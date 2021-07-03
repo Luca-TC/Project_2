@@ -5,17 +5,6 @@ const bcrypt = require('bcrypt')
 const transporter = require('./../config/nodemailer.config')
 const fileUploader = require('./../config/cloudinary.config')
 
-// transporter.sendMail({
-//   from:'My project B&BIDAS <myawesome@b&bdas.com>',
-//   to: ' ',
-//   subject: '',
-//   text : '',
-//   html: 'if accept html will send this'
-// }).then(info=> console.log(info)).catch(err => console.log(err))
-
-/* GET log-in*/
-/* POST SIGN-in*/
-/* GET log-in*/
 router.get('/login', (req, res, next) => res.render('user/login'))
 
 router.post('/login', (req, res) => {
@@ -24,13 +13,19 @@ router.post('/login', (req, res) => {
     User.findOne({ username })
         .then(user => {
             if (!user) {
+                console.log('entro al no user')
                 res.render('user/login', { errorMessage: 'Usuario incorrecto' })
             }
 
-            if (bcrypt.compareSync(pwd, user.password) === false) {
+            if (!bcrypt.compareSync(pwd, user.password)) {
+                console.log('entro al no password')
                 res.render('user/login', { errorMessage: 'Contraseña incorrecta' })
                 return
             }
+            req.session.currentUser = user // Iniciar sesión = almacenar el usuario logueado en req.session.currentUser
+            console.log(req.session.currentUser)
+
+            res.redirect('/places')
         })
         .catch(err => console.log(err))
 })
@@ -85,11 +80,27 @@ router.get('/confirmation/email/:token', (req, res) => {
 
     User.find({ token_confirmation: token })
         .then(user => {
-            User.findByIdAndUpdate(user[0]._id, { email_validation: true, role: 'USER' }, { new: true })
-                .then(user => res.send(user))
-                .catch(err => console.log(err)) //.findByIdAndUpdate(place_id, { name , type })
+            if (user.length) {
+                User.findByIdAndUpdate(user[0]._id, { email_validation: true, role: 'USER' }, { new: true })
+                    .then(user => res.render('index'))
+                    .catch(err => console.log(err))
+            } else {
+                res.render('errors/errorEmail')
+            }
         })
         .catch(err => console.log(err))
 })
 
+/*GET current user profile */
+router.get('/profile', (req, res) => {
+    const currentUser = req.session?.currentUser
+
+    if (currentUser) {
+        res.render('user/my-profile')
+    } else {
+        res.render('user/login', { errorMessage: 'no permiti' })
+    }
+})
+/**GET LOGOUT */
+router.get('/logout', (req, res) => req.session.destroy(() => res.redirect('/')))
 module.exports = router

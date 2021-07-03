@@ -1,6 +1,6 @@
 <div class='container'>
 
-    <form>
+    <form action='/login' method='post'>
         <div class='form-group'>
             <label for='email'>Email address</label>
             <input type='email' class='form-control' id='email' name='username' />
@@ -12,4 +12,7 @@
         <button type='submit' class='btn btn-primary'>Login</button>
     </form>
 </div>
+{{#if errorMessage}}
+    <p>Error</p>
+{{/if}}
 {{!axios por la lista de user_id de las personas}}
