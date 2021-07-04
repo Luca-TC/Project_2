@@ -7,10 +7,10 @@ get/
 get/login  
  post/login
 /**SIGNUP**/  
- get/register
+ get/register->
 post/register-->
 
-                get/profile/:id--------> render user/my-profile
+                get/profile/:id--------> render user/my-profile->
                 <!-- ?        get/application/:id----> render user/pending-application-details -->
                 get/admin/:id ---------> render admin/my-panel
                 get/host/:id  ---------> render host/my-panel
@@ -18,11 +18,11 @@ post/register-->
 /**PLACES ROUTES**/
 
 /places
-get/ -------------------> render places/places-list
-get/new ----------------> render places/new-place
-post/new----------------> redirect /places
+                get/ -------------------> render places/places-list->
+                get/new ----------------> render places/new-place->
+                post/new----------------> redirect /places->
 
-                get/details/:id---------> render places/details(name-description-photo(edit||delete))
+                get/details/:id---------> render places/details(name-description-photo(edit||delete))->
 
                 post/application/:id ---> redirect /user
 

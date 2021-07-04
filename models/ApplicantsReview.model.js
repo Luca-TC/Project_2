@@ -2,9 +2,9 @@ const { Schema, model } = require('mongoose')
 
 const applicantsReview = new Schema(
     {
-        place_name: {
-            type: String,
-            required: true,
+        place_id: {
+            type: Schema.Types.ObjectId,
+            ref: 'Place',
         },
         host_id: {
             type: Schema.Types.ObjectId,
@@ -15,7 +15,7 @@ const applicantsReview = new Schema(
 
         direction: {
             type: String,
-            required: true,
+            //required: true,
         },
         user_applicant: [
             {

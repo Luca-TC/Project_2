@@ -1,8 +1,10 @@
 const router = require('express').Router()
 const Place = require('./../models/Places.model')
+const Applicant = require('./../models/ApplicantsReview.model')
 const fileUploader = require('./../config/cloudinary.config')
 const transporter = require('./../config/nodemailer.config')
 const { keepOut } = require('./../middleware')
+const { role, sessionActive } = require('./../utils')
 
 /*GET places index views list */
 router.get('/', (req, res) => {
@@ -47,9 +49,20 @@ router.post('/edit/:id', (req, res) => res.json(req.query))
 /*GET places index views details */
 router.get('/details/:place_id', (req, res) => {
     const { place_id } = req.params
+    const applicant_id = req.session.currentUser._id
+    const session = sessionActive(req)
+    const isGuest = !role(req, 'GUEST')
+    const isPro = role(req, 'ADMIN')
+
     Place.findById(place_id)
-        .then(place => res.render('places/places-details', place))
+        .then(place => res.render('places/places-details', { place, isGuest, isPro, session, applicant_id }))
         .catch(err => console.log(err))
 })
-
+/*POST application */
+router.post('/application', (req, res) => {
+    const application = ({ place_id, host_id, user_applicant, start_date, final_date, direction, cover_letter } = req.body)
+    Applicant.create(application)
+        .then(() => res.redirect('user/my-profile'))
+        .catch(err => console.log(err))
+})
 module.exports = router
