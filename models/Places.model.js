@@ -2,11 +2,37 @@ const { Schema, model } = require('mongoose')
 
 const placeSchema = new Schema(
     {
-        placeName: {
+        place_name: {
             type: String,
             required: true,
             unique: true,
         },
+
+        description: {
+            name_description: String,
+            task: {
+                time: Number,
+                task_description: String,
+            },
+            //  required: true,
+        },
+        direction: {
+            type: String,
+            required: true,
+        },
+
+        numbe_rooms: {
+            type: Number,
+            required: true,
+        },
+
+        user_applicant: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User',
+            },
+        ],
+
         image: {
             required: true,
             type: String,
@@ -15,35 +41,10 @@ const placeSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'User',
         },
-        description: {
-            nameDescription: String,
-            task: {
-                time: Number,
-                taskDescription: String,
-            },
-            //  required: true,
-        },
-        direction: {
-            type: String,
-            required: true,
-        },
-        user_applicant: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'User',
-            },
-        ],
-        numberRooms: {
-            type: Number,
-            required: true,
-        },
-        rent: [],
 
-        placeApproved: {
-            type: Boolean,
-            default: false,
-        },
-        placeApproved: {
+        rented_users: [],
+
+        place_approved: {
             type: Boolean,
             default: false,
         },
