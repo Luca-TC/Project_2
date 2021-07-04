@@ -5,15 +5,13 @@ const placeSchema = new Schema(
         place_name: {
             type: String,
             required: true,
-            unique: true,
+            // unique: true,
         },
 
-        description: {
-            name_description: String,
-            task: {
-                task_time: Number,
-                task_description: String,
-            },
+        task_info: {
+            name: String,
+            time: Number,
+            description: String,
             //  required: true,
         },
         direction: {

@@ -20,17 +20,17 @@ router.get('/new', checkRoles('GUEST'), (req, res) => res.render('places/new-pla
 router.post('/new', checkRoles('GUEST'), (req, res) => {
     const host_id = req.session?.currentUser
 
-    const { name_description, task_description, task_time, place_name, direction, number_rooms } = req.body
+    const { name, description, time, place_name, direction, number_rooms } = req.body
 
     const description = {
-        name_description,
+        name,
         task: {
-            task_time,
-            task_description,
+            time,
+            description,
         },
     }
 
-    const query = { place_name, description, direction, number_rooms, image: req.file.path, host_id }
+    const query = { place_name, task_info: description, direction, number_rooms, image: req.file.path, host_id }
 
     Place.create(query)
         .then(response => res.json(response))

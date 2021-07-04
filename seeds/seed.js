@@ -1,9 +1,9 @@
 require('dotenv/config')
-require('./../db/index')
+require('../db/index')
 
-const  Mongoose  = require('mongoose')
-const  User  = require('./../models/User.model')
-const  Places  = require('./../models/Places.model')
+const Mongoose = require('mongoose')
+const User = require('../models/User.model')
+const Places = require('../models/Places.model')
 
 const users = [
     {
@@ -26,7 +26,7 @@ const users = [
         username: 'chiappa@gmail.com',
         password: '6666',
     },
-];
+]
 
 User.create(users)
     .then(users => {
@@ -35,7 +35,11 @@ User.create(users)
             place_name: 'Teulada',
             image: 'hshsh.jpg',
             host_id: users[0]._id,
-            description: 'lorem',
+            task_info: {
+                name: 'name description',
+                time: 3,
+                description: 'task is this one',
+            },
             direction: 'via campiania ',
             user_applicant: [users[1]._id, users[2]._id, users[3]._id],
             number_rooms: 3,
@@ -48,7 +52,11 @@ User.create(users)
             place_name: 'Teulada2',
             image: 'hshsh.jpg',
             host_id: users[0]._id,
-            description: 'lorem',
+            task_info: {
+                name: 'name description',
+                time: 3,
+                description: 'task is this one',
+            },
             direction: 'via campiania ',
             user_applicant: [users[1]._id, users[2]._id, users[3]._id],
             number_rooms: 3,
@@ -61,7 +69,11 @@ User.create(users)
             place_name: 'Teulada3',
             image: 'hshsh.jpg',
             host_id: users[0]._id,
-            description: 'lorem',
+            task_info: {
+                name: 'name description',
+                time: 3,
+                description: 'task is this one',
+            },
             direction: 'via campiania ',
             user_applicant: [users[1]._id, users[2]._id, users[3]._id],
             number_rooms: 3,
@@ -74,7 +86,11 @@ User.create(users)
             place_name: 'Teulada4',
             image: 'hshsh.jpg',
             host_id: users[0]._id,
-            description: 'lorem',
+            task_info: {
+                name: 'name description',
+                time: 3,
+                description: 'task is this one',
+            },
             direction: 'via campiania ',
             user_applicant: [users[1]._id, users[2]._id, users[3]._id],
             number_rooms: 3,
@@ -87,7 +103,11 @@ User.create(users)
             place_name: 'Pula',
             image: 'hshs.jpg',
             host_id: users[0]._id,
-            description: 'lorem ipsum',
+            task_info: {
+                name: 'name description',
+                time: 3,
+                description: 'task is this one',
+            },
             direction: 'via roma ',
             user_applicant: [users[1]._id, users[2]._id, users[3]._id],
             number_rooms: 3,
