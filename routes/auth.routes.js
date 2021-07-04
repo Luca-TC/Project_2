@@ -69,7 +69,7 @@ router.post('/register', fileUploader.single('userImage'), (req, res) => {
 
     //
     User.create({ name, username, password: hashPass, description, image: req.file.path, token_confirmation })
-        .then(() => res.redirect('/places'))
+        .then(() => res.redirect('/login'))
         .catch(err => console.log(err))
 })
 

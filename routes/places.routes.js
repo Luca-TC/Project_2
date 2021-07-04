@@ -2,7 +2,7 @@ const router = require('express').Router()
 const Place = require('./../models/Places.model')
 const fileUploader = require('./../config/cloudinary.config')
 const transporter = require('./../config/nodemailer.config')
-const { checkRoles } = require('./../middleware')
+const { keepOut } = require('./../middleware')
 
 /*GET places index views list */
 router.get('/', (req, res) => {
@@ -13,16 +13,16 @@ router.get('/', (req, res) => {
 
 /*GET places create  */
 
-router.get('/new', checkRoles('GUEST'), (req, res) => res.render('places/new-place'))
+router.get('/new', keepOut('GUEST'), (req, res) => res.render('places/new-place'))
 
 /*POST places create  */
 
-router.post('/new', checkRoles('GUEST'), (req, res) => {
+router.post('/new', keepOut('GUEST'), (req, res) => {
     const host_id = req.session?.currentUser
 
     const { name, description, time, place_name, direction, number_rooms } = req.body
 
-    const description = {
+    const task_info = {
         name,
         task: {
             time,
@@ -30,7 +30,7 @@ router.post('/new', checkRoles('GUEST'), (req, res) => {
         },
     }
 
-    const query = { place_name, task_info: description, direction, number_rooms, image: req.file.path, host_id }
+    const query = { place_name, task_info, direction, number_rooms, image: req.file.path, host_id }
 
     Place.create(query)
         .then(response => res.json(response))
