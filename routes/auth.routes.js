@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const User = require('./../models/User.model')
 const bcrypt = require('bcrypt')
-//
+const { role, sessionActive } = require('./../utils')
 const transporter = require('./../config/nodemailer.config')
 const fileUploader = require('./../config/cloudinary.config')
 
@@ -94,9 +94,11 @@ router.get('/confirmation/email/:token', (req, res) => {
 /*GET current user profile */
 router.get('/profile', (req, res) => {
     const currentUser = req.session?.currentUser
+    const session = sessionActive(req)
 
-    if (currentUser) {
-        res.render('user/my-profile')
+    if (currentUser && session) {
+        
+        res.render('user/my-profile', {currentUser})
     } else {
         res.render('user/login', { errorMessage: 'no permiti' })
     }

@@ -41,10 +41,10 @@ router.post('/new', keepOut('GUEST'), (req, res) => {
 
 /*GET places UPDATE  */
 
-router.get('/edit/:id', (req, res) => res.send('hi'))
+router.get('/edit/:id', (req, res) => res.send('hi'))//panel axios
 /*post places delete  */
 
-router.post('/edit/:id', (req, res) => res.json(req.query))
+router.post('/edit/:id', (req, res) => res.json(req.query))//panel axios
 
 /*GET places index views details */
 router.get('/details/:place_id', (req, res) => {

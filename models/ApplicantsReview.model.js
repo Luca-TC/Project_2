@@ -23,10 +23,13 @@ const applicantsReview = new Schema(
                 ref: 'User',
             },
         ],
-
+        confirmed_contract: {
+            type: Boolean,
+            default : false
+        },
         cover_letter: String,
 
-        pendingApproved: {
+        pending_approved: {
             type: Boolean,
             default: false,
         },
