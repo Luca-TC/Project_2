@@ -7,6 +7,10 @@ nav {
     margin-bottom: 50px;
 }
 
+img{
+    width: 100%;
+}
+
 .navbar .nav-item .dropdown-menu {
     display: none;
 }

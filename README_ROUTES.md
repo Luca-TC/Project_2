@@ -1,15 +1,15 @@
 /**LOGIN**/
 
 / ----base
-                get/
+                get/ok
 
 
 / ---- authorization
-                get/login   
-                post/login
+                get/login   ok
+                post/login ok
  /**SIGNUP**/   
-                get/register
-                post/register-->
+                get/register ok
+                post/register--> ok
 
                 get/profile/:id--------> render user/my-profile
                 <!-- ?        get/application/:id----> render user/pending-application-details -->
