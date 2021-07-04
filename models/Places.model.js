@@ -11,7 +11,7 @@ const placeSchema = new Schema(
         description: {
             name_description: String,
             task: {
-                time: Number,
+                task_time: Number,
                 task_description: String,
             },
             //  required: true,
@@ -21,7 +21,7 @@ const placeSchema = new Schema(
             required: true,
         },
 
-        numbe_rooms: {
+        number_rooms: {
             type: Number,
             required: true,
         },
