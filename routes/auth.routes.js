@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const { role, sessionActive } = require('./../utils')
 const transporter = require('./../config/nodemailer.config')
 const fileUploader = require('./../config/cloudinary.config')
+const { keepOut } = require('./../middleware')
 
 router.get('/login', (req, res, next) => res.render('user/login'))
 
@@ -97,12 +98,21 @@ router.get('/profile', (req, res) => {
     const session = sessionActive(req)
 
     if (currentUser && session) {
-        
-        res.render('user/my-profile', {currentUser})
+        res.render('user/my-profile', { currentUser })
     } else {
         res.render('user/login', { errorMessage: 'no permiti' })
     }
 })
 /**GET LOGOUT */
 router.get('/logout', (req, res) => req.session.destroy(() => res.redirect('/')))
+
+//
+
+router.get('/admin_panel', keepOut('USER', 'HOST', 'GUEST'), (req, res) => {
+    res.render('admin/admin_panel')
+})
+
+//
+
+//
 module.exports = router
