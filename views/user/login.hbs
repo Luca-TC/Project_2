@@ -11,8 +11,8 @@
         </div>
         <button type='submit' class='btn btn-primary'>Login</button>
     </form>
+    {{#if errorMessage}}
+        <p class='error'>{{errorMessage}}</p>
+    {{/if}}
 </div>
-{{#if errorMessage}}
-    <p>Error</p>
-{{/if}}
 {{!axios por la lista de user_id de las personas}}
