@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const { Mongoose } = require('mongoose')
 const Place = require('../models/Places.model')
 const User = require('../models/User.model')
 
@@ -22,7 +23,13 @@ router.get('/onePlace/:id', (req, res, next) => {
     //
 })
 //
-
+router.get('/myplaces', (req, res) => {
+    const id = req.session.currentUser._id
+    console.log('funziono', req.session.currentUser._id, id)
+    Place.find({ host_id: id })
+        .then(place => res.json(place))
+        .catch(err => console.log(err))
+})
 //
 
 router.post('/updateHostPlace/:id', (req, res) => {

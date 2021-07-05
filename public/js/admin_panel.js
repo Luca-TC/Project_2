@@ -41,7 +41,7 @@ function myFunction(e) {
             res = res.data
 
             let buttons = `<p>${res.name}</p>
-                        <a href =""  data-id="${res._id}" data-accept="${true}"class="btn btn-info confirm"> accept </a>
+                        <a href =""  data-id="${res._id}" data-accept="${true}"class="btn btn-warning confirm"> accept </a>
                         <a href ="" data-id="${res._id}" data-accept="${false}" class="btn btn-danger confirm"> refuse </a>`
             rightPan.insertAdjacentHTML('beforeend', buttons)
 

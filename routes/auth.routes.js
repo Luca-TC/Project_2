@@ -112,7 +112,7 @@ router.get('/profile', (req, res) => {
     //
     const currentUser = req.session?.currentUser
     const session = sessionActive(req)
-
+//tenemos que poner los roles aquì
     if (currentUser && session) {
         //
         res.render('user/my-profile', { currentUser })
@@ -132,7 +132,9 @@ router.get('/logout', (req, res) => req.session.destroy(() => res.redirect('/'))
 router.get('/admin_panel', keepOut('USER', 'HOST', 'PENDING'), (req, res) => {
     res.render('admin/admin_panel')
 })
-
+router.get('/host_panel', keepOut('USER', 'ADMIN', 'PENDING'), (req, res) => {
+    res.render('host/host_panel')
+})
 //
 
 //
