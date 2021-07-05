@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const User = require('./../models/User.model')
 const bcrypt = require('bcrypt')
-const { role, sessionActive } = require('./../utils')
+const { role, sessionActive, emails } = require('./../utils')
 const transporter = require('./../config/nodemailer.config')
 const fileUploader = require('./../config/cloudinary.config')
 const { keepOut } = require('./../middleware')
@@ -42,7 +42,7 @@ router.post('/register', fileUploader.single('userImage'), (req, res) => {
 
     function randomString(length, chars) {
         var result = ''
-        for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)]
+        for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)]
         return result
     }
 
@@ -51,15 +51,13 @@ router.post('/register', fileUploader.single('userImage'), (req, res) => {
 
     //
     const { name, username, description, pwd } = req.body
+
+    const objectEmail = { username, token_confirmation }
+
+    const email = emails('email', objectEmail)
+
     transporter
-        .sendMail({
-            from: 'My project B&BIDAS',
-            to: username,
-            subject: 'BIENVENIDO A BEBIDAS PONTE TO CIEGO, no olvides confirmar tu email, pulsando el siguiente enlace ',
-            text: 'oh yeah',
-            html: `'<h1> BIENVENIDO A BEBIDAS PONTE TO CIEGO</h1><br>
-            <a href="http://localhost:5000/confirmation/email/${token_confirmation}">Get confirmed</a>`,
-        })
+        .sendMail(email)
         .then(info => console.log(info))
         .catch(err => console.log(err))
 

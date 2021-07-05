@@ -26,6 +26,7 @@ const placeSchema = new Schema(
 
         user_applicant: [
             {
+                // dates: { start: String, final: String },
                 type: Schema.Types.ObjectId,
                 ref: 'User',
             },
@@ -39,8 +40,6 @@ const placeSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'User',
         },
-
-        rented_users: [],
 
         place_approved: {
             type: Boolean,

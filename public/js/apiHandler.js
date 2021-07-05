@@ -7,7 +7,9 @@ class ApiHandler {
         })
     }
 
-    getFullPlaces = () => this.app.post('/api/places')
+    getFullPlaces = () => this.app.get('/api/places')
 
-    getOneRegister = id => this.app.post(`/api/onePlace/${id}`)
+    getOneRegister = id => this.app.get(`/api/onePlace/${id}`)
+
+    updatePendingHostAndPlace = id => this.app.post(`/api/updateHostPlace/${id}`)
 }
