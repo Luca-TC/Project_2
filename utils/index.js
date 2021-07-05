@@ -24,7 +24,14 @@ module.exports = {
                 <a href="http://localhost:3000/confirmation/email/${objectNeeded.token_confirmation}">Get confirmed</a>`,
             }
         }
-        if (validation === 'contract') {
+        if (validation === 'customMessage') {
+            return {
+                from: 'My project B&BIDAS',
+                to: objectNeeded.elm.host_id.username,
+                subject: 'BIENVENIDO A BEBIDAS PONTE TO CIEGO, no olvides confirmar tu email, pulsando el siguiente enlace ',
+                text: `'${objectNeeded.answer}'`,
+                html: `'${objectNeeded.answer}'`,
+            }
         }
     },
 }

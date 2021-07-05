@@ -4,11 +4,11 @@ const Applicant = require('./../models/ApplicantsReview.model')
 const fileUploader = require('./../config/cloudinary.config')
 const transporter = require('./../config/nodemailer.config')
 const { keepOut } = require('./../middleware')
-const { role, sessionActive } = require('./../utils')
+const { role, sessionActive , emails} = require('./../utils')
 
 /*GET places index views list */
 router.get('/', (req, res) => {
-    Place.find()
+    Place.find({place_approved :true})
         .then(places => res.render('places/places-list', { places }))
         .catch(err => console.log(err))
 })
@@ -76,5 +76,25 @@ router.post('/application', (req, res) => {
     Applicant.create(application)
         .then(() => res.redirect('user/my-profile'))
         .catch(err => console.log(err))
+})
+/*POST email  */
+router.post('/postEmail', (req, res) => {
+    console.log(req.body)
+    const id = req.body.id
+    const answer = req.body.answer
+    console.log(answer)
+    Place.findById(id)
+        .populate('host_id')
+
+        .then(elm => {
+            console.log(elm.host_id.username)
+            const objectEmail = { elm, answer }
+            const email = emails('customMessage', objectEmail)
+
+            transporter
+                .sendMail(email)
+                .then(info => console.log(info))
+                .catch(err => console.log(err))
+        })
 })
 module.exports = router

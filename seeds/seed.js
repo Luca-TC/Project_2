@@ -4,27 +4,33 @@ require('../db/index')
 const Mongoose = require('mongoose')
 const User = require('../models/User.model')
 const Places = require('../models/Places.model')
+User.collection.drop()
+Places.collection.drop()
 
 const users = [
     {
         name: 'admin',
+        role:'ADMIN',
         username: 'admin@admin.com',
-        password: '123',
+        password: '$2b$10$xgMcrXkNZtsCCH2NSU4o2OI3vVLmj.RcPhk8gYT0B3tSBgLkYIRWm',
     },
     {
         name: 'host',
+        role:'HOST',
         username: 'host@host.com',
-        password: '123',
+        password: '$2b$10$xgMcrXkNZtsCCH2NSU4o2OI3vVLmj.RcPhk8gYT0B3tSBgLkYIRWm',
     },
     {
         name: 'user',
+        role:'USER',
         username: 'user@user.com',
-        password: 'fgdgfd3',
+        password: '$2b$10$xgMcrXkNZtsCCH2NSU4o2OI3vVLmj.RcPhk8gYT0B3tSBgLkYIRWm',
     },
     {
         name: 'pending',
+        role:'PENDING',
         username: 'pending@pending.com',
-        password: '123',
+        password: '$2b$10$xgMcrXkNZtsCCH2NSU4o2OI3vVLmj.RcPhk8gYT0B3tSBgLkYIRWm',
     },
 ]
 

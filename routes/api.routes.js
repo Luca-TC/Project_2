@@ -50,8 +50,12 @@ router.post('/updateHostPlace/:id', (req, res) => {
         .catch(err => console.log(err))
 })
 
-router.post('/postTry', (req, res) => {
+router.post('/deleteHostPlace/:id', (req, res) => {
+    const { id } = req.params
     console.log(req.body)
+    Place.findByIdAndDelete(id)
+    .then(place=>res.json(place))
+    .catch(err=>console.log(err))
 })
 
 module.exports = router
