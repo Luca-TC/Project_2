@@ -5,11 +5,13 @@ module.exports = {
     keepOut:
         (...rolesToCheck) =>
         (req, res, next) => {
-            console.log(rolesToCheck)
-            console.log(req.session.currentUser.role)
-            req.session?.currentUser && !rolesToCheck.includes(req.session?.currentUser?.role)
-                ? next()
-                : res.render('user/login', { errorMessage: 'No dispones de privilegios suficientes' })
+            if (req.session) {
+                req.session?.currentUser && !rolesToCheck.includes(req.session?.currentUser?.role)
+                    ? next()
+                    : res.render('user/login', { errorMessage: 'No dispones de privilegios suficientes' })
+            } else {
+                res.render('user/login', { errorMessage: 'No dispones de privilegios suficientes' })
+            }
         },
 
     checkPMorOwner: (req, res, next) => {

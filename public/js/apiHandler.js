@@ -14,6 +14,19 @@ class ApiHandler {
     updatePendingHostAndPlace = id => this.app.post(`/api/updateHostPlace/${id}`)
 }
 
+class ApiHandlerPost {
+    constructor(baseUrl, bodyFormData) {
+        this.app = axios.create({
+            method: 'post',
+            url: baseUrl,
+            data: bodyFormData,
+            headers: { 'Content-Type': 'multipart/form-data' },
+        })
+    }
+
+    tryPost = () => this.app('/api/postTry')
+}
+
 // var bodyFormData = new FormData();
 // And then add the fields to the form you want to send:
 

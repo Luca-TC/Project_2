@@ -20,23 +20,29 @@ router.get('/new', keepOut('PENDING'), (req, res) => res.render('places/new-plac
 /*POST places create  */
 
 router.post('/new', keepOut('PENDING'), (req, res) => {
-    const host_id = req.session?.currentUser
+    const session = sessionActive(req)
 
-    const { name, description, time, place_name, direction, number_rooms } = req.body
+    if (session) {
+        const host_id = req.session?.currentUser
 
-    const task_info = {
-        name,
-        task: {
-            time,
-            description,
-        },
+        const { name, description, time, place_name, direction, number_rooms } = req.body
+
+        const task_info = {
+            name,
+            task: {
+                time,
+                description,
+            },
+        }
+
+        const query = { place_name, task_info, direction, number_rooms, image: req.file.path, host_id }
+
+        Place.create(query)
+            .then(response => res.json(response))
+            .catch(err => console.log(err))
+    } else {
+        res.render('user/login', { errorMessage: 'no permiti fai il login' })
     }
-
-    const query = { place_name, task_info, direction, number_rooms, image: req.file.path, host_id }
-
-    Place.create(query)
-        .then(response => res.json(response))
-        .catch(err => console.log(err))
 })
 
 /*GET places UPDATE  */
@@ -49,8 +55,6 @@ router.post('/edit/:id', (req, res) => res.json(req.query)) //panel axios
 /*GET places index views details */
 router.get('/details/:place_id', (req, res) => {
     const session = sessionActive(req)
-
-    console.log(session)
 
     if (session) {
         const { place_id } = req.params

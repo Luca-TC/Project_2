@@ -58,5 +58,11 @@ function confirmApplication(e) {
 
 document.querySelector('#buttonForm').addEventListener('click', e => {
     e.preventDefault()
-    alert('hola')
+    const bodyFormData = new FormData()
+
+    bodyFormData.append('prueba', 'nombre')
+
+    const apiPost = new ApiHandlerPost(`http://localhost:3000`, { bodyFormData })
+
+    apiPost.tryPost().then(res => console.log(res))
 })

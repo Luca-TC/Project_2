@@ -50,4 +50,8 @@ router.post('/updateHostPlace/:id', (req, res) => {
         .catch(err => console.log(err))
 })
 
+router.post('/postTry', (req, res) => {
+    console.log(req.body)
+})
+
 module.exports = router
