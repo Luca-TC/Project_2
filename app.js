@@ -22,6 +22,7 @@ require('./config/session.config')(app)
 module.exports = { projectName: 'B&BIDDAS' }
 
 app.locals.title = 'B&BIDDAS'
+app.locals.MYAPICODE = process.env.API_GMAPS
 
 // 👇 Start handling routes here
 require('./routes/index')(app)

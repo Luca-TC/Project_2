@@ -14,6 +14,7 @@ const placeSchema = new Schema(
             description: String,
             //  required: true,
         },
+
         address: {
             road: String,
             number: Number,

@@ -35,7 +35,7 @@ router.post('/new', fileUploader.single('image'), keepOut('PENDING'), (req, res)
         //
         const host_id = req.session?.currentUser
 
-        const { name, description, working_hours, task_name, direction, rooms } = req.body
+        const { name, description, working_hours, task_name, direction, rooms, road, number, city, state } = req.body
 
         const task_info = {
             name: task_name,
@@ -43,7 +43,14 @@ router.post('/new', fileUploader.single('image'), keepOut('PENDING'), (req, res)
             description,
         }
 
-        const query = { name, task_info, direction, rooms, image: req.file.path, host_id }
+        const address = {
+            road,
+            number,
+            city,
+            state,
+        }
+
+        const query = { name, task_info, direction, rooms, image: req.file.path, host_id, address }
 
         Place.create(query)
             .then(() => res.redirect('/profile'))
@@ -99,7 +106,7 @@ router.get('/details/:place_id', (req, res) => {
 router.post('/application', (req, res) => {
     const application = ({ place_id, host_id, user_applicant, start_date, final_date, direction, cover_letter } = req.body)
     Applicant.create(application)
-        .then(() => res.redirect('user/my-profile'))
+        .then(() => res.redirect('/profile'))
         .catch(err => console.log(err))
 })
 

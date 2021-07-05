@@ -1,6 +1,6 @@
 const api = new ApiHandler(`http://localhost:3000`)
-const pruebaDiv2 = document.querySelector('.prueba2')
-const pruebaDiv = document.querySelector('.prueba')
+const leftPan = document.querySelector('.leftPan')
+const rightPan = document.querySelector('.rightPan')
 
 function printPlacesNames() {
     //
@@ -13,7 +13,7 @@ function printPlacesNames() {
                 //
                 let link = `<p><a href="" class="link" data-id="${elm._id}" >${elm.name}</a></p>`
 
-                pruebaDiv.insertAdjacentHTML('beforeend', link)
+                leftPan.insertAdjacentHTML('beforeend', link)
             })
         })
         .then(() => {
@@ -21,7 +21,6 @@ function printPlacesNames() {
         })
         .catch(err => console.log(err))
 }
-
 printPlacesNames()
 //
 
@@ -37,15 +36,22 @@ function myFunction(e) {
 
     api.getOneRegister(id)
         .then(res => {
+            console.log(res)
             //
             res = res.data
 
             let buttons = `<p>${res.name}</p>
                         <a href =""  data-id="${res._id}" data-accept="${true}"class="btn btn-info confirm"> accept </a>
                         <a href ="" data-id="${res._id}" data-accept="${false}" class="btn btn-danger confirm"> refuse </a>`
-            pruebaDiv2.insertAdjacentHTML('beforeend', buttons)
+            rightPan.insertAdjacentHTML('beforeend', buttons)
+
+            return res
         })
-        .then(() => document.querySelectorAll('.confirm').forEach(btn => btn.addEventListener('click', e => confirmApplication(e))))
+        .then(res => {
+            document.querySelectorAll('.confirm').forEach(btn => btn.addEventListener('click', e => confirmApplication(e)))
+            return res
+        })
+        .then(res => gmapsRoute(res))
         .catch(err => console.log(err))
 }
 
@@ -65,7 +71,7 @@ function confirmApplication(e) {
                                 <button type='submit' id='buttonForm' data-id="${res.data._id}" data-accept="${true}" class='btn btn-primary'>Submit</button>
                             </form>`
 
-                pruebaDiv2.insertAdjacentHTML('beforeend', form)
+                rightPan.insertAdjacentHTML('beforeend', form)
             })
             .then(() => document.querySelector('#buttonForm').addEventListener('click', e => showForm(e)))
             .catch(err => console.log(err))
@@ -102,5 +108,5 @@ function showForm(e) {
 }
 
 function clearPage(div) {
-    div === 'divLeft' ? (pruebaDiv.textContent = '') : (pruebaDiv2.textContent = ''.textContent = '')
+    div === 'divLeft' ? (leftPan.textContent = '') : (rightPan.textContent = ''.textContent = '')
 }
