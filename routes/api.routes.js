@@ -54,8 +54,8 @@ router.post('/deleteHostPlace/:id', (req, res) => {
     const { id } = req.params
     console.log(req.body)
     Place.findByIdAndDelete(id)
-    .then(place=>res.json(place))
-    .catch(err=>console.log(err))
+        .then(place => res.json(place))
+        .catch(err => console.log(err))
 })
 
 module.exports = router

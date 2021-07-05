@@ -13,7 +13,7 @@ class ApiHandler {
 
     updatePendingHostAndPlace = id => this.app.post(`/api/updateHostPlace/${id}`)
 
-    deletePendingHost = id => this.app.post(`/api/deleteHostPlace/${id}`)
+    deleteHostPlace = id => this.app.post(`/api/deleteHostPlace/${id}`)
 
     tryPost = data => this.app.post('/places/postEmail', data)
 }

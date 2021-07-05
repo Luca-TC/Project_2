@@ -7,7 +7,6 @@ function printPlacesNames() {
         .then(response => {
             data = response.data
 
-
             data.forEach(elm => {
                 console.log(elm)
                 let str = `<p><a href="" class="link" data-id="${elm._id}" >${elm.name}</a></p>`
@@ -30,8 +29,7 @@ function myFunction(e) {
 
     const id = e.currentTarget.dataset.id
 
-        clearPage('divRight')
-
+    clearPage('divRight')
 
     api.getOneRegister(id)
         .then(res => {
@@ -50,27 +48,27 @@ function myFunction(e) {
 function confirmApplication(e) {
     e.preventDefault()
     const id = e.currentTarget.dataset.id
-console.log(e.currentTarget.dataset.accept)
-    if(e.currentTarget.dataset.accept==='true'){
-    clearPage('divRight')
+    console.log(e.currentTarget.dataset.accept)
+    if (e.currentTarget.dataset.accept === 'true') {
+        clearPage('divRight')
 
-    api.updatePendingHostAndPlace(id)
-        .then(res => {
-            console.log(res)
-            let str = ` <form>
+        api.updatePendingHostAndPlace(id)
+            .then(res => {
+                console.log(res)
+                let str = ` <form>
             <textarea name="content" id="answer" cols="30" rows="10"></textarea>
         <button type='submit' id='buttonForm' data-id="${res.data._id}" data-accept="${true}" class='btn btn-primary'>Submit</button>
     </form>`
-            pruebaDiv2.insertAdjacentHTML('beforeend', str)
-            document.querySelector('#buttonForm').addEventListener('click', e => showForm(e))
-        })
+                pruebaDiv2.insertAdjacentHTML('beforeend', str)
+                document.querySelector('#buttonForm').addEventListener('click', e => showForm(e))
+            })
 
-        .catch(err => console.log(err))}
-        else{
-            api.deletePendingHost(id)
+            .catch(err => console.log(err))
+    } else {
+        api.deleteHostPlace(id)
             .then(place => console.log(place))
-            .catch(err => console.log(err));
-        }
+            .catch(err => console.log(err))
+    }
 }
 
 function showForm(e) {
@@ -85,6 +83,6 @@ function showForm(e) {
     printPlacesNames()
 }
 
-function clearPage(div){
-div==='divLeft'?pruebaDiv.textContent='':pruebaDiv2.textContent=''.textContent=''
+function clearPage(div) {
+    div === 'divLeft' ? (pruebaDiv.textContent = '') : (pruebaDiv2.textContent = ''.textContent = '')
 }
