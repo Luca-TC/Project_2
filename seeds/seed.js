@@ -7,24 +7,24 @@ const Places = require('../models/Places.model')
 
 const users = [
     {
-        name: 'Salva',
-        username: 'lahuhsuhds@gmail.com',
-        password: '12354',
+        name: 'admin',
+        username: 'admin@admin.com',
+        password: '123',
     },
     {
-        name: 'Luca',
-        username: 'salta@gmail.com',
-        password: 'vdsfgwe3',
+        name: 'host',
+        username: 'host@host.com',
+        password: '123',
     },
     {
-        name: 'Carlotta',
-        username: 'tetta@gmail.com',
+        name: 'user',
+        username: 'user@user.com',
         password: 'fgdgfd3',
     },
     {
-        name: 'Mara',
-        username: 'chiappa@gmail.com',
-        password: '6666',
+        name: 'pending',
+        username: 'pending@pending.com',
+        password: '123',
     },
 ]
 
@@ -32,85 +32,101 @@ User.create(users)
     .then(users => {
         console.log(users)
         Places.create({
-            place_name: 'Teulada',
-            image: 'hshsh.jpg',
-            host_id: users[0]._id,
+            name: 'Teulada',
+            image: undefined,
+            host_id: users[1]._id,
             task_info: {
                 name: 'name description',
-                time: 3,
+                working_hours: 3,
                 description: 'task is this one',
             },
-            direction: 'via campiania ',
-            user_applicant: [users[1]._id, users[2]._id, users[3]._id],
-            number_rooms: 3,
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
         })
         return users
     })
     .then(users => {
-        console.log(users)
         Places.create({
-            place_name: 'Teulada2',
-            image: 'hshsh.jpg',
-            host_id: users[0]._id,
+            name: 'Teulada2',
+            image: undefined,
+            host_id: users[1]._id,
             task_info: {
                 name: 'name description',
-                time: 3,
+                working_hours: 3,
                 description: 'task is this one',
             },
-            direction: 'via campiania ',
-            user_applicant: [users[1]._id, users[2]._id, users[3]._id],
-            number_rooms: 3,
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
         })
         return users
     })
     .then(users => {
-        console.log(users)
         Places.create({
-            place_name: 'Teulada3',
-            image: 'hshsh.jpg',
-            host_id: users[0]._id,
+            name: 'Teulada3',
+            image: undefined,
+            host_id: users[1]._id,
             task_info: {
                 name: 'name description',
-                time: 3,
+                working_hours: 3,
                 description: 'task is this one',
             },
-            direction: 'via campiania ',
-            user_applicant: [users[1]._id, users[2]._id, users[3]._id],
-            number_rooms: 3,
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
         })
         return users
     })
     .then(users => {
-        console.log(users)
         Places.create({
-            place_name: 'Teulada4',
-            image: 'hshsh.jpg',
-            host_id: users[0]._id,
+            name: 'Teulada4',
+            image: undefined,
+            host_id: users[1]._id,
             task_info: {
                 name: 'name description',
-                time: 3,
+                working_hours: 3,
                 description: 'task is this one',
             },
-            direction: 'via campiania ',
-            user_applicant: [users[1]._id, users[2]._id, users[3]._id],
-            number_rooms: 3,
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
         })
         return users
     })
     .then(users => {
-        console.log(users)
         Places.create({
-            place_name: 'Pula',
-            image: 'hshs.jpg',
-            host_id: users[0]._id,
+            name: 'Pula',
+            image: undefined,
+            host_id: users[1]._id,
             task_info: {
                 name: 'name description',
-                time: 3,
+                working_hours: 3,
                 description: 'task is this one',
             },
-            direction: 'via roma ',
-            user_applicant: [users[1]._id, users[2]._id, users[3]._id],
-            number_rooms: 3,
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
         }).then(() => Mongoose.connection.close())
     })
 

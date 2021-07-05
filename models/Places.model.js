@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose')
 
 const placeSchema = new Schema(
     {
-        place_name: {
+        name: {
             type: String,
             required: true,
             // unique: true,
@@ -10,32 +10,28 @@ const placeSchema = new Schema(
 
         task_info: {
             name: String,
-            time: Number,
+            working_hours: Number,
             description: String,
             //  required: true,
         },
-        direction: {
-            type: String,
-            required: true,
+        address: {
+            road: String,
+            number: Number,
+            city: String,
+            state: String,
         },
 
-        number_rooms: {
+        rooms: {
             type: Number,
             required: true,
         },
 
-        user_applicant: [
-            {
-                // dates: { start: String, final: String },
-                type: Schema.Types.ObjectId,
-                ref: 'User',
-            },
-        ],
-
         image: {
-            required: true,
+            // required: true,
             type: String,
+            default: 'https://media-cdn.tripadvisor.com/media/photo-s/12/4c/0a/ba/montecristo-country-house.jpg',
         },
+
         host_id: {
             type: Schema.Types.ObjectId,
             ref: 'User',

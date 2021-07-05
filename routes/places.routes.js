@@ -15,11 +15,11 @@ router.get('/', (req, res) => {
 
 /*GET places create  */
 
-router.get('/new', keepOut('GUEST'), (req, res) => res.render('places/new-place'))
+router.get('/new', keepOut('PENDING'), (req, res) => res.render('places/new-place'))
 
 /*POST places create  */
 
-router.post('/new', keepOut('GUEST'), (req, res) => {
+router.post('/new', keepOut('PENDING'), (req, res) => {
     const host_id = req.session?.currentUser
 
     const { name, description, time, place_name, direction, number_rooms } = req.body
@@ -41,22 +41,30 @@ router.post('/new', keepOut('GUEST'), (req, res) => {
 
 /*GET places UPDATE  */
 
-router.get('/edit/:id', (req, res) => res.send('hi'))//panel axios
+router.get('/edit/:id', (req, res) => res.send('hi')) //panel axios
 /*post places delete  */
 
-router.post('/edit/:id', (req, res) => res.json(req.query))//panel axios
+router.post('/edit/:id', (req, res) => res.json(req.query)) //panel axios
 
 /*GET places index views details */
 router.get('/details/:place_id', (req, res) => {
-    const { place_id } = req.params
-    const applicant_id = req.session.currentUser._id
     const session = sessionActive(req)
-    const isGuest = !role(req, 'GUEST')
-    const isPro = role(req, 'ADMIN')
 
-    Place.findById(place_id)
-        .then(place => res.render('places/places-details', { place, isGuest, isPro, session, applicant_id }))
-        .catch(err => console.log(err))
+    console.log(session)
+
+    if (session) {
+        const { place_id } = req.params
+        const applicant_id = req.session.currentUser._id
+        const session = sessionActive(req)
+        const isPending = !role(req, 'PENDING')
+        const isPro = role(req, 'ADMIN')
+
+        Place.findById(place_id)
+            .then(place => res.render('places/places-details', { place, isPending, isPro, session, applicant_id }))
+            .catch(err => console.log(err))
+    } else {
+        res.render('user/login', { errorMessage: 'no permiti' })
+    }
 })
 /*POST application */
 router.post('/application', (req, res) => {

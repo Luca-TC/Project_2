@@ -7,20 +7,20 @@
         </div>
 
         <div class='col-md-8'>
-            <h2> Place: {{place_name}}</h2>
+            <h2> Place: {{name}}</h2>
             <h3> Description: </h3>
-            {{#with description}}
-                <h5>{{name_description}}</h5>
+            {{#with place.task_info}}
+                <h5>{{name}}</h5>
+                <h5>{{working_hours}}</h5>
+                <h5>{{description}}</h5>
             {{/with}}
-            {{#with description.task}}
-                <h5>{{task_time}}</h5>
-                <h5>{{task_description}}</h5>
+            {{#with place.address}}
+            <h5> Direction: {{road}}, {{number}} ({{city}})</h5>
             {{/with}}
-            <h5> Direction: {{direction}}</h5>
-            <h5> Rooms avail: {{number_rooms}}</h5>
+            <h5> Rooms avail: {{place.rooms}}</h5>
         </div>
         {{#if session}}
-        {{#if isGuest}}
+        {{#if isPending}}
                 <div class='form-group'>
         <div class='pop-up'>
             <form action='/places/application' method='post'>
@@ -32,11 +32,6 @@
 
                     <label for='date'>Final date</label>
                     <input type='date' name='final_date' id='final_date' class='form-control' />
-                </div>
-                <div class='form-group'>
-
-                    <label for='direction'>Direction:</label>
-                    <input type='text' id='direction' class='form-control' />
                 </div>
                  
                      

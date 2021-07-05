@@ -10,29 +10,24 @@ const applicantsReview = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'User',
         },
-        start_date: String,
-        final_date: String,
-
-        direction: {
-            type: String,
-            //required: true,
+        user_applicant_id: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
         },
-        user_applicant: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'User',
-            },
-        ],
-        confirmed_contract: {
-            type: Boolean,
-            default : false
-        },
-        cover_letter: String,
+        start_date: Date,
+        final_date: Date,
 
-        pending_approved: {
+        contract_status: {
             type: Boolean,
             default: false,
         },
+
+        readed: {
+            type: Boolean,
+            default: false,
+        },
+
+        cover_letter: String,
     },
     { timestamps: true }
 )

@@ -55,3 +55,8 @@ function confirmApplication(e) {
         .then(res => console.log(res))
         .catch(err => console.log(err))
 }
+
+document.querySelector('#buttonForm').addEventListener('click', e => {
+    e.preventDefault()
+    alert('hola')
+})

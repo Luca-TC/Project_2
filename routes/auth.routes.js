@@ -50,7 +50,9 @@ router.post('/register', fileUploader.single('userImage'), (req, res) => {
     const token_confirmation = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
 
     //
-    const { name, username, description, pwd } = req.body
+    const { name, username, description, pwd, road, number, city, state } = req.body
+
+    const address = { road, number, city, state }
 
     const objectEmail = { username, token_confirmation }
 
@@ -67,10 +69,12 @@ router.post('/register', fileUploader.single('userImage'), (req, res) => {
     let hashPass = bcrypt.hashSync(pwd, salt)
 
     //
-    User.create({ name, username, password: hashPass, description, image: req.file.path, token_confirmation })
+    User.create({ name, username, password: hashPass, description, image: req.file.path, token_confirmation, address })
         .then(() => res.redirect('/login'))
         .catch(err => console.log(err))
 })
+
+//
 
 // Confirmacion de email
 
@@ -80,7 +84,7 @@ router.get('/confirmation/email/:token', (req, res) => {
     User.find({ token_confirmation: token })
         .then(user => {
             if (user.length) {
-                User.findByIdAndUpdate(user[0]._id, { email_validation: true, role: 'USER' }, { new: true })
+                User.findByIdAndUpdate(user[0]._id, { role: 'USER' }, { new: true })
                     .then(user => res.render('index'))
                     .catch(err => console.log(err))
             } else {
@@ -89,6 +93,10 @@ router.get('/confirmation/email/:token', (req, res) => {
         })
         .catch(err => console.log(err))
 })
+
+//
+
+//
 
 /*GET current user profile */
 router.get('/profile', (req, res) => {
@@ -106,7 +114,7 @@ router.get('/logout', (req, res) => req.session.destroy(() => res.redirect('/'))
 
 //
 
-router.get('/admin_panel', keepOut('USER', 'HOST', 'GUEST'), (req, res) => {
+router.get('/admin_panel', keepOut('USER', 'HOST', 'PENDING'), (req, res) => {
     res.render('admin/admin_panel')
 })
 

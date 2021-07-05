@@ -1,18 +1,27 @@
 <h1>Places list</h1>
 
-<div class='row'>
-    {{#each places}}
-        <div class='col-md-4'>
-            <ul>
-                <li name=''>place_name:{{place_name}}</li>
-                <li name=''>description:{{description}}</li>
-                <li name=''>direction:{{direction}}</li>
-                <li name=''>number_rooms:{{number_rooms}}</li>
-                <li name=''>image: <img src="{{image}}" alt="img.jpg"></li>
-                <li name=''>rented_users:{{rented_users}}</li>
-                <li name=''>place_approved:{{place_approved}}</li>
-            <a class="btn btn-warning btn-sm" href="/places/details/{{id}}">Details</a>
-            </ul>
-        </div>{{/each}}
+<div class='container'>
+
+    <div class='row'>
+        {{#each places}}
+            <div class='col-md-2'>
+
+                <img src='{{image}}' alt='img.jpg' />
+            </div>
+            <div class='col-md-4'>
+
+                <ul>
+                    <li name=''>place_name:{{place_name}}</li>
+                    <li name=''>description:{{description}}</li>
+                    <li name=''>direction:{{direction}}</li>
+                    <li name=''>number_rooms:{{number_rooms}}</li>
+
+                    <li name=''>rented_users:{{rented_users}}</li>
+                    <li name=''>place_approved:{{place_approved}}</li>
+                    <a class='btn btn-warning btn-sm' href='/places/details/{{id}}'>Details</a>
+                </ul>
+            </div>
+        {{/each}}
+    </div>
 </div>
 {{! foto/link details/ }}

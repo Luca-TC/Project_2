@@ -17,17 +17,19 @@ const userSchema = new Schema(
 
         image: String,
 
-        token_confirmation: String,
-
-        email_validation: {
-            type: Boolean,
-            default: false,
+        address: {
+            road: String,
+            number: Number,
+            city: String,
+            state: String,
         },
+
+        token_confirmation: String,
 
         role: {
             type: String,
-            enum: ['GUEST', 'USER', 'HOST', 'ADMIN'],
-            default: 'GUEST',
+            enum: ['PENDING', 'USER', 'HOST', 'ADMIN'],
+            default: 'PENDING',
         },
     },
 
