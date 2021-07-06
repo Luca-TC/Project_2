@@ -1,32 +1,29 @@
-{{! <div class='col-md-2 mt-5'>
+<div class='col-md-2 position-absolute leftNav'>
     <nav>
-        <ul class='nav flex-column'>
+        <ul class='nav flex-column pt-5 mt-5'>
+
             <li class='nav-item'>
-                <a class='nav-link active' href='#'>Active</a>
+                <a class='' href='#'>Contracts</a>
             </li>
-            <li class='nav-item'>
-                <a class='nav-link' href='#'>Link</a>
-            </li>
-            <li class='nav-item'>
-                <a class='nav-link' href='#'>Link</a>
-            </li>
-            <li class='nav-item'>
-                <a class='nav-link disabled' href='#'>Disabled</a>
+            <li class='nav-item mt-2'>
+                <a class='' href='#'>Places</a>
             </li>
         </ul>
     </nav>
-</div> }}
+</div>
 
 <div class='container'>
     <h1>Admin panel</h1>
-    <div class='row'>
+    <div class='row admin-content'>
 
         <div class='leftPan col-md-5'></div>
         <div class='midPan col-md-2'></div>
-        <div class='rightPan col-md-5'></div>
+        <div class='col-md-5 rightPan'></div>
 
     </div>
 </div>
+
+<div class='overlay hidden'></div>
 
 <script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
 <script src='/js/apiGoogle.js'></script>

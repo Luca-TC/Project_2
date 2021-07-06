@@ -1,8 +1,5 @@
 //
 
-const { emails } = require('../../utils')
-console.log(emails(email))
-
 const gmapsRoute = res => {
     //
     const { road, city } = res.address

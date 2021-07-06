@@ -42,7 +42,8 @@ function myFunction(e) {
 
             let buttons = `<p>${res.name}</p>
                         <a href =""  data-id="${res._id}" data-accept="${true}"class="btn btn-warning confirm"> accept </a>
-                        <a href ="" data-id="${res._id}" data-accept="${false}" class="btn btn-danger confirm"> refuse </a>`
+                        <a href ="" data-id="${res._id}" data-accept="${false}" class="btn btn-danger confirm"> refuse </a>
+                        <img src="${res.image}" alt="">`
             rightPan.insertAdjacentHTML('beforeend', buttons)
 
             return res
@@ -53,6 +54,8 @@ function myFunction(e) {
         })
         .then(res => gmapsRoute(res))
         .catch(err => console.log(err))
+
+    openModal()
 }
 
 function confirmApplication(e) {
@@ -78,12 +81,13 @@ function confirmApplication(e) {
         //
     } else {
         //
+        clearPage('divr')
+        clearPage('divLeft')
+
         api.deleteHostPlace(id)
             .then(place => '????????????????????')
             .catch(err => console.log(err))
 
-        clearPage('divr')
-        clearPage('divLeft')
         printPlacesNames()
     }
 }
@@ -110,3 +114,45 @@ function showForm(e) {
 function clearPage(div) {
     div === 'divLeft' ? (leftPan.textContent = '') : (rightPan.textContent = ''.textContent = '')
 }
+
+//
+
+//
+
+// blurs
+
+const overlay = document.querySelector('.overlay')
+
+// const modalButton = document.querySelectorAll('.show-modal')
+
+const modal = document.querySelector('.modal')
+const btnClose = document.querySelector('.close-modal')
+
+const closeModal = () => {
+    // modal.classList.add('hidden')
+    rightPan.textContent = ''
+    rightPan.classList.remove('opacity')
+    overlay.classList.add('hidden')
+    rightPan.classList.remove('modal')
+}
+
+// modalButton.forEach(element => {
+//     element.addEventListener('click', openModal)
+// })
+
+// btnClose.addEventListener('click', closeModal)
+overlay.addEventListener('click', closeModal)
+
+function openModal() {
+    // modal.classList.remove('hidden')
+
+    rightPan.classList.add('modal')
+    rightPan.classList.add('opacity')
+    overlay.classList.remove('hidden')
+}
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeModal()
+    }
+})
