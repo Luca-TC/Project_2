@@ -25,6 +25,7 @@ module.exports = {
             }
         }
         if (validation === 'customMessage') {
+            console.log(objectNeeded.elm)
             return {
                 from: 'My project B&BIDAS',
                 to: objectNeeded.elm.host_id.username,

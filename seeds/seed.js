@@ -3,7 +3,7 @@ require('../db/index')
 
 const Mongoose = require('mongoose')
 const User = require('../models/User.model')
-const Places = require('../models/Places.model')
+const Places = require('../models/Place.model')
 User.collection.drop()
 Places.collection.drop()
 

@@ -1,6 +1,7 @@
 const api = new ApiHandler(`http://localhost:3000`)
 const leftPan = document.querySelector('.leftPan')
 const rightPan = document.querySelector('.rightPan')
+
 document.querySelector('.places').addEventListener('click', e => printPlacesNames(e))
 document.querySelector('.contracts').addEventListener('click', e => printContracts(e))
 
@@ -101,6 +102,8 @@ function confirmApplication(e) {
             .then(() => document.querySelector('#buttonForm').addEventListener('click', e => showForm(e)))
             .catch(err => console.log(err))
         //
+
+        //
     } else {
         //
         clearPage('divr')
@@ -128,6 +131,7 @@ function showForm(e) {
         .then(res => '????????????????????')
         .catch(err => console.log(err))
 
+    closeModal()
     clearPage('divLeft')
     clearPage('right')
     printPlacesNames()
