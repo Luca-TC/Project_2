@@ -66,9 +66,15 @@ router.post('/new', fileUploader.single('image'), keepOut('PENDING'), (req, res)
 
 /*GET places UPDATE  */
 
-// router.get('/edit/:id', (req, res) => res.send('hi')) //panel axios
-
-//
+router.post('/updateMyPlace', (req, res) => {
+    const { id, placeName, name, description, working_hours, room, road, number, city, state } = req.body
+    const task_info = { name, description, working_hours }
+    const address = { road, number, city, state }
+    console.log({ room })
+    Place.findByIdAndUpdate(id, { name: placeName, task_info, room, address}, { new: true })
+        .then(place => console.log(place))
+        .catch(err => console.log(err))
+})
 
 /*post places delete  */
 

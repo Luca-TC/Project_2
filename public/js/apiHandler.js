@@ -15,7 +15,7 @@ class ApiHandler {
 
     getOneRegister = id => this.app.get(`/api/onePlace/${id}`)
 
-    updateMyPlace = id => this.app.post(`/api/updateMyPlace/${id}`)
+    updateMyPlace =  data => this.app.post(`/places/updateMyPlace`, data)
 
     updatePendingHostAndPlace = id => this.app.post(`/api/updateHostPlace/${id}`)
 

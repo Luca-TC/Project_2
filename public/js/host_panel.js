@@ -57,7 +57,7 @@ function getFormMyPlaces(e) {
     const id = e.currentTarget.dataset.id
     if (e.currentTarget.dataset.accept === 'true') {
         clearPage('divRight')
-        //    console.log('admin-panel', id)
+      //  console.log('admin-panel inside get form', id)
         api.getMyPlaceToEdit(id)
             .then(res => {
                 let form = ` <form>
@@ -105,18 +105,15 @@ function getFormMyPlaces(e) {
                 <input type='text' class='form-control' name='state' id='state'  value="${res.data.address.state}"/>
                 <small id='description-help' class='form-text text-muted'>Your state</small>
             </div>
-            <div class='form-group'>
-                <label for='image'>Image</label>
-                <input type='file' class='form-control' name='image' id='image' value="${res.data.name}" />
-                <small id='description-help' class='form-text text-muted'>Real screen of your place(house must appear)</small>
-            </div>
+           
 
-            <button id="buttonForm" type='submit' class='btn btn-primary'>Submit</button>
+            <button id="buttonForm" type='submit' data-id="${res.data._id}" class='btn btn-primary'>Submit</button>
         </form>`
 
                 rightPan.insertAdjacentHTML('beforeend', form)
+                document.querySelector('#buttonForm').addEventListener('click', e => sendEdits(e))
             })
-            .then(() => document.querySelector('#buttonForm').addEventListener('click', e => sendEdits(e)))
+            // .then(() => )
             .catch(err => console.log(err))
     } else {
         // console.log('delete',place)
@@ -133,20 +130,18 @@ function getFormMyPlaces(e) {
 function sendEdits(e) {
     e.preventDefault()
     const form = document.querySelectorAll('form input')
-const placeName = form[0].value
-const taskName = form[1].value
-const taskDescription = form[2].value
-const taskTime = form[3].value
-const roomn = form[4].value
-const road = form[5].value
-const number = form[6].value
-const city = form[7].value
-const state = form[8].value
-const image = form[9].value
-// const input10 = form[10].value
+    const allInputsValue = []
+    form.forEach(elm => {
+        allInputsValue.push(elm.value)
+    })
 
-    console.log('form.input',form)
-
+    const id = e.currentTarget.dataset.id
+  //  console.log('boh', id)
+    const [placeName, name, description, working_hours, room, road, number, city, state] = allInputsValue
+    const obj = { id, placeName, name, description, working_hours, room, road, number, city, state }
+   // console.log('sono un obj',obj)
+   api.updateMyPlace(obj)
+   clearPage('ok')
 }
 
 function clearPage(div) {

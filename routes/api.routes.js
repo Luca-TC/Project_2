@@ -73,36 +73,7 @@ router.post('/updateHostPlace/:id', (req, res) => {
         .catch(err => console.log(err))
 })
 
-router.post('/updateMyPlace/:id', (req, res) => {
-    //
-    //const { id } = req.params
 
-    console.log('------------', req.body)
-
-    // Place.findByIdAndUpdate(id, {})
-    //     .then(place => {
-    //         //
-    //         // User.findByIdAndUpdate(place.host_id, { role: 'HOST' }, { new: true })
-    //         //     .then(user => place)
-    //         //     .then(place => {
-    //         //         //
-    //         //         Place.findById(place._id)
-    //         //             .populate('host_id')
-    //         //             .then(place => res.json(place))
-    //         //             // .then(() => {
-    //         //             //     const objectEmail = { username, token_confirmation }
-    //         //             //     const email = emails('host', objectEmail)
-    //         //             //     transporter
-    //         //             //         .sendMail(email)
-    //         //             //         .then(info => console.log(info))
-    //         //             //         .catch(err => console.log(err))
-    //         //             // })
-    //         //             .catch(err => console.log(err))
-    //         //     })
-    //         //     .catch(err => console.log(err))
-    //     })
-    //     .catch(err => console.log(err))
-})
 
 router.post('/deleteHostPlace/:id', (req, res) => {
     //
