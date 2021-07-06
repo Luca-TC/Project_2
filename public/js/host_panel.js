@@ -1,7 +1,7 @@
 const api = new ApiHandler(`http://localhost:3000`)
 const leftPan = document.querySelector('.leftPan')
 const rightPan = document.querySelector('.rightPan')
-
+/*DOESN'T WORK FUNCTION PRINTPLACENAMES AFTER SUBMITING EDIT FORM */
 function printPlacesNames() {
     //
     api.getMyPlaces()
@@ -49,6 +49,7 @@ function myFunction(e) {
         })
         // .then(res => gmapsRoute(res))
         .catch(err => console.log(err))
+    openModal()
 }
 
 function getFormMyPlaces(e) {
@@ -57,7 +58,7 @@ function getFormMyPlaces(e) {
     const id = e.currentTarget.dataset.id
     if (e.currentTarget.dataset.accept === 'true') {
         clearPage('divRight')
-      //  console.log('admin-panel inside get form', id)
+        //  console.log('admin-panel inside get form', id)
         api.getMyPlaceToEdit(id)
             .then(res => {
                 let form = ` <form>
@@ -115,6 +116,7 @@ function getFormMyPlaces(e) {
             })
             // .then(() => )
             .catch(err => console.log(err))
+        openModal()
     } else {
         // console.log('delete',place)
         api.deleteHostPlace(id)
@@ -124,6 +126,7 @@ function getFormMyPlaces(e) {
         clearPage('divr')
         clearPage('divLeft')
         printPlacesNames()
+        closeModal()
     }
 }
 
@@ -136,12 +139,13 @@ function sendEdits(e) {
     })
 
     const id = e.currentTarget.dataset.id
-  //  console.log('boh', id)
-    const [placeName, name, description, working_hours, room, road, number, city, state] = allInputsValue
-    const obj = { id, placeName, name, description, working_hours, room, road, number, city, state }
-   // console.log('sono un obj',obj)
-   api.updateMyPlace(obj)
-   clearPage('ok')
+    //  console.log('boh', id)
+    const [placeName, name, description, working_hours, rooms, road, number, city, state] = allInputsValue
+    const obj = { id, placeName, name, description, working_hours, rooms, road, number, city, state }
+    // console.log('sono un obj',obj)
+    api.updateMyPlace(obj)
+    clearPage('ok')
+    closeModal()
 }
 
 function clearPage(div) {
