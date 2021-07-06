@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const Place = require('./../models/Places.model')
+const Place = require('./../models/Place.model')
 const Applicant = require('./../models/ApplicantsReview.model')
 const fileUploader = require('./../config/cloudinary.config')
 const transporter = require('./../config/nodemailer.config')

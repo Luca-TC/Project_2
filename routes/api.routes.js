@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const { Mongoose } = require('mongoose')
-const Place = require('../models/Places.model')
+const Place = require('../models/Place.model')
 const User = require('../models/User.model')
 
 /* GET home page */
