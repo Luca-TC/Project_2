@@ -42,6 +42,9 @@ h3 {
 .admin-content > .col-md-5.rightPan {
     z-index: 10;
 }
+.admin-content > .col-md-5.rightPan img {
+    margin-top: 30px;
+}
 
 .navbar .nav-item .dropdown-menu {
     display: none;

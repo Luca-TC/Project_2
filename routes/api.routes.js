@@ -48,7 +48,7 @@ router.post('/updateHostPlace/:id', (req, res) => {
 
     Place.findByIdAndUpdate(id, { place_approved: true }, { new: true })
         .then(place => {
-            //
+            //Hay que buscar una manera de que no updatee al admin
             User.findByIdAndUpdate(place.host_id, { role: 'HOST' }, { new: true })
                 .then(user => place)
                 .then(place => {
@@ -72,7 +72,6 @@ router.post('/updateHostPlace/:id', (req, res) => {
         })
         .catch(err => console.log(err))
 })
-
 
 router.post('/updateMyPlace/:id', (req, res) => {
     //
@@ -107,7 +106,7 @@ router.post('/updateMyPlace/:id', (req, res) => {
 
 router.post('/deleteHostPlace/:id', (req, res) => {
     //
-    console.log('funziono delete',id)
+    console.log('funziono delete', id)
     const { id } = req.params
     //
     Place.findByIdAndDelete(id)
