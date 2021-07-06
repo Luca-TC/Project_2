@@ -20,10 +20,10 @@ function createImages(imagesList) {
     for (let i = 0; i < 6; i++) {
         // const image = document.createElement('img')
         image = imagesList[i].urls.thumb
-        let str = ` <div ><img class="shadow "  src="${image}" alt="image"></div>`
+        let str = ` <div ><img class="shadow " src="${image}" alt="image"></div>`
         document.querySelector('.home-top').insertAdjacentHTML('afterbegin', str)
     }
-    for (let i = 5; i < 11; i++) {
+    for (let i = 6; i < 12; i++) {
         // const image = document.createElement('img')
         image = imagesList[i].urls.thumb
         let str = ` <div ><img  class="shadow " src="${image}" alt="image"></div>`

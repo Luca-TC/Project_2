@@ -13,7 +13,11 @@ img {
     height: 250px;
     object-fit: cover;
     border-radius: 5px;
-    
+}
+
+nav .nav-image {
+    width: 100px;
+    height: 40px;
 }
 
 h1,
@@ -21,14 +25,15 @@ h2,
 h3 {
     text-align: center;
 }
-.home{
+.home {
     height: 90vh;
 }
-.home img{
+.home img {
     opacity: 0.8;
-    padding:2px;
+    padding: 2px;
     box-shadow: outset black;
 }
+
 .leftNav a {
     background: cornflowerblue;
     color: black;
