@@ -112,6 +112,7 @@ function confirmApplication(e) {
         api.deleteHostPlace(id)
             .then(place => '????????????????????')
             .catch(err => console.log(err))
+        closeModal()
 
         printPlacesNames()
     }
