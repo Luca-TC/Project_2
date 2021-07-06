@@ -110,12 +110,19 @@ router.get('/confirmation/email/:token', (req, res) => {
 /*GET current user profile */
 router.get('/profile', (req, res) => {
     //
+    // const id = req.session.currentUser._id
     const currentUser = req.session?.currentUser
+    const admin = req.session?.currentUser.role === 'ADMIN'
+    const host = req.session?.currentUser.role === 'HOST'
+    const pending = req.session?.currentUser.role === 'PENDING'
+
     const session = sessionActive(req)
-//tenemos que poner los roles aquì
-    if (currentUser && session) {
+
+    // console.log(currentUser)
+    //tenemos que poner los roles aquì
+    if (session) {
         //
-        res.render('user/my-profile', { currentUser })
+        res.render('user/my-profile', { currentUser, admin, host, pending })
     } else {
         //
         res.render('user/login', { errorMessage: 'no permiti' })

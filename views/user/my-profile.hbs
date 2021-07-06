@@ -1,4 +1,16 @@
-<h1>my profile {{currentUser.name}}</h1>
+{{#if pending}}
+    <p class='bg-warning'> No has confirmado tu email</p>
+{{/if}}
 
-<a href='/admin_panel'>admin panel</a><br>
-<a href='/host_panel'>host panel</a>
+<div class='container'>
+
+    <h1>{{currentUser.name}}`s Profile</h1>
+
+    {{#if this.admin}}
+        <a href='/admin_panel'>admin panel</a><br />
+    {{/if}}
+
+    {{#if this.host}}
+        <a href='/host_panel'>host panel</a>
+    {{/if}}
+</div>
