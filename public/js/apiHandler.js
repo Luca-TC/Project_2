@@ -9,6 +9,8 @@ class ApiHandler {
 
     getFullPlaces = () => this.app.get('/api/places')
 
+    getFullPlacesLive = () => this.app.post('/api/placeslive')
+
     getFullContracts = () => this.app.post('/api/contracts')
 
     getMyPlaces = () => this.app.get(`/api/myplaces`)

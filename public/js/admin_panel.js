@@ -5,18 +5,23 @@ const rightPan = document.querySelector('.rightPan')
 window.onload = function () {
     document.querySelector('.places-pending').addEventListener('click', e => printPlacesNames(e))
     document.querySelector('.contracts').addEventListener('click', e => printContracts(e))
+    document.querySelector('.places-live').addEventListener('click', e => placesLive(e))
 }
 
 function printPlacesNames(e) {
     //
     e ? e.preventDefault() : null
 
-    leftPan.textContent = ''
+    clearPage('divLeft')
 
     api.getFullPlaces()
         .then(response => {
             //
             data = response.data
+
+            let title = `<h3> Pending approve </h3> <hr />`
+
+            leftPan.insertAdjacentHTML('beforeend', title)
 
             data.forEach(elm => {
                 //
@@ -34,12 +39,75 @@ printPlacesNames()
 
 //
 
+function placesLive(e) {
+    e.preventDefault()
+
+    clearPage('divLeft')
+
+    api.getFullPlacesLive()
+        .then(response => {
+            //
+            data = response.data
+
+            let title = `<h3> Live Places </h3> <hr />`
+
+            leftPan.insertAdjacentHTML('beforeend', title)
+
+            data.forEach(elm => {
+                //
+                let link = `<p><a href="" class="link" data-id="${elm._id}" >${elm.name}</a></p>`
+
+                leftPan.insertAdjacentHTML('beforeend', link)
+            })
+        })
+        .catch(err => console.log(err))
+}
+
 //
 function printContracts(e) {
     e.preventDefault()
+
+    clearPage('divLeft')
     //
     api.getFullContracts()
-        .then(res => console.log(res))
+        .then(res => {
+            //
+
+            data = res.data
+            let tableContracts = `
+            <div>
+            <table class="table-contracts">
+                <thead>
+                    <td style="width: 25%">Place</td>
+                    <td>Applicant</td>
+                    <td>Host</td>
+                    <td>posted</td>
+                    <td>viewed</td>
+                </thead>
+                
+            </table>
+            </div>
+            <hr />
+            `
+            leftPan.insertAdjacentHTML('beforeend', tableContracts)
+
+            let table = document.querySelector('.table-contracts')
+
+            data.forEach(elm => {
+                console.log(elm)
+                //
+                let rows = `
+                <tr>
+                        <td><a href='/places/details/${elm.place_id._id}' target='_blank'>${elm.place_id.name}</a></td>
+                        <td><a href='/user/details/${elm.user_applicant_id._id}' target='_blank'>${elm.user_applicant_id.name}</a></td>
+                        <td><a href='/user/details/${elm.host_id._id}' target='_blank'>${elm.host_id.name}</a></td>
+                        <td>${elm.createdAt.split('T')[0]}</td>
+                        <td>${elm.updatedAt.split('T')[0]}</td>
+                    </tr>
+                `
+                table.insertAdjacentHTML('beforeend', rows)
+            })
+        })
         .catch(err => console.log(err))
 }
 //

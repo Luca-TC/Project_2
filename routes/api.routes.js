@@ -88,8 +88,17 @@ router.post('/deleteHostPlace/:id', (req, res) => {
 //
 
 router.post('/contracts', (req, res) => {
-    Applicants.find({ contract_status: false })
-        .then(response => console.log(response))
+    Applicants.find({ contract_status: true })
+        .populate('place_id')
+        .populate('host_id')
+        .populate('user_applicant_id')
+        .then(response => res.json(response))
+        .catch(err => console.log(err))
+})
+
+router.post('/placeslive', (req, res) => {
+    Place.find({ place_approved: true })
+        .then(response => res.json(response))
         .catch(err => console.log(err))
 })
 
