@@ -102,4 +102,6 @@ router.post('/placeslive', (req, res) => {
         .catch(err => console.log(err))
 })
 
+router.get('/unsplash', (req, res) => res.json(process.env.UNSPLASH_KEY))
+
 module.exports = router

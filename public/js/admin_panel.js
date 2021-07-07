@@ -40,7 +40,7 @@ printPlacesNames()
 //
 
 function placesLive(e) {
-    e.preventDefault()
+    if (e) e.preventDefault()
 
     clearPage('divLeft')
 
@@ -105,15 +105,14 @@ function pendingOrDelete(e) {
         api.deleteHostPlace(id)
             .then(response => {
                 closeModal()
-
-                console.log(response)
+                placesLive()
             })
             .catch(err => console.log(err))
     } else {
         api.returnPlaceToPending(id)
             .then(response => {
                 closeModal()
-                console.log(response)
+                placesLive()
             })
             .catch(err => console.log(err))
     }
@@ -123,16 +122,17 @@ function pendingOrDelete(e) {
 
 //
 function printContracts(e) {
-    e.preventDefault()
-
     clearPage('divLeft')
-    //
-    api.getFullContracts()
-        .then(res => {
-            //
+    if (e) {
+        e.preventDefault()
 
-            data = res.data
-            let tableContracts = `
+        //
+        api.getFullContracts()
+            .then(res => {
+                //
+
+                data = res.data
+                let tableContracts = `
             <div>
             <table class="table-contracts">
                 <thead>
@@ -147,14 +147,14 @@ function printContracts(e) {
             </div>
             <hr />
             `
-            leftPan.insertAdjacentHTML('beforeend', tableContracts)
+                leftPan.insertAdjacentHTML('beforeend', tableContracts)
 
-            let table = document.querySelector('.table-contracts')
+                let table = document.querySelector('.table-contracts')
 
-            data.forEach(elm => {
-                console.log(elm)
+                data.forEach(elm => {
+                    console.log(elm)
 
-                let rows = `
+                    let rows = `
                 <tr>
                         <td><a href='/places/details/${elm.place_id?._id}' target='_blank'>${elm.place_id?.name}</a></td>
                         <td><a href='/user/details/${elm.user_applicant_id._id}' target='_blank'>${elm.user_applicant_id.name}</a></td>
@@ -163,10 +163,11 @@ function printContracts(e) {
                         <td>${elm.updatedAt.split('T')[0]}</td>
                     </tr>
                 `
-                table.insertAdjacentHTML('beforeend', rows)
+                    table.insertAdjacentHTML('beforeend', rows)
+                })
             })
-        })
-        .catch(err => console.log(err))
+            .catch(err => console.log(err))
+    }
 }
 //
 

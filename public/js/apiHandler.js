@@ -28,4 +28,8 @@ class ApiHandler {
     deleteHostPlace = id => this.app.post(`/api/deleteHostPlace/${id}`)
 
     tryPost = data => this.app.post('/places/postEmail', data)
+
+    keyHandler = () => this.app.get('/api/unsplash')
+
+    apiSplash = url => this.app.get(url)
 }

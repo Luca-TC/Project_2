@@ -1,4 +1,4 @@
-function createTags(tag){
+function createTags(tagNeeded){
 
         if(tag ==== 'adminPanel'){
                 
