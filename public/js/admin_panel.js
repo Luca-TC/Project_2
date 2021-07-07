@@ -1,4 +1,4 @@
-const api = new ApiHandler(window.location.href.includes('locahost') ? 'https://localhost:3000' : 'https://bbidas.herokuapp.com/')
+const api = new ApiHandler(window.location.href.split('/')[2].split(':').includes('localhost') ? 'http://localhost:3000' : 'https://bbidas.herokuapp.com/')
 const leftPan = document.querySelector('.leftPan')
 const rightPan = document.querySelector('.rightPan')
 
@@ -55,11 +55,12 @@ function placesLive(e) {
 
             data.forEach(elm => {
                 //
-                let link = `<p><a href="" class="link" data-id="${elm._id}" >${elm.name}</a></p>`
+                let link = `<p><a href="" class="link-live" data-id="${elm._id}" >${elm.name}</a></p>`
 
                 leftPan.insertAdjacentHTML('beforeend', link)
             })
         })
+        .then(() => document.querySelector('.link-live').addEventListener('click', e => showLiveOptions(e)))
         .catch(err => console.log(err))
 }
 
@@ -149,6 +150,9 @@ function registerInfo(e) {
         .catch(err => console.log(err))
 
     openModal()
+
+    // ensancho la col
+    document.querySelector('.rightPan').classList.add('col-md-6')
 }
 
 function confirmApplication(e) {
