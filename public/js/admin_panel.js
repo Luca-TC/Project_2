@@ -2,16 +2,17 @@ const api = new ApiHandler(`http://localhost:3000`)
 const leftPan = document.querySelector('.leftPan')
 const rightPan = document.querySelector('.rightPan')
 
-document.querySelector('.places').addEventListener('click', e => printPlacesNames(e))
-document.querySelector('.contracts').addEventListener('click', e => printContracts(e))
+window.onload = function () {
+    document.querySelector('.places-pending').addEventListener('click', e => printPlacesNames(e))
+    document.querySelector('.contracts').addEventListener('click', e => printContracts(e))
+}
 
 function printPlacesNames(e) {
-    if (e) {
-        e.preventDefault()
-    }
     //
+    e ? e.preventDefault() : null
+
     leftPan.textContent = ''
-    //
+
     api.getFullPlaces()
         .then(response => {
             //
@@ -25,7 +26,7 @@ function printPlacesNames(e) {
             })
         })
         .then(() => {
-            document.querySelectorAll('.link').forEach(elm => elm.addEventListener('click', e => myFunction(e)))
+            document.querySelectorAll('.link').forEach(elm => elm.addEventListener('click', e => registerInfo(e)))
         })
         .catch(err => console.log(err))
 }
@@ -34,15 +35,18 @@ printPlacesNames()
 //
 
 //
-function printContracts() {
-    //
+function printContracts(e) {
     e.preventDefault()
+    //
+    api.getFullContracts()
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
 }
 //
 
 //
 
-function myFunction(e) {
+function registerInfo(e) {
     //
     e.preventDefault()
 
@@ -145,3 +149,9 @@ function clearPage(div) {
 //
 
 //
+
+// function showContracts() {
+//     api.getFullContracts()
+//         .then(res => console.log(res))
+//         .catch(err => console.log(err))
+// }

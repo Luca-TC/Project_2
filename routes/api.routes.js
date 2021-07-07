@@ -2,6 +2,7 @@ const router = require('express').Router()
 const { Mongoose } = require('mongoose')
 const Place = require('../models/Place.model')
 const User = require('../models/User.model')
+const Applicants = require('../models/ApplicantsReview.model')
 
 /* GET home page */
 router.get('/places', (req, res, next) => {
@@ -73,15 +74,22 @@ router.post('/updateHostPlace/:id', (req, res) => {
         .catch(err => console.log(err))
 })
 
-
-
 router.post('/deleteHostPlace/:id', (req, res) => {
     //
-    console.log('funziono delete', id)
     const { id } = req.params
     //
     Place.findByIdAndDelete(id)
         .then(place => res.json(place))
+        .catch(err => console.log(err))
+})
+
+//
+
+//
+
+router.post('/contracts', (req, res) => {
+    Applicants.find({ contract_status: false })
+        .then(response => console.log(response))
         .catch(err => console.log(err))
 })
 

@@ -4,6 +4,7 @@ require('../db/index')
 const Mongoose = require('mongoose')
 const User = require('../models/User.model')
 const Places = require('../models/Place.model')
+const Applicant = require('../models/ApplicantsReview.model')
 User.collection.drop()
 Places.collection.drop()
 
@@ -35,310 +36,325 @@ const users = [
 ]
 
 User.create(users)
-    .then(response => console.log(response))
-    .catch(err => console.log(err))
+    .then(users => {
+        console.log(users)
+        Places.create({
+            name: 'Teulada',
+            image: undefined,
+            host_id: users[1]._id,
+            task_info: {
+                name: 'name description',
+                working_hours: 3,
+                description: 'task is this one',
+            },
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
+        })
+        return users
+    })
+    .then(users => {
+        Places.create({
+            name: 'Teulada2',
+            image: undefined,
+            host_id: users[1]._id,
+            task_info: {
+                name: 'name description',
+                working_hours: 3,
+                description: 'task is this one',
+            },
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
+        })
+        return users
+    })
+    .then(users => {
+        Places.create({
+            name: 'Teulada3',
+            image: undefined,
+            host_id: users[1]._id,
+            task_info: {
+                name: 'name description',
+                working_hours: 3,
+                description: 'task is this one',
+            },
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
+        })
+        return users
+    })
+    .then(users => {
+        Places.create({
+            name: 'Teulada4',
+            image: undefined,
+            host_id: users[1]._id,
+            task_info: {
+                name: 'name description',
+                working_hours: 3,
+                description: 'task is this one',
+            },
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
+        })
+        return users
+    })
+    .then(users => {
+        Places.create({
+            name: 'Teulada4',
+            image: undefined,
+            host_id: users[1]._id,
+            task_info: {
+                name: 'name description',
+                working_hours: 3,
+                description: 'task is this one',
+            },
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
+        })
+        return users
+    })
+    .then(users => {
+        Places.create({
+            name: 'Teulada4',
+            image: undefined,
+            host_id: users[1]._id,
+            task_info: {
+                name: 'name description',
+                working_hours: 3,
+                description: 'task is this one',
+            },
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
+        })
+        return users
+    })
+    .then(users => {
+        Places.create({
+            name: 'Teulada4',
+            image: undefined,
+            host_id: users[1]._id,
+            task_info: {
+                name: 'name description',
+                working_hours: 3,
+                description: 'task is this one',
+            },
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
+        })
+        return users
+    })
+    .then(users => {
+        Places.create({
+            name: 'Teulada4',
+            image: undefined,
+            host_id: users[1]._id,
+            task_info: {
+                name: 'name description',
+                working_hours: 3,
+                description: 'task is this one',
+            },
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
+        })
+        return users
+    })
+    .then(users => {
+        Places.create({
+            name: 'Teulada4',
+            image: undefined,
+            host_id: users[1]._id,
+            task_info: {
+                name: 'name description',
+                working_hours: 3,
+                description: 'task is this one',
+            },
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
+        })
+        return users
+    })
+    .then(users => {
+        Places.create({
+            name: 'Teulada4',
+            image: undefined,
+            host_id: users[1]._id,
+            task_info: {
+                name: 'name description',
+                working_hours: 3,
+                description: 'task is this one',
+            },
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
+        })
+        return users
+    })
+    .then(users => {
+        Places.create({
+            name: 'Teulada4',
+            image: undefined,
+            host_id: users[1]._id,
+            task_info: {
+                name: 'name description',
+                working_hours: 3,
+                description: 'task is this one',
+            },
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
+        })
+        return users
+    })
+    .then(users => {
+        Places.create({
+            name: 'Teulada4',
+            image: undefined,
+            host_id: users[1]._id,
+            task_info: {
+                name: 'name description',
+                working_hours: 3,
+                description: 'task is this one',
+            },
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
+        })
+        return users
+    })
+    .then(users => {
+        Places.create({
+            name: 'Teulada4',
+            image: undefined,
+            host_id: users[1]._id,
+            task_info: {
+                name: 'name description',
+                working_hours: 3,
+                description: 'task is this one',
+            },
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
+        })
+        return users
+    })
+    .then(users => {
+        Places.create({
+            name: 'Teulada4',
+            image: undefined,
+            host_id: users[1]._id,
+            task_info: {
+                name: 'name description',
+                working_hours: 3,
+                description: 'task is this one',
+            },
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
+        }).then(place => {
+            Applicant.create({
+                place_id: place._id,
+                host_id: place.host_id,
+                user_applicant_id: users[2]._id,
+                // start_data:
+                // final_data:
+            })
+        })
+        return users
+    })
+    .then(users => {
+        Places.create({
+            name: 'Pula',
+            image: undefined,
+            host_id: users[1]._id,
+            task_info: {
+                name: 'name description',
+                working_hours: 3,
+                description: 'task is this one',
+            },
+            address: {
+                road: 'gran via',
+                number: 3,
+                city: 'Madrid',
+                state: 'Washington',
+            },
+            rooms: 3,
+        })
+            .then(place => {
+                Applicant.create({
+                    place_id: place._id,
+                    host_id: place.host_id,
+                    user_applicant_id: users[2]._id,
+                    contract_status: true,
+                    // start_data:
+                    // final_data:
+                }).then(() => Mongoose.connection.close())
+            })
 
-Places.create({
-    name: 'Teulada',
-    image: undefined,
-    host_id: users[1]._id,
-    task_info: {
-        name: 'name description',
-        working_hours: 3,
-        description: 'task is this one',
-    },
-    address: {
-        road: 'gran via',
-        number: 3,
-        city: 'Madrid',
-        state: 'Washington',
-    },
-    rooms: 3,
-})
-    .then(() =>
-        Places.create({
-            name: 'Teulada',
-            image: undefined,
-            host_id: users[1]._id,
-            task_info: {
-                name: 'name description',
-                working_hours: 3,
-                description: 'task is this one',
-            },
-            address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
-            },
-            rooms: 3,
-        })
-    )
-    .then(() =>
-        Places.create({
-            name: 'Teulada',
-            image: undefined,
-            host_id: users[1]._id,
-            task_info: {
-                name: 'name description',
-                working_hours: 3,
-                description: 'task is this one',
-            },
-            address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
-            },
-            rooms: 3,
-        })
-    )
-    .then(() =>
-        Places.create({
-            name: 'Teulada',
-            image: undefined,
-            host_id: users[1]._id,
-            task_info: {
-                name: 'name description',
-                working_hours: 3,
-                description: 'task is this one',
-            },
-            address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
-            },
-            rooms: 3,
-        })
-    )
-    .then(() =>
-        Places.create({
-            name: 'Teulada',
-            image: undefined,
-            host_id: users[1]._id,
-            task_info: {
-                name: 'name description',
-                working_hours: 3,
-                description: 'task is this one',
-            },
-            address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
-            },
-            rooms: 3,
-        })
-    )
-    .then(() =>
-        Places.create({
-            name: 'Teulada',
-            image: undefined,
-            host_id: users[1]._id,
-            task_info: {
-                name: 'name description',
-                working_hours: 3,
-                description: 'task is this one',
-            },
-            address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
-            },
-            rooms: 3,
-        })
-    )
-    .then(() =>
-        Places.create({
-            name: 'Teulada',
-            image: undefined,
-            host_id: users[1]._id,
-            task_info: {
-                name: 'name description',
-                working_hours: 3,
-                description: 'task is this one',
-            },
-            address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
-            },
-            rooms: 3,
-        })
-    )
-    .then(() =>
-        Places.create({
-            name: 'Teulada',
-            image: undefined,
-            host_id: users[1]._id,
-            task_info: {
-                name: 'name description',
-                working_hours: 3,
-                description: 'task is this one',
-            },
-            address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
-            },
-            rooms: 3,
-        })
-    )
-    .then(() =>
-        Places.create({
-            name: 'Teulada',
-            image: undefined,
-            host_id: users[1]._id,
-            task_info: {
-                name: 'name description',
-                working_hours: 3,
-                description: 'task is this one',
-            },
-            address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
-            },
-            rooms: 3,
-        })
-    )
-    .then(() =>
-        Places.create({
-            name: 'Teulada',
-            image: undefined,
-            host_id: users[1]._id,
-            task_info: {
-                name: 'name description',
-                working_hours: 3,
-                description: 'task is this one',
-            },
-            address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
-            },
-            rooms: 3,
-        })
-    )
-    .then(() =>
-        Places.create({
-            name: 'Teulada',
-            image: undefined,
-            host_id: users[1]._id,
-            task_info: {
-                name: 'name description',
-                working_hours: 3,
-                description: 'task is this one',
-            },
-            address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
-            },
-            rooms: 3,
-        })
-    )
-    .then(() =>
-        Places.create({
-            name: 'Teulada',
-            image: undefined,
-            host_id: users[1]._id,
-            task_info: {
-                name: 'name description',
-                working_hours: 3,
-                description: 'task is this one',
-            },
-            address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
-            },
-            rooms: 3,
-        })
-    )
-    .then(() =>
-        Places.create({
-            name: 'Teulada',
-            image: undefined,
-            host_id: users[1]._id,
-            task_info: {
-                name: 'name description',
-                working_hours: 3,
-                description: 'task is this one',
-            },
-            address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
-            },
-            rooms: 3,
-        })
-    )
-    .then(() =>
-        Places.create({
-            name: 'Teulada',
-            image: undefined,
-            host_id: users[1]._id,
-            task_info: {
-                name: 'name description',
-                working_hours: 3,
-                description: 'task is this one',
-            },
-            address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
-            },
-            rooms: 3,
-        })
-    )
-    .then(() =>
-        Places.create({
-            name: 'Teulada',
-            image: undefined,
-            host_id: users[1]._id,
-            task_info: {
-                name: 'name description',
-                working_hours: 3,
-                description: 'task is this one',
-            },
-            address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
-            },
-            rooms: 3,
-        })
-    )
-    .then(() =>
-        Places.create({
-            name: 'Teulada',
-            image: undefined,
-            host_id: users[1]._id,
-            task_info: {
-                name: 'name description',
-                working_hours: 3,
-                description: 'task is this one',
-            },
-            address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
-            },
-            rooms: 3,
-        })
-    )
-    .then(() => Mongoose.connection.close())
-    .catch(err => console.log(err))
+            .catch(err => console.log(err))
+    })
+
+    .catch(err => console.log('new error', err))
