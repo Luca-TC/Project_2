@@ -6,27 +6,49 @@
 
     <h1>Welcome to {{currentUser.name}}`s Profile</h1>
 
-    {{#if this.admin}}
-        <a href='/admin_panel'>Admin panel</a><br />
-    {{/if}}
+    <div style='border: 1px solid black' class='row'>
+        <div class='col-3 align-self-center'>
+            {{#if this.admin}}
+                <a class='btn btn-outline-dark' href='/admin_panel'>Admin panel</a><br />
+            {{/if}}
 
-    {{#if this.host}}
-        <a href='/host_panel'>Host panel</a>
-    {{/if}}
-    <div style="border: 1px solid black" class='row'>
-{{#with currentUser}}
-        <div style="border: 1px solid red" class="col-3"></div>
-        <div style="border: 1px solid red" class="col-6"></div>
-
-        <div  class="col-3 card">
-            <p><img src="{{image}}" alt="profile img" class="shadow profile-img"></p>
-            <p class="text-center">{{description}}</p>
-            {{#with address}}
-            <p>{{road}},{{number}}</p>
-            <p class="blockquote disabled">{{city}},({{state}})</p>
-            {{/with}}
+            {{#if this.host}}
+                <a class='btn btn-outline-dark' href='/host_panel'>Host panel</a>
+            {{/if}}
         </div>
-{{/with}}
+        {{#with currentUser}}
+            <div style='border: 1px solid red' class='col-6'>
+
+            {{#if this.host}}
+            {{#each places}}
+            <div class='col-md-2 '>
+
+                <img src='{{image}}' alt='img.jpg' />
+            </div>
+            <div class='col-md-4'>
+
+                <ul>
+                    <li name=''>place_name:{{name}}</li>
+                    <li name=''>description:{{task_info.description}}</li>
+                    <li name=''>direction:{{address.city}}</li>
+                    <li name=''>number_rooms:{{rooms}}</li>
+
+                    <a class='btn btn-outline-dark btn-sm' href='/places/details/{{id}}'>Details</a>
+                </ul>
+            </div>
+        {{/each}}
+ {{/if}}
+            </div>
+
+            <div class='col-3 card'>
+                <p><img src='{{image}}' alt='profile img' class='shadow profile-img' /></p>
+                <p class='text-center'>{{description}}</p>
+                {{#with address}}
+                    <p>{{road}},{{number}}</p>
+                    <p class='blockquote disabled'>{{city}},({{state}})</p>
+                {{/with}}
+            </div>
+        {{/with}}
     </div>
 </div>
 <div class='overlay hidden'></div>
@@ -34,4 +56,4 @@
 <script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
 <script src='../../js/apiHandler.js'></script>
 <script src='../../js/blur.js'></script>
-<script src='../../js/host_panel.js'></script>
+{{!-- <script src='../../js/host_panel.js'></script> --}}

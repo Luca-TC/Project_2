@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const User = require('./../models/User.model')
+const Place = require('./../models/Place.model')
 const bcrypt = require('bcrypt')
 const { role, sessionActive, emails } = require('./../utils')
 const transporter = require('./../config/nodemailer.config')
@@ -122,7 +123,11 @@ router.get('/profile', (req, res) => {
         const admin = req.session?.currentUser.role === 'ADMIN'
         const host = req.session?.currentUser.role === 'HOST'
         const pending = req.session?.currentUser.role === 'PENDING'
-        res.render('user/my-profile', { currentUser, admin, host, pending })
+        const id = req.session?.currentUser._id
+        console.log(id)
+        Place.find({host_id:id})
+        .then(places=>res.render('user/my-profile', { currentUser, admin, host, pending ,places}))
+        .catch(err=> console.log(err))
     } else {
         //
         res.render('user/login', { errorMessage: 'Log in first' })
