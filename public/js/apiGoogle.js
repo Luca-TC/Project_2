@@ -9,9 +9,6 @@ const gmapsRoute = res => {
     geoCode(currentLocation)
 }
 
-//
-
-//
 
 const geoCode = location => {
     let geocoder = new google.maps.Geocoder()
@@ -26,9 +23,6 @@ const geoCode = location => {
     })
 }
 
-//
-
-//
 
 function showScreen(cords) {
     //

@@ -3,6 +3,19 @@ module.exports = {
 
     role: (req, ...rolesToCheck) => rolesToCheck.includes(req.session.currentUser?.role),
 
+    randomToken: () => {
+        let str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        let randomToken = ''
+        for (let i = 32; i > 0; --i) randomToken += str[Math.floor(Math.random() * str.length)]
+        return randomToken
+    },
+
+    currentUser: (req) => {
+        if (req.session.currentUser) return req.session.currentUser
+        // return req.session ? req.session?.currentUser : null
+    },
+
+
     emails: (validation, objectNeeded, yesornot) => {
         if (validation === 'email') {
             return {

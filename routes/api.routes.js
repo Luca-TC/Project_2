@@ -13,6 +13,7 @@ router.get('/places', (req, res, next) => {
         .catch(err => console.log(err))
 })
 
+
 router.get('/onePlace/:id', (req, res, next) => {
     //
     const { id } = req.params
@@ -21,19 +22,23 @@ router.get('/onePlace/:id', (req, res, next) => {
         .populate('host_id')
         .then(response => res.json(response))
         .catch(err => console.log(err))
-    //
 })
-//
+
+
 router.get('/myplaces', (req, res) => {
+
     const id = req.session.currentUser._id
-    // console.log('funziono', req.session.currentUser._id, id)
+
     Place.find({ host_id: id })
         .then(place => res.json(place))
         .catch(err => console.log(err))
 })
 
+
 router.get('/myplace/edit/:id', (req, res) => {
+
     const { id } = req.params
+
     Place.findById(id)
         .then(place => res.json(place))
         .catch(err => console.log(err))
@@ -42,12 +47,8 @@ router.get('/myplace/edit/:id', (req, res) => {
 //Patron Models Views Controller
 
 router.put('/updateHostPlace/:id', (req, res) => {
-    //
+
     const { id } = req.params
-
-    console.log('------------', req.body)
-
-
 
     Place.findByIdAndUpdate(id, { place_approved: true }, { new: true })
         .then(place => {
@@ -61,7 +62,7 @@ router.put('/updateHostPlace/:id', (req, res) => {
         })
         .catch(err => console.log(err))
 })
-
+// insert message pending
 
 
 //Hay que buscar una manera de que no updatee al admin
@@ -98,11 +99,9 @@ router.delete('/deleteHostPlace/:id', (req, res) => {
         .catch(err => console.log(err))
 })
 
-//
-
-//
 
 router.get('/contracts', (req, res) => {
+
     Applicants.find({ contract_status: true })
         .populate('place_id')
         .populate('host_id')
@@ -111,11 +110,14 @@ router.get('/contracts', (req, res) => {
         .catch(err => console.log(err))
 })
 
+
 router.get('/placeslive', (req, res) => {
+
     Place.find({ place_approved: true })
         .then(response => res.json(response))
         .catch(err => console.log(err))
 })
+
 
 router.get('/unsplash', (req, res) => res.json(process.env.UNSPLASH_KEY))
 

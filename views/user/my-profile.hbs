@@ -4,7 +4,7 @@
 
 <div class='container'>
 
-    <h1>Welcome to {{currentUser.name}}`s Profile</h1>
+    <h1>Welcome to {{loggedUser.name}}`s Profile</h1>
 
     <div class='row'>
         <div class='col-3'>
@@ -40,7 +40,7 @@
             {{/if}}
         </div>
 
-        {{#with currentUser}}
+        {{#with loggedUser}}
             <div class='col-3 card bg-transparent border-light mb-3'>
                 <p><img src='{{image}}' alt='profile img' class='shadow profile-img' /></p>
                 <p class='text-center text-truncate'>{{description}}</p>
