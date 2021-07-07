@@ -1,4 +1,4 @@
-const api = new ApiHandler(`http://localhost:3000`)
+const api = new ApiHandler(window.location.includes('locahost') ? 'https://localhost:3000' : 'https://bbidas.herokuapp.com/')
 const leftPan = document.querySelector('.leftPan')
 const rightPan = document.querySelector('.rightPan')
 /*DOESN'T WORK FUNCTION PRINTPLACENAMES AFTER SUBMITING EDIT FORM */
