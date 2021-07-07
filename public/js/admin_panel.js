@@ -1,22 +1,26 @@
 const api = new ApiHandler(window.location.href.split('/')[2].split(':').includes('localhost') ? 'http://localhost:3000' : 'https://bbidas.herokuapp.com/')
+
 const leftPan = document.querySelector('.leftPan')
+
 const rightPan = document.querySelector('.rightPan')
 
 window.onload = function () {
     document.querySelector('.places-pending').addEventListener('click', e => printPlacesNames(e))
+
     document.querySelector('.contracts').addEventListener('click', e => printContracts(e))
+
     document.querySelector('.places-live').addEventListener('click', e => placesLive(e))
 }
 
 function printPlacesNames(e) {
-    //
-    e ? e.preventDefault() : null
+
+    if (e) e.preventDefault()
 
     clearPage('divLeft')
 
     api.getFullPlaces()
         .then(response => {
-            //
+
             data = response.data
 
             let title = `<h3> Pending approve </h3> <hr />`
@@ -24,7 +28,7 @@ function printPlacesNames(e) {
             leftPan.insertAdjacentHTML('beforeend', title)
 
             data.forEach(elm => {
-                //
+
                 let link = `<p><a href="" class="link" data-id="${elm._id}" >${elm.name}</a></p>`
 
                 leftPan.insertAdjacentHTML('beforeend', link)
@@ -37,7 +41,6 @@ function printPlacesNames(e) {
 }
 printPlacesNames()
 
-//
 
 function placesLive(e) {
     if (e) e.preventDefault()
@@ -46,7 +49,7 @@ function placesLive(e) {
 
     api.getFullPlacesLive()
         .then(response => {
-            //
+
             data = response.data
 
             let title = `<h3> Live Places </h3> <hr />`
@@ -54,7 +57,7 @@ function placesLive(e) {
             leftPan.insertAdjacentHTML('beforeend', title)
 
             data.forEach(elm => {
-                //
+
                 let link = `<p><a href="" class="link-live" data-id="${elm._id}" >${elm.name}</a></p>`
 
                 leftPan.insertAdjacentHTML('beforeend', link)
@@ -63,20 +66,18 @@ function placesLive(e) {
         .then(() => document.querySelectorAll('.link-live').forEach(elm => elm.addEventListener('click', e => showLiveOptions(e))))
         .catch(err => console.log(err))
 }
-//
 
-//
 
 function showLiveOptions(e) {
-    e.preventDefault()
+    if (e) e.preventDefault()
 
     const id = e.currentTarget.dataset.id
 
     api.getOneRegister(id)
         .then(res => {
+
             res = res.data
-            console.log(res)
-            //
+
             let buttons = ` 
                             <h3>${res.name}</h3>
                             <h5>${res.address.road}</h5>
@@ -94,68 +95,70 @@ function showLiveOptions(e) {
     makeRigthPanBigger()
 }
 
+
 function pendingOrDelete(e) {
-    e.preventDefault()
+
+    if (e) e.preventDefault()
+
     const placeToDelete = e.currentTarget.dataset.delete
+
     const id = e.currentTarget.dataset.id
 
     console.log(id)
 
     if (placeToDelete === 'true') {
+
         api.deleteHostPlace(id)
-            .then(response => {
+            .then(() => {
                 closeModal()
                 placesLive()
             })
             .catch(err => console.log(err))
     } else {
+
         api.returnPlaceToPending(id)
-            .then(response => {
+            .then(() => {
                 closeModal()
                 placesLive()
             })
             .catch(err => console.log(err))
     }
-
-    console.log(placeToDelete)
 }
 
-//
+
 function printContracts(e) {
+
     clearPage('divLeft')
-    if (e) {
-        e.preventDefault()
 
-        //
-        api.getFullContracts()
-            .then(res => {
-                //
+    if (e) e.preventDefault()
 
-                data = res.data
-                let tableContracts = `
-            <div>
-            <table class="table-contracts">
-                <thead>
-                    <td style="width: 25%">Place</td>
-                    <td>Applicant</td>
-                    <td>Host</td>
-                    <td>posted</td>
-                    <td>viewed</td>
-                </thead>
-                
-            </table>
-            </div>
-            <hr />
+    api.getFullContracts()
+        .then(res => {
+
+            data = res.data
+
+            let tableContracts = `
+                    <div>
+                    <table class="table-contracts">
+                        <thead>
+                            <td style="width: 25%">Place</td>
+                            <td>Applicant</td>
+                            <td>Host</td>
+                            <td>posted</td>
+                            <td>viewed</td>
+                        </thead>
+                    </table>
+                    </div>
+                    <hr />
             `
-                leftPan.insertAdjacentHTML('beforeend', tableContracts)
+            leftPan.insertAdjacentHTML('beforeend', tableContracts)
 
-                let table = document.querySelector('.table-contracts')
+            let table = document.querySelector('.table-contracts')
 
-                data.forEach(elm => {
-                    console.log(elm)
+            data.forEach(elm => {
 
-                    let rows = `
-                <tr>
+                let rows = `
+                    <tr>
                         <td><a href='/places/details/${elm.place_id?._id}' target='_blank'>${elm.place_id?.name}</a></td>
                         <td><a href='/user/details/${elm.user_applicant_id._id}' target='_blank'>${elm.user_applicant_id.name}</a></td>
                         <td><a href='/user/details/${elm.host_id._id}' target='_blank'>${elm.host_id.name}</a></td>
@@ -163,19 +166,16 @@ function printContracts(e) {
                         <td>${elm.updatedAt.split('T')[0]}</td>
                     </tr>
                 `
-                    table.insertAdjacentHTML('beforeend', rows)
-                })
+                table.insertAdjacentHTML('beforeend', rows)
             })
-            .catch(err => console.log(err))
-    }
+        })
+        .catch(err => console.log(err))
 }
-//
 
-//
 
 function registerInfo(e) {
-    //
-    e.preventDefault()
+
+    if (e) e.preventDefault()
 
     const id = e.currentTarget.dataset.id
 
@@ -183,8 +183,7 @@ function registerInfo(e) {
 
     api.getOneRegister(id)
         .then(res => {
-            console.log(res)
-            //
+
             res = res.data
 
             let buttons = ` <a href ="" data-id="${res._id}" data-details="${res}" 
@@ -202,9 +201,9 @@ function registerInfo(e) {
         })
         .then(res => {
             document.querySelectorAll('.confirm').forEach(btn => btn.addEventListener('click', e => confirmApplication(e)))
-            return res
+
+            gmapsRoute(res)
         })
-        .then(res => gmapsRoute(res))
         .catch(err => console.log(err))
 
     openModal()
@@ -214,8 +213,8 @@ function registerInfo(e) {
 }
 
 function confirmApplication(e) {
-    //
-    e.preventDefault()
+
+    if (e) e.preventDefault()
 
     const id = e.currentTarget.dataset.id
 
@@ -235,17 +234,16 @@ function confirmApplication(e) {
             })
             .then(() => document.querySelector('#buttonForm').addEventListener('click', e => showForm(e)))
             .catch(err => console.log(err))
-        //
 
-        //
     } else {
-        //
+
         clearPage('divr')
         clearPage('divLeft')
 
         api.deleteHostPlace(id)
             .then(place => '????????????????????')
             .catch(err => console.log(err))
+
         closeModal()
 
         printPlacesNames()
@@ -253,7 +251,7 @@ function confirmApplication(e) {
 }
 
 function showForm(e) {
-    //
+
     e.preventDefault()
 
     const answer = document.querySelector('#answer').value
@@ -280,12 +278,3 @@ function makeRigthPanBigger() {
     document.querySelector('.rightPan').classList.add('col-md-6')
 }
 
-//
-
-//
-
-// function showContracts() {
-//     api.getFullContracts()
-//         .then(res => console.log(res))
-//         .catch(err => console.log(err))
-// }

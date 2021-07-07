@@ -7,7 +7,9 @@
     <h1>Welcome to {{loggedUser.name}}`s Profile</h1>
 
     <div class='row'>
+       
         <div class='col-3'>
+       
             {{#if this.admin}}
                 <a class='btn btn-outline-dark position-fixed' href='/admin_panel'>Admin panel</a><br />
             {{/if}}
@@ -15,16 +17,20 @@
             {{#if this.host}}
                 <a class='btn btn-outline-dark position-fixed' href='/host_panel'>Host panel</a>
             {{/if}}
+       
         </div>
+       
         <div class='col-6'>
 
             {{#if this.host}}
                 {{#each places}}
 
                     <div class='card shadow bg-transparent border-light mb-3'>
+                        
                         {{#if place_approved}}
                             <input class='form-control p-3' type='checkbox' checked disabled />
                         {{/if}}
+                        
                         <img class='card-img-top' src='{{image}}' alt='img.jpg' />
 
                         <h5 class='card-title text-center'>{{name}}</h5>
@@ -36,18 +42,22 @@
                         <a class='btn btn-outline-dark btn-sm border-light mb-3' href='/places/details/{{id}}'>Details</a>
 
                     </div>
+
                 {{/each}}
             {{/if}}
         </div>
 
         {{#with loggedUser}}
+
             <div class='col-3 card bg-transparent border-light mb-3'>
                 <p><img src='{{image}}' alt='profile img' class='shadow profile-img' /></p>
                 <p class='text-center text-truncate'>{{description}}</p>
+        
                 {{#with address}}
                     <p>{{road}},{{number}}</p>
                     <p class='blockquote disabled'>{{city}},({{state}})</p>
                 {{/with}}
+        
             </div>
         {{/with}}
     </div>

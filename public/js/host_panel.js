@@ -1,18 +1,19 @@
-const api = new ApiHandler(window.location.href.includes('locahost') ? 'https://localhost:3000' : 'https://bbidas.herokuapp.com/')
+const api = new ApiHandler(window.location.href.split('/')[2].split(':').includes('localhost') ? 'http://localhost:3000' : 'https://bbidas.herokuapp.com/')
 const leftPan = document.querySelector('.leftPan')
 const rightPan = document.querySelector('.rightPan')
+
 /*DOESN'T WORK FUNCTION PRINTPLACENAMES AFTER SUBMITING EDIT FORM */
 function printPlacesNames() {
-    //
-    leftPan.textContent = ''
-    //
+
+    clearPage('divLeft')
+
     api.getMyPlaces()
         .then(response => {
-            //
+
             data = response.data
 
             data.forEach(elm => {
-                //
+
                 let link = `<p><a href="" class="link" data-id="${elm._id}" >${elm.name}</a></p>`
 
                 leftPan.insertAdjacentHTML('beforeend', link)
@@ -25,11 +26,10 @@ function printPlacesNames() {
 }
 printPlacesNames()
 
-//
 
-//
 function myFunction(e) {
-    e.preventDefault()
+
+    if (e) e.preventDefault()
 
     const id = e.currentTarget.dataset.id
 
@@ -37,13 +37,13 @@ function myFunction(e) {
 
     api.getOneRegister(id)
         .then(res => {
-            // console.log(res)
-            //
+
             res = res.data
 
             let buttons = `<p>${res.name}</p>
                         <a href =""  data-id="${res._id}" data-accept="${true}"class="btn btn-outline-warning edit"> Edit </a>
                         <a href ="" data-id="${res._id}" data-accept="${false}" class="btn btn-outline-danger edit"> delete </a>`
+
             rightPan.insertAdjacentHTML('beforeend', buttons)
 
             return res
@@ -52,8 +52,8 @@ function myFunction(e) {
             document.querySelectorAll('.edit').forEach(btn => btn.addEventListener('click', e => getFormMyPlaces(e))) //da completare
             return res
         })
-        // .then(res => gmapsRoute(res))
         .catch(err => console.log(err))
+
     openModal()
 }
 
@@ -61,8 +61,11 @@ function getFormMyPlaces(e) {
     e.preventDefault()
 
     const id = e.currentTarget.dataset.id
+
     if (e.currentTarget.dataset.accept === 'true') {
+
         clearPage('divRight')
+
         //  console.log('admin-panel inside get form', id)
         api.getMyPlaceToEdit(id)
             .then(res => {
@@ -121,9 +124,11 @@ function getFormMyPlaces(e) {
             })
             // .then(() => )
             .catch(err => console.log(err))
+
         openModal()
+
     } else {
-        // console.log('delete',place)
+
         api.deleteHostPlace(id)
             .then(place => console.log('deleted', place))
             .catch(err => console.log(err))
@@ -136,8 +141,8 @@ function getFormMyPlaces(e) {
 }
 
 function sendEdits(e) {
-    //
-    e.preventDefault()
+
+    if (e) e.preventDefault()
 
     const form = document.querySelectorAll('form input')
 
@@ -148,16 +153,17 @@ function sendEdits(e) {
     })
 
     const id = e.currentTarget.dataset.id
-    //  console.log('boh', id)
+
     const [placeName, name, description, working_hours, rooms, road, number, city, state] = allInputsValue
+
     const obj = { id, placeName, name, description, working_hours, rooms, road, number, city, state }
-    // console.log('sono un obj',obj)
+
     api.updateMyPlace(obj)
-        .then(response => {
-            printPlacesNames()
-        })
+        .then(() => printPlacesNames())
         .catch(err => console.log(err))
+
     clearPage('ok')
+
     closeModal()
 }
 
