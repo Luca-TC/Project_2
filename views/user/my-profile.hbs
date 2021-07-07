@@ -16,30 +16,32 @@
                 <a class='btn btn-outline-dark' href='/host_panel'>Host panel</a>
             {{/if}}
         </div>
-        {{#with currentUser}}
-            <div style='border: 1px solid red' class='col-6'>
+        <div style='border: 1px solid red' class='col-6'>
 
             {{#if this.host}}
-            {{#each places}}
-            <div class='col-md-2 '>
+                {{#each places}}
 
-                <img src='{{image}}' alt='img.jpg' />
-            </div>
-            <div class='col-md-4'>
+                    <div class='col-md-2'>
 
-                <ul>
-                    <li name=''>place_name:{{name}}</li>
-                    <li name=''>description:{{task_info.description}}</li>
-                    <li name=''>direction:{{address.city}}</li>
-                    <li name=''>number_rooms:{{rooms}}</li>
+                        <img src='{{image}}' alt='img.jpg' />
+                    </div>
+                    <div class='col-md-6'>
 
-                    <a class='btn btn-outline-dark btn-sm' href='/places/details/{{id}}'>Details</a>
-                </ul>
-            </div>
-        {{/each}}
- {{/if}}
-            </div>
+                        <ul>
+                            <li name=''>place_name:{{name}}</li>
+                            <li name=''>description:{{task_info.description}}</li>
+                            <li name=''>direction:{{address.city}}</li>
+                            <li name=''>number_rooms:{{rooms}}</li>
 
+                            <a class='btn btn-outline-dark btn-sm' href='/places/details/{{id}}'>Details</a>
+                        </ul>
+                    </div>
+
+                {{/each}}
+            {{/if}}
+        </div>
+
+        {{#with currentUser}}
             <div class='col-3 card'>
                 <p><img src='{{image}}' alt='profile img' class='shadow profile-img' /></p>
                 <p class='text-center'>{{description}}</p>
@@ -56,4 +58,4 @@
 <script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
 <script src='../../js/apiHandler.js'></script>
 <script src='../../js/blur.js'></script>
-{{!-- <script src='../../js/host_panel.js'></script> --}}
+{{! <script src='../../js/host_panel.js'></script> }}

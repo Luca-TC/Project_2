@@ -125,8 +125,11 @@ router.get('/profile', (req, res) => {
         const pending = req.session?.currentUser.role === 'PENDING'
         const id = req.session?.currentUser._id
         console.log(id)
+        
         Place.find({host_id:id})
-        .then(places=>res.render('user/my-profile', { currentUser, admin, host, pending ,places}))
+        .then(places=>{
+            console.log(places)
+            res.render('user/my-profile', { currentUser, admin, host, pending ,places})})
         .catch(err=> console.log(err))
     } else {
         //
