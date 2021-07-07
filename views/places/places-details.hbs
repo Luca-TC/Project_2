@@ -1,23 +1,25 @@
 <div class='container'>
 
-    <div class='row'>
+    <div class='row p-4'>
 
         <div class='col-md-4'>
             <img src='https://media-cdn.tripadvisor.com/media/photo-s/12/4c/0a/ba/montecristo-country-house.jpg' alt='country house' />
         </div>
 
-        <div class='col-md-8'>
-            <h2> Place: {{name}}</h2>
+        <div class='col-md-8 text-center'>
+            <h2> Place: {{place.name}}</h2>
             <h3> Description: </h3>
             {{#with place.task_info}}
-                <h5>{{name}}</h5>
-                <h5>{{working_hours}}</h5>
-                <h5>{{description}}</h5>
+                <h5>Task: {{name}}</h5>
+                <h5>Hour for day: {{working_hours}}</h5>
+                <h5>About:  {{description}}</h5>
             {{/with}}
             {{#with place.address}}
-            <h5> Direction: {{road}}, {{number}} ({{city}})</h5>
+            <h5> Address: {{road}}, {{number}} ({{city}})</h5>
             {{/with}}
-            <h5> Rooms avail: {{place.rooms}}</h5>
+            <h5> Rooms available: {{place.rooms}}</h5>
+                <a class='btn btn-outline-dark' href='/places'>Back to list</a>
+
         </div>
         {{#if session}}
         {{#if isPending}}
@@ -50,7 +52,6 @@
                     
                 
             </form>
-        </div>
         </div>
     </div>
 
