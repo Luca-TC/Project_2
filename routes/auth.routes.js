@@ -111,9 +111,9 @@ router.get('/confirmation/email/:token', (req, res) => {
 router.get('/profile', (req, res) => {
     //
     // const id = req.session.currentUser._id
-    
+
     const session = sessionActive(req)
-    
+
     // console.log(currentUser)
     //tenemos que poner los roles aquì
     if (session) {
@@ -130,10 +130,23 @@ router.get('/profile', (req, res) => {
 })
 
 //GET OTHERS PROFILES
-/**
-router.get('user/details', (req, res)=>
-) */
 
+router.get('/user/details/:user_id', (req, res) => {
+    const session = sessionActive(req)
+
+    if (session) {
+        //
+        const { user_id } = req.params
+
+        User.findById(user_id)
+            .then(user => res.render('user/others-profiles', { user }) )
+            .catch(err => console.log(err))
+        //
+    } else {
+        //
+        res.render('user/login', { errorMessage: 'no permiti' })
+    }
+})
 /**GET LOGOUT */
 router.get('/logout', (req, res) => req.session.destroy(() => res.redirect('/')))
 

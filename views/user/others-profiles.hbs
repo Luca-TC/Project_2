@@ -1,0 +1,30 @@
+{{#if pending}}
+    <p class='bg-warning'> No has confirmado tu email</p>
+{{/if}}
+
+<div class='container'>
+{{#with user}}
+    <h1>Welcome to {{name}}`s Profile</h1>
+
+    <div style="border: 1px solid black" class='row'>
+        <div style="border: 1px solid red" class="col-3"></div>
+        <div style="border: 1px solid red" class="col-6"></div>
+
+        <div  class="col-3 card">
+            <p><img src="{{image}}" alt="profile img" class="shadow profile-img"></p>
+            <p class="text-center">{{description}}</p>
+            {{#with address}}
+            <p>{{road}},{{number}}</p>
+            <p class="blockquote disabled">{{city}},({{state}})</p>
+    {{/with}}
+        </div>
+
+    </div>
+    {{/with}}
+</div>
+<div class='overlay hidden'></div>
+
+<script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
+<script src='../../js/apiHandler.js'></script>
+<script src='../../js/blur.js'></script>
+<script src='../../js/host_panel.js'></script>
