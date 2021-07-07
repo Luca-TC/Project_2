@@ -125,11 +125,14 @@ router.get('/profile', (req, res) => {
         res.render('user/my-profile', { currentUser, admin, host, pending })
     } else {
         //
-        res.render('user/login', { errorMessage: 'no permiti' })
+        res.render('user/login', { errorMessage: 'Log in first' })
     }
 })
 
-//
+//GET OTHERS PROFILES
+/**
+router.get('user/details', (req, res)=>
+) */
 
 /**GET LOGOUT */
 router.get('/logout', (req, res) => req.session.destroy(() => res.redirect('/')))

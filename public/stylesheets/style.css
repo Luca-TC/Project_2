@@ -5,6 +5,7 @@
     --color-dropdown-hover:rgba(255, 160, 122, 0.342);
     --color-error:rgba(208, 85, 36, 0.729);
     --color-modal-bkg: rgb(234, 230, 202);
+    --color-form: rgba(234, 230, 202, 0.501);
 }
 
 
@@ -18,15 +19,8 @@ body {
 
 /* generales */
 
-/* forms background */
 
-.form-background {
-    background: hsl(0, 0%, 80%);
-    margin: 50px 0;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 1px 1px 5px black;
-}
+
 
 /* estilos para hacer el nav dropdown hover */
 
@@ -54,6 +48,9 @@ h3 {
     opacity: 0.8;
     padding: 2px;
     box-shadow: outset black;
+}
+.profile-img{
+    border-radius: 200px;
 }
 
 .leftNav a {
@@ -127,7 +124,16 @@ h3 {
     background: var(--color-error);
     text-align: center;
 }
-
+/* forms background */
+.form {
+    padding: 1.75rem 3.5rem;
+    margin: 5rem 2rem;
+    border: none;
+    background-color:var(--color-form);
+    color: #444;
+    border-radius: 5px;
+    cursor: pointer;
+}
 .show-modal {
     font-size: 2rem;
     font-weight: 600;

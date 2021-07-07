@@ -4,7 +4,7 @@
 
 <div class='container'>
 
-    <h1>{{currentUser.name}}`s Profile</h1>
+    <h1>Welcome to {{currentUser.name}}`s Profile</h1>
 
     {{#if this.admin}}
         <a href='/admin_panel'>Admin panel</a><br />
@@ -13,4 +13,25 @@
     {{#if this.host}}
         <a href='/host_panel'>Host panel</a>
     {{/if}}
+    <div style="border: 1px solid black" class='row'>
+{{#with currentUser}}
+        <div style="border: 1px solid red" class="col-3"></div>
+        <div style="border: 1px solid red" class="col-6"></div>
+
+        <div  class="col-3 card">
+            <p><img src="{{image}}" alt="profile img" class="shadow profile-img"></p>
+            <p class="text-center">{{description}}</p>
+            {{#with address}}
+            <p>{{road}},{{number}}</p>
+            <p class="blockquote disabled">{{city}},({{state}})</p>
+            {{/with}}
+        </div>
+{{/with}}
+    </div>
 </div>
+<div class='overlay hidden'></div>
+
+<script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
+<script src='../../js/apiHandler.js'></script>
+<script src='../../js/blur.js'></script>
+<script src='../../js/host_panel.js'></script>
