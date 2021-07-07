@@ -111,7 +111,6 @@ router.get('/confirmation/email/:token', (req, res) => {
 /*GET current user profile */
 router.get('/profile', (req, res) => {
     //
-    // const id = req.session.currentUser._id
 
     const session = sessionActive(req)
 
@@ -125,12 +124,10 @@ router.get('/profile', (req, res) => {
         const pending = req.session?.currentUser.role === 'PENDING'
         const id = req.session?.currentUser._id
         console.log(id)
-        
-        Place.find({host_id:id})
-        .then(places=>{
-            console.log(places)
-            res.render('user/my-profile', { currentUser, admin, host, pending ,places})})
-        .catch(err=> console.log(err))
+
+        Place.find({ host_id: id })
+            .then(places => res.render('user/my-profile', { currentUser, admin, host, pending, places }))
+            .catch(err => console.log(err))
     } else {
         //
         res.render('user/login', { errorMessage: 'Log in first' })
@@ -147,12 +144,12 @@ router.get('/user/details/:user_id', (req, res) => {
         const { user_id } = req.params
 
         User.findById(user_id)
-            .then(user => res.render('user/others-profiles', { user }) )
+            .then(user => res.render('user/others-profiles', { user }))
             .catch(err => console.log(err))
         //
     } else {
         //
-        res.render('user/login', { errorMessage: 'no permiti' })
+        res.render('user/login', { errorMessage: 'not permited' })
     }
 })
 /**GET LOGOUT */

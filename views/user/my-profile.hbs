@@ -1,50 +1,49 @@
 {{#if pending}}
-    <p class='bg-warning'> No has confirmado tu email</p>
+    <p class='error'> No has confirmado tu email</p>
 {{/if}}
 
 <div class='container'>
 
     <h1>Welcome to {{currentUser.name}}`s Profile</h1>
 
-    <div style='border: 1px solid black' class='row'>
-        <div class='col-3 align-self-center'>
+    <div class='row'>
+        <div class='col-3'>
             {{#if this.admin}}
-                <a class='btn btn-outline-dark' href='/admin_panel'>Admin panel</a><br />
+                <a class='btn btn-outline-dark position-fixed' href='/admin_panel'>Admin panel</a><br />
             {{/if}}
 
             {{#if this.host}}
-                <a class='btn btn-outline-dark' href='/host_panel'>Host panel</a>
+                <a class='btn btn-outline-dark position-fixed' href='/host_panel'>Host panel</a>
             {{/if}}
         </div>
-        <div style='border: 1px solid red' class='col-6'>
+        <div class='col-6'>
 
             {{#if this.host}}
                 {{#each places}}
 
-                    <div class='col-md-2'>
+                    <div class='card shadow bg-transparent border-light mb-3'>
+                        {{#if place_approved}}
+                            <input class='form-control p-3' type='checkbox' checked disabled />
+                        {{/if}}
+                        <img class='card-img-top' src='{{image}}' alt='img.jpg' />
 
-                        <img src='{{image}}' alt='img.jpg' />
+                        <h5 class='card-title text-center'>{{name}}</h5>
+
+                        <p class='text-center'>{{task_info.description}}</p>
+                        <p class='text-center'>{{address.city}}</p>
+                        <p class='text-center'>{{rooms}}</p>
+
+                        <a class='btn btn-outline-dark btn-sm border-light mb-3' href='/places/details/{{id}}'>Details</a>
+
                     </div>
-                    <div class='col-md-6'>
-
-                        <ul>
-                            <li name=''>place_name:{{name}}</li>
-                            <li name=''>description:{{task_info.description}}</li>
-                            <li name=''>direction:{{address.city}}</li>
-                            <li name=''>number_rooms:{{rooms}}</li>
-
-                            <a class='btn btn-outline-dark btn-sm' href='/places/details/{{id}}'>Details</a>
-                        </ul>
-                    </div>
-
                 {{/each}}
             {{/if}}
         </div>
 
         {{#with currentUser}}
-            <div class='col-3 card'>
+            <div class='col-3 card bg-transparent border-light mb-3'>
                 <p><img src='{{image}}' alt='profile img' class='shadow profile-img' /></p>
-                <p class='text-center'>{{description}}</p>
+                <p class='text-center text-truncate'>{{description}}</p>
                 {{#with address}}
                     <p>{{road}},{{number}}</p>
                     <p class='blockquote disabled'>{{city}},({{state}})</p>
