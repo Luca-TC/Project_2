@@ -2,14 +2,15 @@
 
         <h1>Places list</h1>
     <div class='row '>
-        {{#each places}}
-            <div class='col-md-2'>
 
+        {{#each places}}
+
+            <div class='col-md-2'>
                 <img src='{{image}}' alt='img.jpg' />
             </div>
+        
             <div class='col-md-4 p-3'>
 
-                
                     <h5>{{name}}</h5>
                     <p class="text-truncate">{{task_info.description}}</p>
                     <p>{{address.city}} </p>
@@ -17,9 +18,8 @@
                     <p>{{rooms}}</p>
 
                     <a class='btn btn-outline-dark btn-sm' href='/places/details/{{id}}'>Details</a>
-                
+                    
             </div>
         {{/each}}
     </div>
 </div>
-{{! foto/link details/ }}

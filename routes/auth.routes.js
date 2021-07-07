@@ -30,7 +30,7 @@ router.post('/login', (req, res) => {
 
             req.session.currentUser = user // Iniciar sesión = almacenar el usuario logueado en req.session.currentUser
 
-            res.redirect('/places')
+            res.redirect('/')
         })
         .catch(err => console.log(err))
 })
@@ -82,10 +82,11 @@ router.get('/confirmation/email/:token', (req, res) => {
             if (user.length) {
 
                 User.findByIdAndUpdate(user[0]._id, { role: 'USER' }, { new: true })
-                    .then(user => res.render('index'))
+                    .then(() => res.redirect('/'))
                     .catch(err => console.log(err))
 
             } else {
+
                 res.render('errors/errorEmail')
             }
         })
@@ -96,27 +97,21 @@ router.get('/confirmation/email/:token', (req, res) => {
 /*GET current user profile */
 router.get('/profile', (req, res) => {
 
-    // const session = 
 
-    //tenemos que poner los roles aquì
     if (sessionActive(req)) {
 
         const admin = role(req, 'ADMIN')
         const host = role(req, 'HOST')
         const pending = role(req, 'PENDING')
-
         const loggedUser = currentUser(req)
-        // console.log(currentUser)
-
-        // const id = req.session?.currentUser._id
-        // console.log(id)
 
         Place.find({ host_id: currentUser._id })
             .then(places => res.render('user/my-profile', { loggedUser, admin, host, pending, places }))
             .catch(err => console.log(err))
+
     } else {
-        //
-        res.render('user/login', { errorMessage: 'Log in first' })
+
+        res.render('user/login', { errorMessage: 'Log in first !' })
     }
 })
 
@@ -126,22 +121,22 @@ router.get('/user/details/:user_id', (req, res) => {
     const session = sessionActive(req)
 
     if (session) {
-        //
+
         const { user_id } = req.params
 
         User.findById(user_id)
             .then(user => res.render('user/others-profiles', { user }))
             .catch(err => console.log(err))
-        //
+
     } else {
-        //
-        res.render('user/login', { errorMessage: 'not permited' })
+
+        res.render('user/login', { errorMessage: 'Not permitted 🚫' })
     }
 })
+
+
 /**GET LOGOUT */
 router.get('/logout', (req, res) => req.session.destroy(() => res.redirect('/')))
-
-//
 
 router.get('/admin_panel', keepOut('USER', 'HOST', 'PENDING'), (req, res) => {
     res.render('admin/admin_panel')
@@ -149,7 +144,5 @@ router.get('/admin_panel', keepOut('USER', 'HOST', 'PENDING'), (req, res) => {
 router.get('/host_panel', keepOut('USER', 'ADMIN', 'PENDING'), (req, res) => {
     res.render('host/host_panel')
 })
-//
 
-//
 module.exports = router

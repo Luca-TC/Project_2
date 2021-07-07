@@ -1,7 +1,6 @@
-//
 
 const gmapsRoute = res => {
-    //
+
     const { road, city } = res.address
 
     const currentLocation = road + ' ' + city
@@ -25,7 +24,7 @@ const geoCode = location => {
 
 
 function showScreen(cords) {
-    //
+
     const { lat, lng } = cords
 
     const latLng = new google.maps.LatLng(lat, lng)

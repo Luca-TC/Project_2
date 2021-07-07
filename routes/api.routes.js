@@ -51,9 +51,14 @@ router.put('/updateHostPlace/:id', (req, res) => {
     const { id } = req.params
 
     Place.findByIdAndUpdate(id, { place_approved: true }, { new: true })
+        .populate('host_id')
         .then(place => {
-            User.findByIdAndUpdate(place.host_id, { role: 'HOST' }, { new: true })
-            return place
+
+            if (place.host_id.role !== 'ADMIN') {
+
+                User.findByIdAndUpdate(place.host_id._id, { role: 'HOST' })
+                return place
+            }
         })
         .then((place) => {
             Place.findById(place._id)
@@ -63,37 +68,14 @@ router.put('/updateHostPlace/:id', (req, res) => {
         .catch(err => console.log(err))
 })
 // insert message pending
-
-
-//Hay que buscar una manera de que no updatee al admin
-// User.findByIdAndUpdate(place.host_id, { role: 'HOST' }, { new: true })
-// .then(() => place)
-// .then(place => {
-//
-// Place.findById(place._id)
-//     .populate('host_id')
-//     .then(place => res.json(place))
-//     // .then(() => {
-//     //     const objectEmail = { username, token_confirmation }
-
-//     //     const email = emails('host', objectEmail)
-
-//     //     transporter
-//     //         .sendMail(email)
-//     //         .then(info => console.log(info))
-//     //         .catch(err => console.log(err))
-//     // })
-//     .catch(err => console.log(err))
-//     })
-//     .catch (err => console.log(err))
-
-
+// insert message pending
+// insert message pending
 
 
 router.delete('/deleteHostPlace/:id', (req, res) => {
-    //
+
     const { id } = req.params
-    //
+
     Place.findByIdAndDelete(id)
         .then(place => res.json(place))
         .catch(err => console.log(err))
