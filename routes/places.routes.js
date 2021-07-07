@@ -66,16 +66,20 @@ router.post('/new', fileUploader.single('image'), keepOut('PENDING'), (req, res)
 
 /*GET places UPDATE  */
 
-router.post('/updateMyPlace', (req, res) => {
-    const { id, placeName, name, description, working_hours, rooms, road, number, city, state } = req.body
-    const task_info = { name, description, working_hours }
-    const address = { road, number, city, state }
+router.put('/updateMyPlace', (req, res) => {
+    const { id, placeName, rooms } = req.body
+
+    const task_info = ({ name, description, working_hours } = req.body)
+
+    const address = ({ road, number, city, state } = req.body)
+
     Place.findByIdAndUpdate(id, { name: placeName, task_info, rooms, address }, { new: true })
         .then(place => res.json(place))
         .catch(err => console.log(err))
 })
 
 /*post places delete  */
+
 
 //
 
@@ -134,7 +138,7 @@ router.post('/postEmail', (req, res) => {
         })
 })
 
-router.post('/returnPending/:id', (req, res) => {
+router.put('/returnPending/:id', (req, res) => {
     const { id } = req.params
 
     console.log(id)

@@ -41,40 +41,55 @@ router.get('/myplace/edit/:id', (req, res) => {
 
 //Patron Models Views Controller
 
-router.post('/updateHostPlace/:id', (req, res) => {
+router.put('/updateHostPlace/:id', (req, res) => {
     //
     const { id } = req.params
 
     console.log('------------', req.body)
 
+
+
     Place.findByIdAndUpdate(id, { place_approved: true }, { new: true })
         .then(place => {
-            //Hay que buscar una manera de que no updatee al admin
             User.findByIdAndUpdate(place.host_id, { role: 'HOST' }, { new: true })
-                .then(user => place)
-                .then(place => {
-                    //
-                    Place.findById(place._id)
-                        .populate('host_id')
-                        .then(place => res.json(place))
-                        // .then(() => {
-                        //     const objectEmail = { username, token_confirmation }
-
-                        //     const email = emails('host', objectEmail)
-
-                        //     transporter
-                        //         .sendMail(email)
-                        //         .then(info => console.log(info))
-                        //         .catch(err => console.log(err))
-                        // })
-                        .catch(err => console.log(err))
-                })
-                .catch(err => console.log(err))
+            return place
+        })
+        .then((place) => {
+            Place.findById(place._id)
+                .populate('host_id')
+                .then(place => res.json(place))
         })
         .catch(err => console.log(err))
 })
 
-router.post('/deleteHostPlace/:id', (req, res) => {
+
+
+//Hay que buscar una manera de que no updatee al admin
+// User.findByIdAndUpdate(place.host_id, { role: 'HOST' }, { new: true })
+// .then(() => place)
+// .then(place => {
+//
+// Place.findById(place._id)
+//     .populate('host_id')
+//     .then(place => res.json(place))
+//     // .then(() => {
+//     //     const objectEmail = { username, token_confirmation }
+
+//     //     const email = emails('host', objectEmail)
+
+//     //     transporter
+//     //         .sendMail(email)
+//     //         .then(info => console.log(info))
+//     //         .catch(err => console.log(err))
+//     // })
+//     .catch(err => console.log(err))
+//     })
+//     .catch (err => console.log(err))
+
+
+
+
+router.delete('/deleteHostPlace/:id', (req, res) => {
     //
     const { id } = req.params
     //
@@ -87,7 +102,7 @@ router.post('/deleteHostPlace/:id', (req, res) => {
 
 //
 
-router.post('/contracts', (req, res) => {
+router.get('/contracts', (req, res) => {
     Applicants.find({ contract_status: true })
         .populate('place_id')
         .populate('host_id')
@@ -96,7 +111,7 @@ router.post('/contracts', (req, res) => {
         .catch(err => console.log(err))
 })
 
-router.post('/placeslive', (req, res) => {
+router.get('/placeslive', (req, res) => {
     Place.find({ place_approved: true })
         .then(response => res.json(response))
         .catch(err => console.log(err))

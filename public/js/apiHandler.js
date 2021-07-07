@@ -9,9 +9,9 @@ class ApiHandler {
 
     getFullPlaces = () => this.app.get('/api/places')
 
-    getFullPlacesLive = () => this.app.post('/api/placeslive')
+    getFullPlacesLive = () => this.app.get('/api/placeslive')
 
-    getFullContracts = () => this.app.post('/api/contracts')
+    getFullContracts = () => this.app.get('/api/contracts')
 
     getMyPlaces = () => this.app.get(`/api/myplaces`)
 
@@ -19,13 +19,13 @@ class ApiHandler {
 
     getOneRegister = id => this.app.get(`/api/onePlace/${id}`)
 
-    updateMyPlace = data => this.app.post(`/places/updateMyPlace`, data)
+    updateMyPlace = data => this.app.put(`/places/updateMyPlace`, data)
 
-    returnPlaceToPending = id => this.app.post(`/places/returnPending/${id}`)
+    returnPlaceToPending = id => this.app.put(`/places/returnPending/${id}`)
 
-    updatePendingHostAndPlace = id => this.app.post(`/api/updateHostPlace/${id}`)
+    updatePendingHostAndPlace = id => this.app.put(`/api/updateHostPlace/${id}`)
 
-    deleteHostPlace = id => this.app.post(`/api/deleteHostPlace/${id}`)
+    deleteHostPlace = id => this.app.delete(`/api/deleteHostPlace/${id}`)
 
     tryPost = data => this.app.post('/places/postEmail', data)
 
