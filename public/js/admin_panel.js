@@ -152,11 +152,11 @@ function printContracts(e) {
             let table = document.querySelector('.table-contracts')
 
             data.forEach(elm => {
-                // console.log(elm)
-                //
+                console.log(elm)
+
                 let rows = `
                 <tr>
-                        <td><a href='/places/details/${elm.place_id._id}' target='_blank'>${elm.place_id.name}</a></td>
+                        <td><a href='/places/details/${elm.place_id?._id}' target='_blank'>${elm.place_id?.name}</a></td>
                         <td><a href='/user/details/${elm.user_applicant_id._id}' target='_blank'>${elm.user_applicant_id.name}</a></td>
                         <td><a href='/user/details/${elm.host_id._id}' target='_blank'>${elm.host_id.name}</a></td>
                         <td>${elm.createdAt.split('T')[0]}</td>
