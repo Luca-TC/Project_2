@@ -7,9 +7,9 @@
     --color-modal-bkg: rgb(234, 230, 202);
     --color-form: rgba(234, 230, 202, 0.501);
 }
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
 
-
-
+*{font-family: 'Noto Sans KR', sans-serif;}
 
 body {
     /* height: 100vh; */
@@ -117,7 +117,7 @@ h3 {
 .navbar .nav-item .dropdown-menu {
     margin-top: 0;
 }
-a{}
+
 /* mensaje de error clase error */
 
 .error {
