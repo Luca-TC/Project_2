@@ -4,6 +4,8 @@ const rightPan = document.querySelector('.rightPan')
 /*DOESN'T WORK FUNCTION PRINTPLACENAMES AFTER SUBMITING EDIT FORM */
 function printPlacesNames() {
     //
+    leftPan.textContent = ''
+    //
     api.getMyPlaces()
         .then(response => {
             //
@@ -23,6 +25,9 @@ function printPlacesNames() {
 }
 printPlacesNames()
 
+//
+
+//
 function myFunction(e) {
     e.preventDefault()
 
@@ -131,9 +136,13 @@ function getFormMyPlaces(e) {
 }
 
 function sendEdits(e) {
+    //
     e.preventDefault()
+
     const form = document.querySelectorAll('form input')
+
     const allInputsValue = []
+
     form.forEach(elm => {
         allInputsValue.push(elm.value)
     })
@@ -144,6 +153,10 @@ function sendEdits(e) {
     const obj = { id, placeName, name, description, working_hours, rooms, road, number, city, state }
     // console.log('sono un obj',obj)
     api.updateMyPlace(obj)
+        .then(response => {
+            printPlacesNames()
+        })
+        .catch(err => console.log(err))
     clearPage('ok')
     closeModal()
 }

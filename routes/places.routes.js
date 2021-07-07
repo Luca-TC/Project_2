@@ -70,13 +70,12 @@ router.post('/updateMyPlace', (req, res) => {
     const { id, placeName, name, description, working_hours, rooms, road, number, city, state } = req.body
     const task_info = { name, description, working_hours }
     const address = { road, number, city, state }
-    Place.findByIdAndUpdate(id, { name: placeName, task_info, rooms, address}, { new: true })
-        .then(place => console.log(place))
+    Place.findByIdAndUpdate(id, { name: placeName, task_info, rooms, address }, { new: true })
+        .then(place => res.json(place))
         .catch(err => console.log(err))
 })
 
 /*post places delete  */
-
 
 //
 

@@ -35,8 +35,27 @@ const users = [
 ]
 
 User.create(users)
-    .then(users => {
-        console.log(users)
+    .then(response => console.log(response))
+    .catch(err => console.log(err))
+
+Places.create({
+    name: 'Teulada',
+    image: undefined,
+    host_id: users[1]._id,
+    task_info: {
+        name: 'name description',
+        working_hours: 3,
+        description: 'task is this one',
+    },
+    address: {
+        road: 'gran via',
+        number: 3,
+        city: 'Madrid',
+        state: 'Washington',
+    },
+    rooms: 3,
+})
+    .then(() =>
         Places.create({
             name: 'Teulada',
             image: undefined,
@@ -54,11 +73,10 @@ User.create(users)
             },
             rooms: 3,
         })
-        return users
-    })
-    .then(users => {
+    )
+    .then(() =>
         Places.create({
-            name: 'Teulada2',
+            name: 'Teulada',
             image: undefined,
             host_id: users[1]._id,
             task_info: {
@@ -74,11 +92,10 @@ User.create(users)
             },
             rooms: 3,
         })
-        return users
-    })
-    .then(users => {
+    )
+    .then(() =>
         Places.create({
-            name: 'Teulada3',
+            name: 'Teulada',
             image: undefined,
             host_id: users[1]._id,
             task_info: {
@@ -94,11 +111,10 @@ User.create(users)
             },
             rooms: 3,
         })
-        return users
-    })
-    .then(users => {
+    )
+    .then(() =>
         Places.create({
-            name: 'Teulada4',
+            name: 'Teulada',
             image: undefined,
             host_id: users[1]._id,
             task_info: {
@@ -114,11 +130,10 @@ User.create(users)
             },
             rooms: 3,
         })
-        return users
-    })
-    .then(users => {
+    )
+    .then(() =>
         Places.create({
-            name: 'Teulada4',
+            name: 'Teulada',
             image: undefined,
             host_id: users[1]._id,
             task_info: {
@@ -134,11 +149,10 @@ User.create(users)
             },
             rooms: 3,
         })
-        return users
-    })
-    .then(users => {
+    )
+    .then(() =>
         Places.create({
-            name: 'Teulada4',
+            name: 'Teulada',
             image: undefined,
             host_id: users[1]._id,
             task_info: {
@@ -154,11 +168,10 @@ User.create(users)
             },
             rooms: 3,
         })
-        return users
-    })
-    .then(users => {
+    )
+    .then(() =>
         Places.create({
-            name: 'Teulada4',
+            name: 'Teulada',
             image: undefined,
             host_id: users[1]._id,
             task_info: {
@@ -174,11 +187,10 @@ User.create(users)
             },
             rooms: 3,
         })
-        return users
-    })
-    .then(users => {
+    )
+    .then(() =>
         Places.create({
-            name: 'Teulada4',
+            name: 'Teulada',
             image: undefined,
             host_id: users[1]._id,
             task_info: {
@@ -194,11 +206,10 @@ User.create(users)
             },
             rooms: 3,
         })
-        return users
-    })
-    .then(users => {
+    )
+    .then(() =>
         Places.create({
-            name: 'Teulada4',
+            name: 'Teulada',
             image: undefined,
             host_id: users[1]._id,
             task_info: {
@@ -214,11 +225,10 @@ User.create(users)
             },
             rooms: 3,
         })
-        return users
-    })
-    .then(users => {
+    )
+    .then(() =>
         Places.create({
-            name: 'Teulada4',
+            name: 'Teulada',
             image: undefined,
             host_id: users[1]._id,
             task_info: {
@@ -234,11 +244,10 @@ User.create(users)
             },
             rooms: 3,
         })
-        return users
-    })
-    .then(users => {
+    )
+    .then(() =>
         Places.create({
-            name: 'Teulada4',
+            name: 'Teulada',
             image: undefined,
             host_id: users[1]._id,
             task_info: {
@@ -254,11 +263,10 @@ User.create(users)
             },
             rooms: 3,
         })
-        return users
-    })
-    .then(users => {
+    )
+    .then(() =>
         Places.create({
-            name: 'Teulada4',
+            name: 'Teulada',
             image: undefined,
             host_id: users[1]._id,
             task_info: {
@@ -274,11 +282,10 @@ User.create(users)
             },
             rooms: 3,
         })
-        return users
-    })
-    .then(users => {
+    )
+    .then(() =>
         Places.create({
-            name: 'Teulada4',
+            name: 'Teulada',
             image: undefined,
             host_id: users[1]._id,
             task_info: {
@@ -294,11 +301,10 @@ User.create(users)
             },
             rooms: 3,
         })
-        return users
-    })
-    .then(users => {
+    )
+    .then(() =>
         Places.create({
-            name: 'Teulada4',
+            name: 'Teulada',
             image: undefined,
             host_id: users[1]._id,
             task_info: {
@@ -314,11 +320,10 @@ User.create(users)
             },
             rooms: 3,
         })
-        return users
-    })
-    .then(users => {
+    )
+    .then(() =>
         Places.create({
-            name: 'Pula',
+            name: 'Teulada',
             image: undefined,
             host_id: users[1]._id,
             task_info: {
@@ -333,7 +338,7 @@ User.create(users)
                 state: 'Washington',
             },
             rooms: 3,
-        }).then(() => Mongoose.connection.close())
-    })
-
-    .catch(err => console.log('new error', err))
+        })
+    )
+    .then(() => Mongoose.connection.close())
+    .catch(err => console.log(err))
