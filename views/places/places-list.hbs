@@ -1,0 +1,30 @@
+<div class='container p-4'>
+
+        <h1>Places list</h1>
+    <div class='row '>
+
+        {{#each places}}
+
+            <div class='col-md-2'>
+                <img src='{{image}}' alt='img.jpg' />
+            </div>
+        
+            <div class='col-md-4 p-3'>
+
+                    <h5>{{name}}</h5>
+                    <p class="text-truncate">{{task_info.description}}</p>
+                    <p>{{address.city}} </p>
+                    <p disabled>({{address.state}})</p>
+                    <p>{{rooms}}</p>
+
+<<<<<<< HEAD
+                    <a class='btn btn-outline-dark btn-sm ' href='/places/details/{{id}}'>Details</a>
+                
+=======
+                    <a class='btn btn-outline-dark btn-sm' href='/places/details/{{id}}'>Details</a>
+                    
+>>>>>>> e3b2208b9b41f7d3ee9d2b1891dbe22917a26ef6
+            </div>
+        {{/each}}
+    </div>
+</div>

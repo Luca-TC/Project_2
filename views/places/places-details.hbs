@@ -1,0 +1,62 @@
+<div class='container'>
+
+    <div class='row p-4'>
+
+        <div class='col-md-4'>
+            <img src='{{place.image}}' alt='country house' />
+        </div>
+
+        <div class='col-md-8 text-center'>
+            <h2> Place: {{place.name}}</h2>
+            <h3> Description: </h3>
+            {{#with place.task_info}}
+                <h5>Task: {{name}}</h5>
+                <h5>Hour for day: {{working_hours}}</h5>
+                <h5>About:  {{description}}</h5>
+            {{/with}}
+            {{#with place.address}}
+            <h5> Address: {{road}}, {{number}} ({{city}})</h5>
+            {{/with}}
+            <h5> Rooms available: {{place.rooms}}</h5>
+                <a class='btn btn-outline-dark' href='/places'>Back to list</a>
+        </div>
+        {{#if session}}
+        {{#if isPending}}
+<<<<<<< HEAD
+        <div class="md-4 form shadow">
+=======
+
+        <div class="md-4">
+>>>>>>> e3b2208b9b41f7d3ee9d2b1891dbe22917a26ef6
+                <div class='form-group'>
+            <form action='/places/application' method='post'>
+                    <label for='date'>Start date</label>
+                    <input type='date' name='start_date' id='start_date' class='form-control' />
+
+                    <label for='date'>Final date</label>
+                    <input type='date' name='final_date' id='final_date' class='form-control' />
+                 
+                     
+                        <label for='applicant'>Cover Letter:</label>
+                    <textarea type='' max="750" name='cover_letter' class='form-control' /></textarea>
+                    <button type='submit' class='btn btn-outline-dark'>Submit application</button>
+                    
+
+                    <input type='text' name='host_id'  value="{{place.host_id}}" class='form-control' hidden/>
+                    
+                    <input type='text' name='place_id'  value="{{place.id}}" class='form-control' hidden/>
+                    <input type='text' name='user_applicant' value="{{applicant_id}}"  class='form-control' hidden/>
+                    
+        {{/if}}
+        {{#if isPro}}
+                    <button type='submit' class='btn btn-primary'>Delete</button>
+                    <button type='submit' class='btn btn-warning'>Edit</button>
+        {{/if}}
+        {{/if}}
+                    
+                
+            </form>
+        </div>
+    </div>
+
+</div>
