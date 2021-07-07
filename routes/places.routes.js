@@ -133,4 +133,15 @@ router.post('/postEmail', (req, res) => {
                 .catch(err => console.log(err))
         })
 })
+
+router.post('/returnPending/:id', (req, res) => {
+    const { id } = req.params
+
+    console.log(id)
+
+    Place.findByIdAndUpdate(id, { place_approved: false }, { new: true })
+        .then(response => res.json(response))
+        .catch(err => console.log(err))
+})
+
 module.exports = router

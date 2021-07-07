@@ -39,7 +39,7 @@ router.get('/myplace/edit/:id', (req, res) => {
         .catch(err => console.log(err))
 })
 
-//
+//Patron Models Views Controller
 
 router.post('/updateHostPlace/:id', (req, res) => {
     //

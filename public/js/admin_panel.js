@@ -60,8 +60,65 @@ function placesLive(e) {
                 leftPan.insertAdjacentHTML('beforeend', link)
             })
         })
-        .then(() => document.querySelector('.link-live').addEventListener('click', e => showLiveOptions(e)))
+        .then(() => document.querySelectorAll('.link-live').forEach(elm => elm.addEventListener('click', e => showLiveOptions(e))))
         .catch(err => console.log(err))
+}
+//
+
+//
+
+function showLiveOptions(e) {
+    e.preventDefault()
+
+    const id = e.currentTarget.dataset.id
+
+    api.getOneRegister(id)
+        .then(res => {
+            res = res.data
+            console.log(res)
+            //
+            let buttons = ` 
+                            <h3>${res.name}</h3>
+                            <h5>${res.address.road}</h5>
+                            <h4>${res.address.city} (${res.address.state})</h4>
+                        <a href =""  data-id="${res._id}" data-delete="${false}"class="btn btn-warning btn-live"> Put in pending </a>
+                        <a href ="" data-id="${res._id}" data-delete="${true}" class="btn btn-danger btn-live"> Delete </a>
+                        <img src="${res.image}" class="mt-5" alt="place img">`
+
+            rightPan.insertAdjacentHTML('beforeend', buttons)
+        })
+        .then(() => document.querySelectorAll('.btn-live').forEach(elm => elm.addEventListener('click', e => pendingOrDelete(e))))
+        .catch(err => console.log(err))
+
+    openModal()
+    makeRigthPanBigger()
+}
+
+function pendingOrDelete(e) {
+    e.preventDefault()
+    const placeToDelete = e.currentTarget.dataset.delete
+    const id = e.currentTarget.dataset.id
+
+    console.log(id)
+
+    if (placeToDelete === 'true') {
+        api.deleteHostPlace(id)
+            .then(response => {
+                closeModal()
+
+                console.log(response)
+            })
+            .catch(err => console.log(err))
+    } else {
+        api.returnPlaceToPending(id)
+            .then(response => {
+                closeModal()
+                console.log(response)
+            })
+            .catch(err => console.log(err))
+    }
+
+    console.log(placeToDelete)
 }
 
 //
@@ -95,7 +152,7 @@ function printContracts(e) {
             let table = document.querySelector('.table-contracts')
 
             data.forEach(elm => {
-                console.log(elm)
+                // console.log(elm)
                 //
                 let rows = `
                 <tr>
@@ -152,7 +209,7 @@ function registerInfo(e) {
     openModal()
 
     // ensancho la col
-    document.querySelector('.rightPan').classList.add('col-md-6')
+    makeRigthPanBigger()
 }
 
 function confirmApplication(e) {
@@ -216,6 +273,10 @@ function showForm(e) {
 
 function clearPage(div) {
     div === 'divLeft' ? (leftPan.textContent = '') : (rightPan.textContent = ''.textContent = '')
+}
+
+function makeRigthPanBigger() {
+    document.querySelector('.rightPan').classList.add('col-md-6')
 }
 
 //

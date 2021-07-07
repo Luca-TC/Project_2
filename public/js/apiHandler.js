@@ -21,6 +21,8 @@ class ApiHandler {
 
     updateMyPlace = data => this.app.post(`/places/updateMyPlace`, data)
 
+    returnPlaceToPending = id => this.app.post(`/places/returnPending/${id}`)
+
     updatePendingHostAndPlace = id => this.app.post(`/api/updateHostPlace/${id}`)
 
     deleteHostPlace = id => this.app.post(`/api/deleteHostPlace/${id}`)
