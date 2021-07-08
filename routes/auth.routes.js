@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const User = require('./../models/User.model')
 const Place = require('./../models/Place.model')
+const Applicant = require('./../models/ApplicantsReview.model')
 const bcrypt = require('bcrypt')
 const { role, sessionActive, emails, randomToken, currentUser } = require('./../utils')
 const transporter = require('./../config/nodemailer.config')
@@ -42,7 +43,6 @@ router.get('/register', (req, res) => res.render('user/register'))
 // LOGIC REGISTER
 router.post('/register', fileUploader.single('image'), (req, res) => {
 
-    // PENDING accept no foto
 
     const token_confirmation = randomToken();
 
@@ -97,18 +97,27 @@ router.get('/confirmation/email/:token', (req, res) => {
 /*GET current user profile */
 router.get('/profile', (req, res) => {
 
-
     if (sessionActive(req)) {
+
 
         const admin = role(req, 'ADMIN')
         const host = role(req, 'HOST')
         const pending = role(req, 'PENDING')
         const loggedUser = currentUser(req)
-
-        Place.find({ host_id: currentUser._id })
-            .then(places => res.render('user/my-profile', { loggedUser, admin, host, pending, places }))
-            .catch(err => console.log(err))
-
+        console.log(host)
+        
+        if (host) {//se host vede le sue case
+            Place.find({ host_id: loggedUser._id })
+            .populate('host_id')
+                .then(places => res.render('user/my-profile', { loggedUser, admin, host, pending, places }))
+                .catch(err => console.log(err))
+                // return res
+        }
+        // Applicant.find({ user_applicant_id: loggedUser._id })
+        //     .populate('place_id')
+        //     .populate('host_id')
+        //     .populate('user_applicant_id')
+        //     .then(appli => res.render('user/my-profile', { loggedUser, admin, host, pending, places }))
     } else {
 
         res.render('user/login', { errorMessage: 'Log in first !' })
