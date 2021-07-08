@@ -66,7 +66,8 @@ router.get('/details/:place_id', (req, res) => {
         const { place_id } = req.params
         const applicant_id = currentUser(req)._id
         const session = sessionActive(req)
-        const isPending = !role(req, 'PENDING')
+        const isPending = role(req, 'PENDING')
+
 
         Place.findById(place_id)
             .then(place => res.render('places/places-details', { place, isPending, session, applicant_id }))
@@ -115,8 +116,6 @@ router.post('/postEmail', rejectUser('USER', 'PENDING'), (req, res) => {
 
 router.put('/returnPending/:id', rejectUser('USER', 'PENDING', 'HOST'), (req, res) => {
     const { id } = req.params
-
-    console.log(id)
 
     Place.findByIdAndUpdate(id, { place_approved: false }, { new: true })
         .then(response => res.json(response))
