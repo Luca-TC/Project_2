@@ -33,25 +33,31 @@ const users = [
         username: 'pending@pending.com',
         password: '$2b$10$xgMcrXkNZtsCCH2NSU4o2OI3vVLmj.RcPhk8gYT0B3tSBgLkYIRWm',
     },
+    {
+        name: 'Salva Gallego',
+        role: 'USER',
+        username: 'sgallegogirona@gmail.com',
+        password: '$2b$10$xgMcrXkNZtsCCH2NSU4o2OI3vVLmj.RcPhk8gYT0B3tSBgLkYIRWm',
+    },
 ]
 
 User.create(users)
     .then(users => {
         console.log(users)
         Places.create({
-            name: 'Teulada',
-            image: undefined,
-            host_id: users[1]._id,
+            name: 'Chalet',
+            image: 'https://res.cloudinary.com/dnpvaaivi/image/upload/v1625780628/project/kypmczsbim0lv8ojp5h2.png',
+            host_id: users[4]._id,
             task_info: {
-                name: 'name description',
+                name: 'trabajar en el campo',
                 working_hours: 3,
-                description: 'task is this one',
+                description: 'cultivo cuidado animales',
             },
             address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
+                road: 'Serra de aitana',
+                number: 10,
+                city: 'Valencia paiporta',
+                state: '',
             },
             rooms: 3,
         })
@@ -59,19 +65,19 @@ User.create(users)
     })
     .then(users => {
         Places.create({
-            name: 'Teulada2',
-            image: undefined,
-            host_id: users[1]._id,
+            name: 'Piso paiporta',
+            image: 'https://res.cloudinary.com/dnpvaaivi/image/upload/v1625780628/project/kypmczsbim0lv8ojp5h2.png',
+            host_id: users[4]._id,
             task_info: {
-                name: 'name description',
-                working_hours: 3,
-                description: 'task is this one',
+                name: 'limpiar la calle',
+                working_hours: 2,
+                description: 'lo que sea',
             },
             address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
+                road: 'San juan de rivera',
+                number: 6,
+                city: 'Valencia paiporta',
+                state: '',
             },
             rooms: 3,
         })
@@ -79,19 +85,19 @@ User.create(users)
     })
     .then(users => {
         Places.create({
-            name: 'Teulada3',
-            image: undefined,
-            host_id: users[1]._id,
+            name: 'piso Almussafes',
+            image: 'https://res.cloudinary.com/dnpvaaivi/image/upload/v1625780615/project/unfylbu3obsoicjzregu.png',
+            host_id: users[4]._id,
             task_info: {
                 name: 'name description',
                 working_hours: 3,
                 description: 'task is this one',
             },
             address: {
-                road: 'gran via',
+                road: 'Calle cervantes',
                 number: 3,
-                city: 'Madrid',
-                state: 'Washington',
+                city: 'Almussafes',
+                state: '',
             },
             rooms: 3,
         })
@@ -99,19 +105,19 @@ User.create(users)
     })
     .then(users => {
         Places.create({
-            name: 'Teulada4',
-            image: undefined,
-            host_id: users[1]._id,
+            name: 'Calle de la iglesia',
+            image: 'https://res.cloudinary.com/dnpvaaivi/image/upload/v1625781158/project/j2hxi2lp1zkvukel9s19.png',
+            host_id: users[4]._id,
             task_info: {
-                name: 'name description',
-                working_hours: 3,
-                description: 'task is this one',
+                name: 'cosas de pueblo',
+                working_hours: 1,
+                description: 'cortar leña, pasear cabras, aburrirte',
             },
             address: {
-                road: 'gran via',
-                number: 3,
-                city: 'Madrid',
-                state: 'Washington',
+                road: 'Calle de la iglesia',
+                number: 37,
+                city: 'Maranchon',
+                state: '',
             },
             rooms: 3,
         })
@@ -318,7 +324,7 @@ User.create(users)
             Applicant.create({
                 place_id: place._id,
                 host_id: place.host_id,
-                user_applicant_id: users[2]._id,
+                user_applicant_id: users[4]._id,
                 // start_data:
                 // final_data:
             })
@@ -347,7 +353,7 @@ User.create(users)
                 Applicant.create({
                     place_id: place._id,
                     host_id: place.host_id,
-                    user_applicant_id: users[2]._id,
+                    user_applicant_id: users[4]._id,
                     contract_status: true,
                     // start_data:
                     // final_data:

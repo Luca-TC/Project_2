@@ -47,9 +47,9 @@
     <div class='row'>
        
        
-        <div class='col-5'>
 
-        {{#if this.host}}
+        {{#if host}}
+        <div class='col-5'>
     
             {{#each place}}
 
@@ -75,13 +75,17 @@
 
             {{/each}}
 
+        </div>
+
         {{/if}}   
 
-        <div class="col-1"></div>
+        {{!-- <div class="col-1"></div> --}}
         
         {{#if userOrAdmin}}
 
-            {{#each place}}
+        <div class='col-5'>
+
+                {{#each place}}
         
                     <div class='card shadow bg-transparent border-light mb-3'>
                         
@@ -104,33 +108,27 @@
                     </div>
 
                 {{/each}}
+            </div>
             
-            {{/if}}
-        </div>
+        {{/if}}
 
 
         {{#unless pending}}
-
+            {{#if applicantLength}}
         <div class="col-md-5">
-        {{#each place}}
-        
-
+                {{#each applicant}}  
         
                     <div class='card shadow bg-transparent border-light mb-3'>
                         
                     {{#if contract_status}}
                             <input class='form-control p-3' type='checkbox' checked disabled />
                     {{/if}}
+                        <h5 class='card-title text-center'>Place name: {{place_id.name}}</h5>
                         
-                        <img class='card-img-top' src='{{image}}' alt='img.jpg' />
-
+                        <h5 class='card-title text-center'>City: {{place_id.address.city}}</h5>
                         <h5 class='card-title text-center'>{{name}}</h5>
 
-                        <p class='text-center'>{{task_info.description}}</p>
-                        
-                        <p class='text-center'>{{address.city}}</p>
-                        
-                        <p class='text-center'>{{rooms}}</p>
+                        <img src="{{place_id.image}}" alt="">
 
                         <a class='btn btn-outline-dark btn-sm border-light mb-3' href='/places/details/{{id}}'>Details</a>
 
@@ -139,7 +137,7 @@
                 {{/each}}
         </div>
 
-
+            {{/if}}
         {{/unless}}
 
            

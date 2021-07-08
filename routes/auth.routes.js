@@ -106,6 +106,9 @@ router.get('/profile', (req, res) => {
         const pending = role(req, 'PENDING')
         const loggedUser = currentUser(req)
 
+        console.log(host)
+        console.log(userOrAdmin)
+
         const promisePlace = Place.find({ host_id: loggedUser._id })
         const promiseApplicants = (Applicant.find({ user_applicant_id: loggedUser._id }).populate('place_id')
             .populate('host_id')
@@ -116,8 +119,10 @@ router.get('/profile', (req, res) => {
 
                 const [place, applicant] = myPlacesAndMyApps
 
-                res.send({ applicant, admin, host, pending, loggedUser, userOrAdmin })
-                // res.render('user/my-profile', { place, applicant, admin, host, pending, loggedUser, userOrAdmin })
+                const applicantLength = applicant.length >= 1
+
+                // res.send({ applicant, admin, host, pending, loggedUser, userOrAdmin })
+                res.render('user/my-profile', { place, applicant, admin, host, pending, loggedUser, userOrAdmin, applicantLength })
             })
             .catch(err => console.log(err))
 

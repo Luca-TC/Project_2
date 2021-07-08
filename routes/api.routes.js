@@ -17,7 +17,7 @@ router.get('/places', rejectUser('HOST', 'USER', 'PENDING'), (req, res, next) =>
 })
 
 
-router.get('/onePlace/:id', rejectUser('HOST', 'USER', 'PENDING'), (req, res, next) => {
+router.get('/onePlace/:id', rejectUser('USER', 'PENDING'), (req, res, next) => {
     //
     const { id } = req.params
 
