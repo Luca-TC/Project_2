@@ -5,7 +5,7 @@ const leftPan = document.querySelector('.leftPan')
 const rightPan = document.querySelector('.rightPan')
 
 window.onload = function () {
-    document.querySelector('.myProfileEdit').addEventListener('click', e => printPlacesNames(e))
+    document.querySelector('.myProfileEdit').addEventListener('click', e => getMyProfileInfo(e))
 }
 
 function editMyPRofile(e) {
