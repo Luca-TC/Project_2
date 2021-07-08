@@ -146,6 +146,8 @@ function printContracts(e) {
                         <th scope="col">Place</th>
                         <th scope="col">Applicant</th>
                         <th scope="col">Host</th>
+                        <th scope="col">Creat at Date</th>
+                        <th scope="col">Updated</th>
                         <th scope="col">Start Date</th>
                         <th scope="col">End Date</th>
                         </tr>
@@ -169,6 +171,8 @@ function printContracts(e) {
                         <td><a href='/user/details/${elm.host_id._id}' target='_blank'>${elm.host_id.name}</a></td>
                         <td>${elm.createdAt.split('T')[0]}</td>
                         <td>${elm.updatedAt.split('T')[0]}</td>
+                        <td>${elm.user_applicant_id.start_date}</td>
+                        <td>${elm.user_applicant_id.final_date}</td>
                     </tr>
                 `
                 table.insertAdjacentHTML('beforeend', rows)
