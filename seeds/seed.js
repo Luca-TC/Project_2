@@ -7,7 +7,7 @@ const Places = require('../models/Place.model')
 const Applicant = require('../models/ApplicantsReview.model')
 User.collection.drop()
 Places.collection.drop()
-
+Applicant.collection.drop()
 const users = [
     {
         name: 'admin',

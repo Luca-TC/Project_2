@@ -48,7 +48,26 @@
                         <a class='btn btn-outline-dark btn-sm border-light mb-3' href='/places/details/{{id}}'>Details</a>
 
                     </div>
+                    {{else}}
+                    {{!-- {{#with loggedUser}}
+                    <div class='card shadow bg-transparent border-light mb-3'>
+                        
+                        {{#if contract_status}}
+                            <input class='form-control p-3' type='checkbox' checked disabled />
+                        {{/if}}
+                        
+                        <img class='card-img-top' src='{{place_id.image}}' alt='img.jpg' />
 
+                        <h5 class='card-title text-center'>{{place_id.name}}</h5>
+
+                        <p class='text-center'>{{place_id.task_info.description}}</p>
+                        <p class='text-center'>{{place_id.address.city}}</p>
+                        <p class='text-center'>{{place_id.rooms}}</p>
+
+                        <a class='btn btn-outline-dark btn-sm border-light mb-3' href='/places/details/{{id}}'>Details</a>
+
+                    </div>
+{{!-- {{/with}} --}} --}}
                 {{/each}}
                 {{/each}}
             {{/if}}
@@ -74,4 +93,5 @@
 <script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
 <script src='../../js/apiHandler.js'></script>
 <script src='../../js/blur.js'></script>
+<script src='../../js/.js'></script>
 {{! <script src='../../js/host_panel.js'></script> }}

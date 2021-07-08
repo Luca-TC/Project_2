@@ -99,7 +99,7 @@ router.get('/profile', (req, res) => {
 
     if (sessionActive(req)) {
 
-        console.log('profile')
+        
 
         const admin = role(req, 'ADMIN')
         const host = role(req, 'HOST')
@@ -111,8 +111,8 @@ router.get('/profile', (req, res) => {
             .populate('host_id')
             .populate('user_applicant_id'))
 
-        Promise.all([promisePlace, promiseApplicants])
-            .then(myPlacesAndMyApps => res.render('user/my-profile', { myPlacesAndMyApps, admin, host, pending, loggedUser }))
+        Promise.all([ promiseApplicants])//'user/my-profile',
+            .then(myPlacesAndMyApps => res.send( { myPlacesAndMyApps, admin, host, pending, loggedUser }))
             .catch(err => console.log(err))
 
 
