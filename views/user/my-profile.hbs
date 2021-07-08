@@ -129,8 +129,9 @@
                         <h5 class='card-title text-center'>{{name}}</h5>
 
                         <img src="{{place_id.image}}" alt="">
-
-                        <a class='btn btn-outline-dark btn-sm border-light mb-3' href='/places/details/{{id}}'>Details</a>
+                                            {{!-- {{#with place}} --}}
+                        <a class='btn btn-outline-dark btn-sm border-light mb-3' href='/places/details/{{place_id._id}}'>Details</a>
+                                            {{!-- {{/with}} --}}
 
                     </div>
 
