@@ -31,7 +31,7 @@ module.exports = {
             return {
                 from: 'Rejected request B&BIDAS',
                 to: objectNeeded,
-                subject: 'Hi, we are sorry, request rejected, Not trusted info',
+                subject: 'Hi, we are sorry, request rejected, Not trusted info or place not avail',
                 text: 'oh yeah',
                 html: `SO SORRY Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe fuga perferendis ratione! Cum deserunt labore culpa, ducimus placeat quasi libero quibusdam sed eos quas vero optio voluptas itaque distinctio ullam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse nulla, ullam deleniti ut, aliquam reiciendis recusandae ducimus minus placeat molestiae sed deserunt ex sapiente tempore alias nemo. Iusto, doloribus omnis!`,
             }

@@ -18,7 +18,10 @@ body {
 /* generales */
 
 
-
+.avatar{
+    right: 0;
+    width: 250px;
+}
 
 /* estilos para hacer el nav dropdown hover */
 

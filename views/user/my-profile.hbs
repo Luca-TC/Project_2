@@ -2,35 +2,56 @@
     <p class='error'> No has confirmado tu email</p>
 {{/if}}
 
+
+            <div class='col-md-2 position-absolute leftNav'>
+                <nav>
+                    <ul class='nav flex-column pt-5 mt-5'>
+                    {{#if this.admin}}
+                        <li class='nav-item'>
+                            <a class='contracts bg-dark ' href='/admin_panel'>Admin Panel</a>
+                        </li>
+                    {{/if}}
+
+                    {{#if this.host}}
+                        <li class='nav-item mt-2'>
+                            <a class='places-pending bg-dark ' href='/host_panel'>Host panel</a>
+                        </li>
+                    {{/if}}
+                    </ul>
+                </nav>
+            </div>
+
+            <div class=' bg-transparent border-light position-absolute avatar'>
+                {{#with loggedUser}}
+
+                    <p><img src='{{image}}' alt='profile img' class='shadow profile-img' /></p>
+                    
+                    <p class='text-center text-truncate'>{{description}}</p>
+        
+                    {{#with address}}   
+                        <p>address:{{road}} </p>
+                        <p>num:{{number}} </p>
+                        <p class='blockquote disabled'>{{city}} ({{state}})</p>
+                    {{/with}}
+        
+                {{/with}}
+            </div>
+           
+
+
 <div class='container'>
 
     <h1>Welcome to {{loggedUser.name}}`s Profile</h1>
 
     <div class='row'>
        
-        <div class='col-3'>
        
-            {{#if this.admin}}
-                <a class='btn btn-outline-dark position-fixed' href='/admin_panel'>Admin panel</a><br />
-            {{/if}}
+        <div class='col-5'>
 
-            {{#if this.host}}
-                <a class='btn btn-outline-dark position-fixed' href='/host_panel'>Host panel</a>
-            {{/if}}
-       
-        </div>
-       
-        <div class='col-6'>
+        {{#if this.host}}
+    
+            {{#each place}}
 
-            {{#if this.host}}
-            {{!-- doble each no preguntes xd salia asi el array --}}
-                {{#each myPlacesAndMyApps}}
-
-                {{#each this}}
-
-
-
-                {{!-- {{myPlacesAndMyApps.place_id.name}} --}}
                     <div class='card shadow bg-transparent border-light mb-3'>
                         
                         {{#if place_approved}}
@@ -42,52 +63,91 @@
                         <h5 class='card-title text-center'>{{name}}</h5>
 
                         <p class='text-center'>{{task_info.description}}</p>
+                        
                         <p class='text-center'>{{address.city}}</p>
+
                         <p class='text-center'>{{rooms}}</p>
 
                         <a class='btn btn-outline-dark btn-sm border-light mb-3' href='/places/details/{{id}}'>Details</a>
 
                     </div>
-                    {{else}}
-                    {{!-- {{#with loggedUser}}
+
+            {{/each}}
+
+        {{/if}}   
+
+        <div class="col-1"></div>
+        
+        {{#if userOrAdmin}}
+
+            {{#each place}}
+        
                     <div class='card shadow bg-transparent border-light mb-3'>
                         
-                        {{#if contract_status}}
+                    {{#if contract_status}}
                             <input class='form-control p-3' type='checkbox' checked disabled />
-                        {{/if}}
+                    {{/if}}
                         
-                        <img class='card-img-top' src='{{place_id.image}}' alt='img.jpg' />
+                        <img class='card-img-top' src='{{image}}' alt='img.jpg' />
 
-                        <h5 class='card-title text-center'>{{place_id.name}}</h5>
+                        <h5 class='card-title text-center'>{{name}}</h5>
 
-                        <p class='text-center'>{{place_id.task_info.description}}</p>
-                        <p class='text-center'>{{place_id.address.city}}</p>
-                        <p class='text-center'>{{place_id.rooms}}</p>
+                        <p class='text-center'>{{task_info.description}}</p>
+                        
+                        <p class='text-center'>{{address.city}}</p>
+                        
+                        <p class='text-center'>{{rooms}}</p>
 
                         <a class='btn btn-outline-dark btn-sm border-light mb-3' href='/places/details/{{id}}'>Details</a>
 
                     </div>
-{{!-- {{/with}} --}} --}}
+
                 {{/each}}
-                {{/each}}
-            {{/if}}
             
+            {{/if}}
         </div>
 
-        {{#with loggedUser}}
-            <div class='col-3 card bg-transparent border-light mb-3'>
-                <p><img src='{{this.image}}' alt='profile img' class='shadow profile-img' /></p>
-                <p class='text-center text-truncate'>{{description}}</p>
+
+        {{#unless pending}}
+
+        <div class="col-md-5">
+        {{#each place}}
         
-                {{#with address}}
-                    <p>{{road}},{{number}}</p>
-                    <p class='blockquote disabled'>{{city}},({{state}})</p>
-                {{/with}}
+
         
-            </div>
-        {{/with}}
+                    <div class='card shadow bg-transparent border-light mb-3'>
+                        
+                    {{#if contract_status}}
+                            <input class='form-control p-3' type='checkbox' checked disabled />
+                    {{/if}}
+                        
+                        <img class='card-img-top' src='{{image}}' alt='img.jpg' />
+
+                        <h5 class='card-title text-center'>{{name}}</h5>
+
+                        <p class='text-center'>{{task_info.description}}</p>
+                        
+                        <p class='text-center'>{{address.city}}</p>
+                        
+                        <p class='text-center'>{{rooms}}</p>
+
+                        <a class='btn btn-outline-dark btn-sm border-light mb-3' href='/places/details/{{id}}'>Details</a>
+
+                    </div>
+
+                {{/each}}
+        </div>
+
+
+        {{/unless}}
+
+           
+        
+
     </div>
+
 </div>
+
 <div class='overlay hidden'></div>
 
 <script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
