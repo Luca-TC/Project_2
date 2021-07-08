@@ -47,6 +47,18 @@ router.get('/myplace/edit/:id', rejectUser('ADMIN', 'USER', 'PENDING'), (req, re
         .catch(err => console.log(err))
 })
 
+
+router.get('/profile/MyPRofile/:id', (req, res) => {
+
+    const { id } = req.params
+    
+    User.findById(id)
+        .then(user => res.json(user))
+        .catch(err => console.log(err))
+})
+
+
+
 //Patron Models Views Controller
 
 router.put('/updateHostPlace/:id', rejectUser('HOST', 'USER', 'PENDING'), (req, res) => {

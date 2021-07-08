@@ -21,7 +21,7 @@ class ApiHandler {
 
     getOneRegister = id => this.app.get(`/api/onePlace/${id}`)
     
-    getMyProfileInfo = id => this.app.get('/profile/MyPRofile', id)
+    getMyProfileInfo = id => this.app.get(`/api/profile/MyPRofile/${id}`)
 
     updateMyPlace = data => this.app.put(`/places/updateMyPlace`, data)
 

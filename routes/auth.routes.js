@@ -116,8 +116,8 @@ router.get('/profile', (req, res) => {
 
                 const [place, applicant] = myPlacesAndMyApps
 
-                res.send({ applicant, admin, host, pending, loggedUser, userOrAdmin })
-                // res.render('user/my-profile', { place, applicant, admin, host, pending, loggedUser, userOrAdmin })
+               // res.send({ applicant, admin, host, pending, loggedUser, userOrAdmin })
+                 res.render('user/my-profile', { place, applicant, admin, host, pending, loggedUser, userOrAdmin })
             })
             .catch(err => console.log(err))
 

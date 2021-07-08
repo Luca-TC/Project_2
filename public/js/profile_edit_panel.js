@@ -5,7 +5,7 @@ const leftPan = document.querySelector('.leftPan')
 const rightPan = document.querySelector('.rightPan')
 
 window.onload = function () {
-    document.querySelector('.myProfileEdit').addEventListener('click', e => getMyProfileInfo(e))
+    document.querySelector('.myProfileEdit').addEventListener('click', e => editMyPRofile(e))
 }
 
 function editMyPRofile(e) {
@@ -14,6 +14,8 @@ function editMyPRofile(e) {
 
     const id = e.currentTarget.dataset.id
 
+  
+
     clearPage('divRight')
 
     api.getMyProfileInfo(id)
@@ -21,9 +23,8 @@ function editMyPRofile(e) {
 
             res = res.data
 
-            let buttons = `<img src="${res.image}" alt="">
+            let form = `<img src="${res.image}" alt="">
                             <p>${res.name}</p>
-                        <a id="button" data-id="${res._id}" data-accept="${false}" class="btn btn-outline-danger delete"> delete </a>
                          <form>
 
             <div class='form-group'>
@@ -32,21 +33,21 @@ function editMyPRofile(e) {
             </div>
             <div class='form-group'>
                 <label for='name_description'>insert your Email:</label>
-                <input type='email' class='form-control' name='username' id='userName' value="${res.task_info.name}" />
+                <input type='email' class='form-control' name='username' id='userName' value="${res.userName}" />
             </div>
             <div class='form-group'>
                 <label for='task_description'>Change your password:</label>
-                <input type='password' class='form-control' name='pwd' id='password' value="${res.task_info.description}" />
+                <input type='password' class='form-control' name='pwd' id='password' value="${res.password}" />
                 <small id='description-help' class='form-text text-muted'>Description of the task to do</small>
             </div>
             <div class='custom-file'>
                 <label for='task_time'>Insert your photo</label>
-                <input type='file' class='custom-file-input' name='image' id='image'  value="${res.task_info.working_hours}" required/>
+                <input type='file' class='custom-file-input' name='image' id='image'  value="${res.image}" required/>
                 <small id='description-help' class='form-text text-muted'>Insert your photo</small>
             </div>
             <div class='form-group'>
                 <label for='description'>Tell us your story:</label>
-                <input type='text' class='form-control' name='description' id='description'  value="${res.rooms}"/>
+                <input type='text' class='form-control' name='description' id='description'  value="${res.description}"/>
                 <small id='description-help' class='form-text text-muted'>Tell us your story</small>
             </div>
             <div class='form-group'>
@@ -75,7 +76,7 @@ function editMyPRofile(e) {
         </form>
                        `
 
-            rightPan.insertAdjacentHTML('beforeend', buttons)
+            rightPan.insertAdjacentHTML('beforeend', form)
 
             return res
         })
@@ -85,11 +86,11 @@ function editMyPRofile(e) {
                     sendEdits(e)
                     return res
                 }
-                //  else {
-                //     console.log(e.currentTarget.dataset)
-                //     deleteMyPlace(e)
-                //     return res
-                // }
+                else {
+                    console.log(e.currentTarget.dataset)
+                    deleteMyPlace(e)
+                    return res
+                }
             }))
 
         })
@@ -116,11 +117,11 @@ function sendEdits(e) {
     const id = e.currentTarget.dataset.id
 
 
-    const obj = { id, placeName, name, description, working_hours, rooms, road, number, city, state }
+    const obj = { name, userName, password, image, description, road, number, city, state }
 
     api.updateMyProfile(obj)
-        // .then(() => printPlacesNames())
-        // .catch(err => console.log(err))
+    // .then(() => printPlacesNames())
+    // .catch(err => console.log(err))
 
     clearPage('ok')
 
