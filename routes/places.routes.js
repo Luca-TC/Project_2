@@ -3,7 +3,7 @@ const Place = require('./../models/Place.model')
 const Applicant = require('./../models/ApplicantsReview.model')
 const fileUploader = require('./../config/cloudinary.config')
 const transporter = require('./../config/nodemailer.config')
-const { keepOut } = require('./../middleware')
+const { rejectUser } = require('./../middleware')
 const { role, sessionActive, emails, currentUser } = require('./../utils')
 
 /*GET places index views list */
@@ -17,18 +17,15 @@ router.get('/', (req, res) => {
 
 /*GET places create  */
 
-router.get('/new', keepOut('PENDING'), (req, res) => res.render('places/new-place'))
+router.get('/new', rejectUser('PENDING'), (req, res) => res.render('places/new-place'))
 
 
 /*POST places create  */
 
-router.post('/new', fileUploader.single('image'), keepOut('PENDING'), (req, res) => {
+router.post('/new', fileUploader.single('image'), rejectUser('PENDING'), (req, res) => {
 
-    console.log(req.file)
 
-    const session = sessionActive(req)
-
-    if (session) {
+    if (sessionActive(req)) {
 
         const host_id = req.session?.currentUser
 
@@ -61,7 +58,7 @@ router.post('/new', fileUploader.single('image'), keepOut('PENDING'), (req, res)
 
 /*GET places UPDATE  */
 
-router.put('/updateMyPlace', (req, res) => {
+router.put('/updateMyPlace', rejectUser('USER', 'PENDING'), (req, res) => {
     const { id, placeName, rooms } = req.body
 
     const task_info = ({ name, description, working_hours } = req.body)
@@ -77,18 +74,16 @@ router.put('/updateMyPlace', (req, res) => {
 
 /*GET places index views details */
 router.get('/details/:place_id', (req, res) => {
-    const session = sessionActive(req)
 
-    if (session) {
+    if (sessionActive(req)) {
 
         const { place_id } = req.params
         const applicant_id = currentUser(req)._id
         const session = sessionActive(req)
         const isPending = !role(req, 'PENDING')
-        const isPro = role(req, 'ADMIN')
 
         Place.findById(place_id)
-            .then(place => res.render('places/places-details', { place, isPending, isPro, session, applicant_id }))
+            .then(place => res.render('places/places-details', { place, isPending, session, applicant_id }))
             .catch(err => console.log(err))
 
     } else {
@@ -99,7 +94,7 @@ router.get('/details/:place_id', (req, res) => {
 
 
 /*POST application */
-router.post('/application', (req, res) => {
+router.post('/application', rejectUser('PENDING'), (req, res) => {
 
     const application = { place_id, host_id, user_applicant, start_date, final_date, direction, cover_letter } = req.body
 
@@ -111,7 +106,7 @@ router.post('/application', (req, res) => {
 //
 
 /*POST email  */
-router.post('/postEmail', (req, res) => {
+router.post('/postEmail', rejectUser('USER', 'PENDING'), (req, res) => {
 
     const { id, answer } = req.body
 
@@ -129,7 +124,7 @@ router.post('/postEmail', (req, res) => {
         })
 })
 
-router.put('/returnPending/:id', (req, res) => {
+router.put('/returnPending/:id', rejectUser('USER', 'PENDING', 'HOST'), (req, res) => {
     const { id } = req.params
 
     console.log(id)

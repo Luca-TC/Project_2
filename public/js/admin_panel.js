@@ -139,15 +139,18 @@ function printContracts(e) {
 
             let tableContracts = `
                     <div>
-                    <table class="table-contracts">
+                    <table class=" table table-contracts">
                         <thead>
-                            <td style="width: 25%">Place</td>
-                            <td>Applicant</td>
-                            <td>Host</td>
-                            <td>Posted</td>
-                            <td>Viewed</td>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Place</th>
+                        <th scope="col">Applicant</th>
+                        <th scope="col">Host</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
+                        </tr>
                         </thead>
-                    </table>
+                        </table>
                     </div>
                     <hr />
             `
@@ -155,10 +158,12 @@ function printContracts(e) {
 
             let table = document.querySelector('.table-contracts')
 
+            let count = 0;
             data.forEach(elm => {
-
+                count += 1
                 let rows = `
                     <tr>
+                    <th scope="row">${count}</th>
                         <td><a href='/places/details/${elm.place_id?._id}' target='_blank'>${elm.place_id?.name}</a></td>
                         <td><a href='/user/details/${elm.user_applicant_id._id}' target='_blank'>${elm.user_applicant_id.name}</a></td>
                         <td><a href='/user/details/${elm.host_id._id}' target='_blank'>${elm.host_id.name}</a></td>

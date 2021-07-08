@@ -158,7 +158,6 @@ function printApplications(e) {
                     </table>
                     </div>
                     <hr />
-                    <table class="table">
   
             `
             leftPan.insertAdjacentHTML('beforeend', tableContracts)

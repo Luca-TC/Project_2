@@ -7,7 +7,7 @@
     --color-modal-bkg: rgb(234, 230, 202);
     --color-form: rgba(234, 230, 202, 0.501);
 }
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap'));
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap');
 
 *{font-family: 'Noto Sans TC', sans-serif;}
 
@@ -46,8 +46,10 @@ h3 {
     text-align: center;
 }
 .home {
-    height: 90vh;
+    height: 90%;
 }
+
+
 .home img {
     opacity: 0.8;
     padding: 2px;
@@ -203,4 +205,17 @@ h3 {
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(3px);
     z-index: 5;
+}
+
+
+@media (max-width: 1300px){
+
+.home{
+    height:auto
+}
+
+
+
+
+
 }

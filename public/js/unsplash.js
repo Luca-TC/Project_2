@@ -6,13 +6,12 @@ const api = new ApiHandler(window.location.href.split('/')[2].split(':').include
 
 const apiSplash = new ApiHandler(unsPlashurl)
 
-const accesKey = 'aD6Jjsp_D3qn_bkX-NRQe-eLZwRlFaf9HPi6_mf7hpQ'
 
-;(function () {
-    api.keyHandler()
-        .then(res => queryForImages(res.data, 'friends'))
-        .catch(err => console.log(err))
-})()
+    ; (function () {
+        api.screensHandler()
+            .then(res => queryForImages(res.data, 'friends'))
+            .catch(err => console.log(err))
+    })()
 
 function queryForImages(res, query) {
     const randomNum = Math.trunc(Math.random() * 10 - 1)
@@ -27,18 +26,11 @@ function queryForImages(res, query) {
 
 function printImages(dataImg) {
     let image
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 12; i++) {
         image = dataImg[i].urls.thumb
 
-        let str = ` <div ><img class="shadow " src="${image}" alt="image"></div>`
+        let str = ` <div class="col-lg-2 col-md-4 col-sm-6 p-5" ><img class="shadow " src="${image}" alt="image"></div>`
 
         document.querySelector('.home-top').insertAdjacentHTML('afterbegin', str)
-    }
-    for (let i = 6; i < 12; i++) {
-        image = dataImg[i].urls.thumb
-
-        let str = ` <div ><img  class="shadow " src="${image}" alt="image"></div>`
-
-        document.querySelector('.home-bottom').insertAdjacentHTML('afterbegin', str)
     }
 }

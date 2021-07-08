@@ -3,9 +3,10 @@ const { Mongoose } = require('mongoose')
 const Place = require('../models/Place.model')
 const User = require('../models/User.model')
 const Applicants = require('../models/ApplicantsReview.model')
+const { rejectUser } = require('../middleware')
 
 /* GET home page */
-router.get('/places', (req, res, next) => {
+router.get('/places', rejectUser('HOST', 'USER', 'PENDING'), (req, res, next) => {
     //
     Place.find({ place_approved: false })
         .populate('host_id')
@@ -14,7 +15,7 @@ router.get('/places', (req, res, next) => {
 })
 
 
-router.get('/onePlace/:id', (req, res, next) => {
+router.get('/onePlace/:id', rejectUser('HOST', 'USER', 'PENDING'), (req, res, next) => {
     //
     const { id } = req.params
 
@@ -25,7 +26,7 @@ router.get('/onePlace/:id', (req, res, next) => {
 })
 
 
-router.get('/myplaces', (req, res) => {
+router.get('/myplaces', rejectUser('ADMIN', 'USER', 'PENDING'), (req, res) => {
 
     const id = req.session.currentUser._id
 
@@ -35,7 +36,7 @@ router.get('/myplaces', (req, res) => {
 })
 
 
-router.get('/myplace/edit/:id', (req, res) => {
+router.get('/myplace/edit/:id', rejectUser('ADMIN', 'USER', 'PENDING'), (req, res) => {
 
     const { id } = req.params
 
@@ -46,7 +47,7 @@ router.get('/myplace/edit/:id', (req, res) => {
 
 //Patron Models Views Controller
 
-router.put('/updateHostPlace/:id', (req, res) => {
+router.put('/updateHostPlace/:id', rejectUser('HOST', 'USER', 'PENDING'), (req, res) => {
 
     const { id } = req.params
 
@@ -72,7 +73,7 @@ router.put('/updateHostPlace/:id', (req, res) => {
 // insert message pending
 
 
-router.delete('/deleteHostPlace/:id', (req, res) => {
+router.delete('/deleteHostPlace/:id', rejectUser('USER', 'PENDING'), (req, res) => {
 
     const { id } = req.params
 
@@ -82,7 +83,7 @@ router.delete('/deleteHostPlace/:id', (req, res) => {
 })
 
 
-router.get('/contracts', (req, res) => {
+router.get('/contracts', rejectUser('HOST', 'USER', 'PENDING'), (req, res) => {
 
     Applicants.find({ contract_status: true })
         .populate('place_id')
@@ -92,7 +93,7 @@ router.get('/contracts', (req, res) => {
         .catch(err => console.log(err))
 })
 
-router.get('/applicants', (req, res) => {
+router.get('/applicants', rejectUser('ADMIN', 'USER', 'PENDING'), (req, res) => {
 
     Applicants.find({ contract_status: false })
         .populate('place_id')
@@ -101,8 +102,9 @@ router.get('/applicants', (req, res) => {
         .then(response => res.json(response))
         .catch(err => console.log(err))
 })
+
 /**put pending contracts */
-router.put('/updateApplicant/:id', (req, res) => {
+router.put('/updateApplicant/:id', rejectUser('ADMIN', 'USER', 'PENDING'), (req, res) => {
 
     const { id } = req.params
 
@@ -111,8 +113,9 @@ router.put('/updateApplicant/:id', (req, res) => {
         .then(appl => res.json(appl))
         .catch(err => console.log(err))
 })
+
 /**delete pending contracts*/
-router.delete('/deleteApplicant/:id', (req, res) => {
+router.delete('/deleteApplicant/:id', rejectUser('ADMIN', 'USER', 'PENDING'), (req, res) => {
 
     const { id } = req.params
 
@@ -122,7 +125,7 @@ router.delete('/deleteApplicant/:id', (req, res) => {
 })
 
 /**get places live */
-router.get('/placeslive', (req, res) => {
+router.get('/placeslive', rejectUser('HOST', 'USER', 'PENDING'), (req, res) => {
 
     Place.find({ place_approved: true })
         .then(response => res.json(response))
@@ -130,6 +133,6 @@ router.get('/placeslive', (req, res) => {
 })
 
 /**I'm in love with Salva's magic tricks---Luca*/
-router.get('/unsplash', (req, res) => res.json(process.env.UNSPLASH_KEY))
+router.get('/unsplash', (req, res) => res.json(process.env.SCREENS))
 
 module.exports = router

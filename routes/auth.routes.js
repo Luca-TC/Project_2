@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 const { role, sessionActive, emails, randomToken, currentUser } = require('./../utils')
 const transporter = require('./../config/nodemailer.config')
 const fileUploader = require('./../config/cloudinary.config')
-const { keepOut } = require('./../middleware')
+const { rejectUser } = require('./../middleware')
 
 router.get('/login', (req, res, next) => res.render('user/login'))
 
@@ -117,10 +117,9 @@ router.get('/profile', (req, res) => {
 
 //GET OTHERS PROFILES
 
-router.get('/user/details/:user_id', (req, res) => {
-    const session = sessionActive(req)
+router.get('/user/details/:user_id', rejectUser('PENDING'), (req, res) => {
 
-    if (session) {
+    if (sessionActive(req)) {
 
         const { user_id } = req.params
 
@@ -142,10 +141,10 @@ router.get('/user/details/:user_id', (req, res) => {
 /**GET LOGOUT */
 router.get('/logout', (req, res) => req.session.destroy(() => res.redirect('/')))
 
-router.get('/admin_panel', keepOut('USER', 'HOST', 'PENDING'), (req, res) => {
+router.get('/admin_panel', rejectUser('USER', 'HOST', 'PENDING'), (req, res) => {
     res.render('admin/admin_panel')
 })
-router.get('/host_panel', keepOut('USER', 'ADMIN', 'PENDING'), (req, res) => {
+router.get('/host_panel', rejectUser('USER', 'ADMIN', 'PENDING'), (req, res) => {
     res.render('host/host_panel')
 })
 

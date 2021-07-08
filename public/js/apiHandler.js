@@ -12,7 +12,7 @@ class ApiHandler {
     getFullPlacesLive = () => this.app.get('/api/placeslive')
 
     getFullContracts = () => this.app.get('/api/contracts')
-    
+
     getFullApplicants = () => this.app.get('/api/applicants')
 
     getMyPlaces = () => this.app.get(`/api/myplaces`)
@@ -26,7 +26,7 @@ class ApiHandler {
     returnPlaceToPending = id => this.app.put(`/places/returnPending/${id}`)
 
     updatePendingHostAndPlace = id => this.app.put(`/api/updateHostPlace/${id}`)
-    
+
     updatePendingApplicant = id => this.app.put(`/api/updateApplicant/${id}`)
 
     deleteHostPlace = id => this.app.delete(`/api/deleteHostPlace/${id}`)
@@ -35,7 +35,7 @@ class ApiHandler {
 
     tryPost = data => this.app.post('/places/postEmail', data)
 
-    keyHandler = () => this.app.get('/api/unsplash')
+    screensHandler = () => this.app.get('/api/unsplash')
 
     apiSplash = url => this.app.get(url)
 }

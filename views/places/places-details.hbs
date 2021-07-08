@@ -1,12 +1,12 @@
 <div class='container'>
 
-    <div class='row p-4'>
+    <div class='row mt-5'>
 
-        <div class='col-md-4'>
+        <div class='col-md-5 ml-auto'>
             <img src='{{place.image}}' alt='country house' />
         </div>
 
-        <div class='col-md-8 text-center'>
+        <div class='col-md-6 text-center'>
             <h2> Place: {{place.name}}</h2>
             <h3> Description: </h3>
             {{#with place.task_info}}
@@ -23,7 +23,7 @@
         </div>
         {{#if session}}
         {{#if isPending}}
-        <div class="md-4 form shadow">
+        <div class="col-md-12 form shadow">
                 <div class='form-group'>
             <form action='/places/application' method='post'>
                     <label for='date'>Start date</label>
@@ -43,10 +43,6 @@
                     <input type='text' name='place_id'  value="{{place.id}}" class='form-control' hidden/>
                     <input type='text' name='user_applicant' value="{{applicant_id}}"  class='form-control' hidden/>
                     
-        {{/if}}
-        {{#if isPro}}
-                    <button type='submit' class='btn btn-primary'>Delete</button>
-                    <button type='submit' class='btn btn-warning'>Edit</button>
         {{/if}}
         {{/if}}
                     

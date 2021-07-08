@@ -1,26 +1,21 @@
 module.exports = {
-    checkLoggedUser: (req, res, next) => {
-        req.session.currentUser ? next() : res.render('pages/auth/login-page', { errorMessage: 'Inicia sesión para continuar' })
-    },
-    keepOut:
-        (...rolesToCheck) =>
-        (req, res, next) => {
-            //
-            if (req.session) {
-                req.session?.currentUser && !rolesToCheck.includes(req.session?.currentUser?.role)
-                    ? next()
-                    : res.render('user/login', { errorMessage: 'No dispones de privilegios suficientes' })
-                //
-            } else {
-                //
-                res.render('user/login', { errorMessage: 'No dispones de privilegios suficientes' })
-            }
-        },
-
-    // checkPMorOwner: (req, res, next) => {
-    //     const isPM = req.session.currentUser.role === 'PM'
-    //     const isOwner = req.session.currentUser._id === req.params.student_id
-
-    //     isPM || isOwner ? next() : res.render('pages/auth/login-page', { errorMessage: 'No dispones de privilegios suficientes' })
+    // checkLoggedUser: (req, res, next) => {
+    //     req.session.currentUser ? next() : res.render('pages/auth/login-page', { errorMessage: 'Inicia sesión para continuar' })
     // },
+    rejectUser:
+        (...rolesToCheck) =>
+            (req, res, next) => {
+
+                if (req.session) {
+
+                    req.session?.currentUser && !rolesToCheck.includes(req.session?.currentUser?.role)
+                        ? next()
+                        : res.render('user/login', { errorMessage: 'No dispones de privilegios suficientes' })
+
+                } else {
+
+                    res.render('user/login', { errorMessage: 'No dispones de privilegios suficientes' })
+                }
+            },
+
 }
