@@ -106,7 +106,7 @@ router.put('/updateApplicant/:id', (req, res) => {
 
     const { id } = req.params
 
-    Applicants.findByIdAndUpdate(id, { contract_status: true })
+    Applicants.findByIdAndUpdate(id, { contract_status: true }, { new: true })
         .populate('host_id')
         .then(appl => res.json(appl))
         .catch(err => console.log(err))

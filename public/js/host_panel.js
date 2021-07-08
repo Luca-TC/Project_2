@@ -166,6 +166,7 @@ function printApplications(e) {
             let table = document.querySelector('.table-contracts')
             let count = 0
             data.forEach(elm => {
+                console.log(elm)
                 count++
                 let rows = `
                    <tr>
@@ -175,8 +176,8 @@ function printApplications(e) {
                         <td>${elm.updatedAt.split('T')[0]}</td>
                         <td>${elm.start_date}</td>
                         <td>${elm.final_date}</td>
-                        <td><button data-accept="false" class="btn btn-outline-danger btn-sm">Delete</button></td>
-                        <td><button data-accept="true" class="btn btn-outline-primary btn-sm">Confirm</button></td>
+                        <td><button data-delete="${true}" data-id="${elm._id}" class="btn btn-outline-danger btn-sm btn-application">Delete</button></td>
+                        <td><button data-delete="${false}" data-id="${elm._id}" class="btn btn-outline-primary btn-sm btn-application">Confirm</button></td>
                    </tr>
                        
                     
@@ -186,7 +187,7 @@ function printApplications(e) {
             })
         })
         .then(res => {
-            document.querySelectorAll('.btn').forEach(btn => btn.addEventListener('click', e => confirmApplication(e)))
+            document.querySelectorAll('.btn-application').forEach(btn => btn.addEventListener('click', e => confirmOrDeleteApplication(e)))
 
             return res
         })
@@ -194,43 +195,61 @@ function printApplications(e) {
 }
 
 
-// function confirmApplication(e) {
-//     console.log(e.currentTarget.dataset.id)
-//     if (e) e.preventDefault()
-//     const id = e.currentTarget.dataset.id
+function confirmOrDeleteApplication(e) {
 
-// api.getFullApplicants()
-//     if (e.currentTarget.dataset.accept === 'true') {
-//         clearPage('divRight')
+    if (e) e.preventDefault()
 
-//         api.updatePendingApplicant(id)
-//             .then(res => {
-//                 let form = `<h4>Custom email to the Applicant </h4>
-//                             <h5>or default email acceptation if blank</h4> 
-//                             <form>
-//                                 <textarea name="content" id="answer" cols="30" rows="10"></textarea>
-//                                 <button type='submit' id='buttonForm' data-id="${res.data._id}" data-accept="${true}" class='btn btn-primary'>Submit</button>
-//                             </form>`
+    console.log(e.currentTarget.dataset.id)
+    const id = e.currentTarget.dataset.id
 
-//                 rightPan.insertAdjacentHTML('beforeend', form)
-//             })
-//             .then(() => document.querySelector('#buttonForm').addEventListener('click', e => showForm(e)))
-//             .catch(err => console.log(err))
+    if (e.currentTarget.dataset.delete !== 'true') {
 
-//     } else {
+        api.updatePendingApplicant(id)
+            .then(res => {
+                clearPage('divRight')
+                let form = `<h4>Custom email to the Applicant </h4>
+                                <h5>or default email acceptation if blank</h4> 
+                                <form class="mt-3">
+                                <div class="form-group">
+                                    <label for="subject">Subject</label>
+                                    <input type="text" id="subject" class="form-control">
+                                </div>    
+                                <div class="form-group">
+                                <label for="answer">Message</label>
+                                    <textarea name="content" id="answer" class="mt-3 form-control" cols="60" rows="10"></textarea>
+                                    </div>
+                                    <button type='submit' id='buttonForm' data-id="${res.data._id}" data-accept="${true}" class='btn btn-primary'>Send</button>
+                                </form>`
 
-//         clearPage('divr')
-//         clearPage('divLeft')
+                rightPan.insertAdjacentHTML('beforeend', form)
 
-//         api.deleteApplicant(id)
-//             .then(place => '????????????????????')
-//             .catch(err => console.log(err))
+                printApplications()
+            }).then(() => {
+                makeRigthPanBigger()
+                openModal()
+            })
+            .then(() => document.querySelector('#buttonForm').addEventListener('click', e => sendEmail(e)))
+            .catch(err => console.log(err))
 
-//         closeModal()
+    } else {
 
-//         printPlacesNames()
-//     }
-// }
+        clearPage('divr')
+        clearPage('divLeft')
+
+        api.deleteApplicant(id)
+            .then(place => '????????????????????')
+            .catch(err => console.log(err))
+
+        closeModal()
+
+        printPlacesNames()
+    }
+}
+
+
+function sendEmail(e) {
+    if (e) e.preventDefault()
+}
 
 
 
@@ -284,5 +303,5 @@ function clearPage(div) {
 }
 
 function makeRigthPanBigger() {
-    document.querySelector('.rightPan').classList.add('col-md-6')
+    document.querySelector('.rightPan').classList.add('col-md-5')
 }

@@ -22,11 +22,6 @@ const applicantsReview = new Schema(
             default: false,
         },
 
-        readed: {
-            type: Boolean,
-            default: false,
-        },
-
         cover_letter: String,
     },
     { timestamps: true }
