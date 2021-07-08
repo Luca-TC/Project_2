@@ -9,7 +9,6 @@ window.onload = function () {
 
     document.querySelector('.applications').addEventListener('click', e => printApplications(e))
 
-    // document.querySelector('.backToProfile').addEventListener('click', e => placesLive(e))
 }
 
 function printPlacesNames() {

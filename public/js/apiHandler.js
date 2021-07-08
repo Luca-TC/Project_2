@@ -20,8 +20,12 @@ class ApiHandler {
     getMyPlaceToEdit = id => this.app.get(`/api/myplace/edit/${id}`) //da completare
 
     getOneRegister = id => this.app.get(`/api/onePlace/${id}`)
+    
+    getMyProfileInfo = id => this.app.get('/profile/MyPRofile', id)
 
     updateMyPlace = data => this.app.put(`/places/updateMyPlace`, data)
+
+    updateMyProfile = data => this.app.put('/profile/editMyPRofile', data)
 
     returnPlaceToPending = id => this.app.put(`/places/returnPending/${id}`)
 

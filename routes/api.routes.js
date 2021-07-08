@@ -137,6 +137,8 @@ router.put('/updateApplicant/:id', rejectUser('ADMIN', 'USER', 'PENDING'), (req,
         .then(appl => res.json(appl))
         .catch(err => console.log(err))
 })
+/**put MyProfile */
+
 
 /**delete pending contracts*/
 router.delete('/deleteApplicant/:id', rejectUser('ADMIN', 'USER', 'PENDING'), (req, res) => {
