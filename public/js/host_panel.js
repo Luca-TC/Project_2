@@ -164,6 +164,7 @@ function printApplications(e) {
 
             let table = document.querySelector('.table-contracts')
             let count = 0
+
             data.forEach(elm => {
                 console.log(elm)
                 count++

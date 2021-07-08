@@ -4,6 +4,8 @@ const Place = require('../models/Place.model')
 const User = require('../models/User.model')
 const Applicants = require('../models/ApplicantsReview.model')
 const { rejectUser } = require('../middleware')
+const { emails } = require('../utils')
+const transporter = require('./../config/nodemailer.config')
 
 /* GET home page */
 router.get('/places', rejectUser('HOST', 'USER', 'PENDING'), (req, res, next) => {
@@ -57,7 +59,9 @@ router.put('/updateHostPlace/:id', rejectUser('HOST', 'USER', 'PENDING'), (req, 
 
             if (place.host_id.role !== 'ADMIN') {
 
-                User.findByIdAndUpdate(place.host_id._id, { role: 'HOST' })
+                User.findByIdAndUpdate(place.host_id._id, { role: 'HOST' }, { new: true })
+                    .then(response => console.log(response))
+                    .catch(err => console.log(err))
                 return place
             }
         })
@@ -78,7 +82,27 @@ router.delete('/deleteHostPlace/:id', rejectUser('USER', 'PENDING'), (req, res) 
     const { id } = req.params
 
     Place.findByIdAndDelete(id)
-        .then(place => res.json(place))
+        .populate('host_id')
+        .then(place => {
+
+
+
+            const objectEmail = place.host_id.username
+
+            const email = emails('host', objectEmail, false)
+
+            transporter
+                .sendMail(email)
+                .then(info => console.log(info))
+                .catch(err => console.log(err))
+
+
+
+
+
+
+            res.json(place)
+        })
         .catch(err => console.log(err))
 })
 
@@ -120,7 +144,24 @@ router.delete('/deleteApplicant/:id', rejectUser('ADMIN', 'USER', 'PENDING'), (r
     const { id } = req.params
 
     Applicants.findByIdAndDelete(id)
-        .then(appl => res.json(appl))
+        .populate('user_applicant_id')
+        .then(appl => {
+            // console.log(appl)
+
+            // const objectEmail = appl.user_applicant_id
+
+            // console.log(objectEmail)
+            // const email = emails('host', objectEmail)
+
+            // transporter
+            //     .sendMail(email)
+            //     .then(info => console.log(info))
+            //     .catch(err => console.log(err))
+
+            res.json(appl)
+
+        })
+
         .catch(err => console.log(err))
 })
 
