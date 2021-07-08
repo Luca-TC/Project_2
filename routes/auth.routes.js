@@ -125,7 +125,11 @@ router.get('/user/details/:user_id', (req, res) => {
         const { user_id } = req.params
 
         User.findById(user_id)
-            .then(user => res.render('user/others-profiles', { user }))
+            .then(user => {
+                res.render('user/others-profiles', { user })
+                return user
+            })
+            .then(user => console.log(user))
             .catch(err => console.log(err))
 
     } else {

@@ -1,31 +1,30 @@
 {{#if pending}}
-    <p class='bg-warning'> No has confirmado tu email</p>
+<p class='bg-warning'> No has confirmado tu email</p>
 {{/if}}
 
 <div class='container'>
     {{#with user}}
-        <h1>Welcome to {{name}}`s Profile</h1>
+    <h1>Welcome to {{name}}`s Profile</h1>
 
-        <div style='border: 1px solid black' class='row justify-content-center'>
 
-            <div class='card shadow bg-transparent border-light mb-3' style='width: 18rem;'>
-                
-                <img class='card-img-top' src='{{image}}' alt='profile img' />
+    <div class="row justify-content-center">
+        <div class='card w-75 shadow bg-transparent border-light mb-3'>
 
-                <div class='card-body bg-transparent'></div>
-                
-                <h5 class='card-title text-center bg-transparent'>{{name}}</h5>
-                
-                {{#with address}}
-                    <p class='text-center'>{{road}},{{number}}</p>
-                    <p class='text-center'>{{city}},({{state}})</p>
-                {{/with}}
-                
-                <p class='card-text text-center p-4'>{{description}}</p>
-                <a href='#' class='btn btn-primary'>See {{name}}'s projects</a>
-            </div>
+            <img class='card-img-top' src='{{image}}' alt='profile img' />
 
+
+            <h5 class='card-title text-center bg-transparent'>{{name}}</h5>
+
+            {{#with address}}
+            <p class='text-center'>{{road}}, {{number}}</p>
+            <p class='text-center'>{{city}}, ({{state}})</p>
+            {{/with}}
+
+            <p class='card-text text-center p-4'>{{description}}</p>
+            <a href='#' class='btn btn-outline-light'>See {{name}}'s projects</a>
         </div>
+
+    </div>
     {{/with}}
 </div>
 <div class='overlay hidden'></div>

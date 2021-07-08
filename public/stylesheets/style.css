@@ -7,13 +7,11 @@
     --color-modal-bkg: rgb(234, 230, 202);
     --color-form: rgba(234, 230, 202, 0.501);
 }
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap'));
 
-*{font-family: 'Noto Sans KR', sans-serif;}
+*{font-family: 'Noto Sans TC', sans-serif;}
 
 body {
-    /* height: 100vh; */
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color: var(--color-principal);
 }
 
@@ -30,7 +28,13 @@ img {
     object-fit: cover;
     border-radius: 5px;
 }
-
+a{
+    color: #444;
+}
+a:hover{
+    color: var(--color-buttons-hover);
+    text-decoration: none;
+}
 nav .nav-image {
     width: 100px;
     height: 40px;

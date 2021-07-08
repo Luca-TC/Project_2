@@ -19,15 +19,11 @@
             {{/with}}
             <h5> Rooms available: {{place.rooms}}</h5>
                 <a class='btn btn-outline-dark' href='/places'>Back to list</a>
+                <a class='btn btn-outline-dark' href='/user/details/{{place.host_id}}'>Host Profile</a>
         </div>
         {{#if session}}
         {{#if isPending}}
-<<<<<<< HEAD
         <div class="md-4 form shadow">
-=======
-
-        <div class="md-4">
->>>>>>> e3b2208b9b41f7d3ee9d2b1891dbe22917a26ef6
                 <div class='form-group'>
             <form action='/places/application' method='post'>
                     <label for='date'>Start date</label>

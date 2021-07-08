@@ -144,8 +144,8 @@ function printContracts(e) {
                             <td style="width: 25%">Place</td>
                             <td>Applicant</td>
                             <td>Host</td>
-                            <td>posted</td>
-                            <td>viewed</td>
+                            <td>Posted</td>
+                            <td>Viewed</td>
                         </thead>
                     </table>
                     </div>
@@ -208,7 +208,6 @@ function registerInfo(e) {
 
     openModal()
 
-    // ensancho la col
     makeRigthPanBigger()
 }
 

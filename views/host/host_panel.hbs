@@ -1,15 +1,33 @@
-<h1>Host panel</h1>
+    <h1>Host panel</h1>
+<div class='col-md-2 position-absolute leftNav'>
+    <nav>
+        <ul class='nav flex-column pt-5 mt-5'>
+
+            <li class='nav-item'>
+                <a class='applications bg-dark' href='#'>Applications</a>
+            </li>
+            <li class='nav-item mt-2'>
+                <a class='myhomes bg-dark' href='#'>MyHomes 🏚</a>
+            </li>
+            <li class='nav-item mt-2'>
+                <a class='backToProfile bg-dark' href='#'>Back to profile</a>
+            </li>
+        </ul>
+    </nav>
+</div>
 
 <div class='container'>
-    <div class='row'>
+    <div class='row admin-content'>
 
-        <div class='leftPan col-md-5'></div>
-        <div class='midPan col-md-2'></div>
-        <div class='rightPan col-md-5'></div>
+        <div class='col-md-2'></div>
+        <div class='leftPan col-md-8'></div>
+        <div class='col-md-2 rightPan'></div>
 
     </div>
 </div>
+
 <div class='overlay hidden'></div>
+
 
 <script src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js'></script>
 <script src='../../js/apiHandler.js'></script>

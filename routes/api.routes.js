@@ -92,7 +92,36 @@ router.get('/contracts', (req, res) => {
         .catch(err => console.log(err))
 })
 
+router.get('/applicants', (req, res) => {
 
+    Applicants.find({ contract_status: false })
+        .populate('place_id')
+        .populate('host_id')
+        .populate('user_applicant_id')
+        .then(response => res.json(response))
+        .catch(err => console.log(err))
+})
+/**put pending contracts */
+router.put('/updateApplicant/:id', (req, res) => {
+
+    const { id } = req.params
+
+    Applicants.findByIdAndUpdate(id, { contract_status: true })
+        .populate('host_id')
+        .then(appl => res.json(appl))
+        .catch(err => console.log(err))
+})
+/**delete pending contracts*/
+router.delete('/deleteApplicant/:id', (req, res) => {
+
+    const { id } = req.params
+
+    Applicants.findByIdAndDelete(id)
+        .then(appl => res.json(appl))
+        .catch(err => console.log(err))
+})
+
+/**get places live */
 router.get('/placeslive', (req, res) => {
 
     Place.find({ place_approved: true })
@@ -100,7 +129,7 @@ router.get('/placeslive', (req, res) => {
         .catch(err => console.log(err))
 })
 
-
+/**I'm in love with Salva's magic tricks---Luca*/
 router.get('/unsplash', (req, res) => res.json(process.env.UNSPLASH_KEY))
 
 module.exports = router
