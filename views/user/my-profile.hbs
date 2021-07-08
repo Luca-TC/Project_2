@@ -23,8 +23,14 @@
         <div class='col-6'>
 
             {{#if this.host}}
-                {{#each places}}
+            {{!-- doble each no preguntes xd salia asi el array --}}
+                {{#each myPlacesAndMyApps}}
 
+                {{#each this}}
+
+
+
+                {{!-- {{myPlacesAndMyApps.place_id.name}} --}}
                     <div class='card shadow bg-transparent border-light mb-3'>
                         
                         {{#if place_approved}}
@@ -43,6 +49,7 @@
 
                     </div>
 
+                {{/each}}
                 {{/each}}
             {{/if}}
             

@@ -1,11 +1,12 @@
 const api = new ApiHandler(window.location.href.split('/')[2].split(':').includes('localhost') ? 'http://localhost:3000' : 'https://bbidas.herokuapp.com/')
-
+document.querySelector('.container-places').classList.add('move')
 
 let timeout
 document.querySelector('#search').addEventListener('keyup', () => {
+        document.querySelector('.small-alert').classList.remove('alert')
+        document.querySelector('.container-places').classList.remove('move')
 
         const search = document.querySelector('#search').value
-        document.querySelector('.small-alert').classList.remove('alert')
 
         clearTimeout(timeout)
         console.log(search.length)
@@ -24,6 +25,9 @@ function searchStart(searchString) {
                 .then(res => {
                         if (res.data.length) {
                                 printMatches(res.data)
+                                setTimeout(() => {
+                                        document.querySelector('.container-places').classList.add('move')
+                                }, 200);
                         } else {
                                 document.querySelector('.small-alert').classList.add('alert')
                         }
@@ -34,7 +38,16 @@ function searchStart(searchString) {
 function allPlaces() {
         // console.log('entro al all places function')
         api.allPlaces()
-                .then(res => res.data.length ? printMatches(res.data) : null)
+                .then(res => {
+                        if (res.data.length) {
+                                printMatches(res.data)
+                                setTimeout(() => {
+                                        document.querySelector('.container-places').classList.add('move')
+                                }, 200);
+                        } else {
+                                document.querySelector('.small-alert').classList.add('alert')
+                        }
+                })
                 .catch(err => console.log(err))
 
 }

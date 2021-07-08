@@ -99,25 +99,25 @@ router.get('/profile', (req, res) => {
 
     if (sessionActive(req)) {
 
+        console.log('profile')
 
         const admin = role(req, 'ADMIN')
         const host = role(req, 'HOST')
         const pending = role(req, 'PENDING')
         const loggedUser = currentUser(req)
-        console.log(host)
-        
-        if (host) {//se host vede le sue case
-            Place.find({ host_id: loggedUser._id })
+
+        const promisePlace = Place.find({ host_id: loggedUser._id })
+        const promiseApplicants = (Applicant.find({ user_applicant_id: loggedUser._id }).populate('place_id')
             .populate('host_id')
-                .then(places => res.render('user/my-profile', { loggedUser, admin, host, pending, places }))
-                .catch(err => console.log(err))
-                // return res
-        }
-        // Applicant.find({ user_applicant_id: loggedUser._id })
-        //     .populate('place_id')
-        //     .populate('host_id')
-        //     .populate('user_applicant_id')
-        //     .then(appli => res.render('user/my-profile', { loggedUser, admin, host, pending, places }))
+            .populate('user_applicant_id'))
+
+        Promise.all([promisePlace, promiseApplicants])
+            .then(myPlacesAndMyApps => res.render('user/my-profile', { myPlacesAndMyApps, admin, host, pending, loggedUser }))
+            .catch(err => console.log(err))
+
+
+
+
     } else {
 
         res.render('user/login', { errorMessage: 'Log in first !' })
