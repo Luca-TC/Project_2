@@ -16,8 +16,8 @@ module.exports = {
     },
 
 
-    emails: (validation, objectNeeded, yesornot) => {
-        if (validation === 'email') {
+    emails: (type, objectNeeded, yesornot) => {
+        if (type === 'email') {
             return {
                 from: 'My project B&BIDAS',
                 to: objectNeeded.username,
@@ -27,7 +27,7 @@ module.exports = {
                 <a href="http://localhost:3000/confirmation/email/${objectNeeded.token_confirmation}">Get confirmed</a>`,
             }
         }
-        if (validation === 'host') {
+        if (type === 'host') {
             return {
                 from: 'My project B&BIDAS',
                 to: objectNeeded.username,
@@ -37,7 +37,7 @@ module.exports = {
                 <a href="http://localhost:3000/confirmation/email/${objectNeeded.token_confirmation}">Get confirmed</a>`,
             }
         }
-        if (validation === 'customMessage') {
+        if (type === 'customMessage') {
             console.log(objectNeeded.elm)
             return {
                 from: 'My project B&BIDAS',

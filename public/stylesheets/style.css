@@ -46,7 +46,7 @@ h3 {
     text-align: center;
 }
 .home {
-    height: 90%;
+    min-height: 90%;
 }
 
 
@@ -63,14 +63,22 @@ h3 {
     /* background: cornflowerblue; */
     color:var(--color-buttons) ;
     padding: 3px 10px;
-    border-radius: 3px;
+    border-radius: 4px;
     text-decoration: none;
     transition: all 0.3s;
 }
 
 .leftNav a:hover {
     color: var(--color-buttons-hover);
-    text-shadow: 0 0 2px white;
+    /* text-shadow: 0 0 2px white; */
+}
+
+.leftNav li{
+    transition: all .3s;
+}
+
+.leftNav li:hover{
+    transform: translateX(10px);
 }
 
 .admin-content {
@@ -230,6 +238,16 @@ h3 {
     opacity: 1;
 }
 
+/* index trailer */
+
+.home-top{
+    opacity: 1;
+    transition: all 2s;
+}
+
+.fadeOpacity{
+    opacity: 0;
+}
 
 .alert {
     opacity: 1 !important;

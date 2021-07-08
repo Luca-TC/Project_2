@@ -56,9 +56,8 @@
         </div>
 
         {{#with loggedUser}}
-
             <div class='col-3 card bg-transparent border-light mb-3'>
-                <p><img src='{{image}}' alt='profile img' class='shadow profile-img' /></p>
+                <p><img src='{{this.image}}' alt='profile img' class='shadow profile-img' /></p>
                 <p class='text-center text-truncate'>{{description}}</p>
         
                 {{#with address}}

@@ -231,12 +231,19 @@ function confirmApplication(e) {
 
         api.updatePendingHostAndPlace(id)
             .then(res => {
-                let form = `<h4>Custom email to the host </h4>
-                            <h5>or default email acceptation if blank</h4> 
-                            <form>
-                                <textarea name="content" id="answer" cols="30" rows="10"></textarea>
-                                <button type='submit' id='buttonForm' data-id="${res.data._id}" data-accept="${true}" class='btn btn-primary'>Submit</button>
-                            </form>`
+                let form = `<h4>Custom email to the Applicant </h4>
+                                <h5>or default email acceptation if blank</h4> 
+                                <form class="mt-3">
+                                <div class="form-group">
+                                    <label for="subject">Subject</label>
+                                    <input type="text" id="subject" class="form-control">
+                                </div>    
+                                <div class="form-group">
+                                <label for="answer">Message</label>
+                                    <textarea name="content" id="answer" class="mt-3 form-control" cols="60" rows="10"></textarea>
+                                    </div>
+                                    <button type='submit' id='buttonForm' data-id="${res.data._id}" data-accept="${true}" class='btn btn-primary'>Send</button>
+                                </form>`
 
                 rightPan.insertAdjacentHTML('beforeend', form)
             })
@@ -262,11 +269,13 @@ function showForm(e) {
 
     e.preventDefault()
 
+    const subject = document.querySelector('#subject').value
+
     const answer = document.querySelector('#answer').value
 
     const id = e.currentTarget.dataset.id
 
-    const obj = { answer, id }
+    const obj = { subject, answer, id }
 
     api.tryPost(obj)
         .then(res => '????????????????????')

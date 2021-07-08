@@ -94,13 +94,14 @@ router.post('/application', rejectUser('PENDING'), (req, res) => {
 /*POST email  */
 router.post('/postEmail', rejectUser('USER', 'PENDING'), (req, res) => {
 
-    const { id, answer } = req.body
+    const { id, answer, subject } = req.body
+
 
     Place.findById(id)
         .populate('host_id')
         .then(elm => {
 
-            const objectEmail = { elm, answer }
+            const objectEmail = { elm, answer, subject }
             const email = emails('customMessage', objectEmail)
 
             transporter
@@ -125,8 +126,6 @@ router.put('/returnPending/:id', rejectUser('USER', 'PENDING', 'HOST'), (req, re
 
 router.get('/search/all', (req, res) => {
 
-    console.log('entro al all')
-
     Place.find({ place_approved: true })
         .then(places => res.json(places))
         .catch(err => console.log(err))
@@ -140,7 +139,12 @@ router.get('/search/:string', (req, res) => {
 
     Place.find({
         "$and": [
-            { "name": { $regex: string, $options: 'i' } },
+            {
+                "$or": [{ "name": { $regex: string, $options: 'i' } },
+                { "address.city": { $regex: string, $options: 'i' } },
+                { "address.road": { $regex: string, $options: 'i' } },
+                { "address.state": { $regex: string, $options: 'i' } }]
+            },
             { place_approved: true }
         ]
     })
