@@ -38,4 +38,8 @@ class ApiHandler {
     screensHandler = () => this.app.get('/api/unsplash')
 
     apiSplash = url => this.app.get(url)
+
+    searchPlaces = (string) => this.app.get(`/places/search/${string}`)
+
+    allPlaces = () => this.app.get(`/places/search/all`)
 }

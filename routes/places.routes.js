@@ -24,29 +24,15 @@ router.get('/new', rejectUser('PENDING'), (req, res) => res.render('places/new-p
 
 router.post('/new', fileUploader.single('image'), rejectUser('PENDING'), (req, res) => {
 
-
     if (sessionActive(req)) {
 
-        const host_id = req.session?.currentUser
+        const host_id = currentUser(req)
 
-        const { name, description, working_hours, task_name, direction, rooms, road, number, city, state } = req.body
+        const { name, direction, rooms } = req.body
+        const task_info = { name: task_name, working_hours, description } = req.body
+        const address = { road, number, city, state } = req.body
 
-        const task_info = {
-            name: task_name,
-            working_hours,
-            description,
-        }
-
-        const address = {
-            road,
-            number,
-            city,
-            state,
-        }
-
-        const query = { name, task_info, direction, rooms, image: req.file.path, host_id, address }
-
-        Place.create(query)
+        Place.create({ name, task_info, direction, rooms, image: req.file.path, host_id, address })
             .then(() => res.redirect('/profile'))
             .catch(err => console.log(err))
 
@@ -130,6 +116,34 @@ router.put('/returnPending/:id', rejectUser('USER', 'PENDING', 'HOST'), (req, re
     console.log(id)
 
     Place.findByIdAndUpdate(id, { place_approved: false }, { new: true })
+        .then(response => res.json(response))
+        .catch(err => console.log(err))
+})
+
+
+
+
+router.get('/search/all', (req, res) => {
+
+    console.log('entro al all')
+
+    Place.find({ place_approved: true })
+        .then(places => res.json(places))
+        .catch(err => console.log(err))
+})
+
+
+
+router.get('/search/:string', (req, res) => {
+
+    const { string } = req.params
+
+    Place.find({
+        "$and": [
+            { "name": { $regex: string, $options: 'i' } },
+            { place_approved: true }
+        ]
+    })
         .then(response => res.json(response))
         .catch(err => console.log(err))
 })

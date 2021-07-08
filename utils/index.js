@@ -11,7 +11,7 @@ module.exports = {
     },
 
     currentUser: (req) => {
-        if (req.session.currentUser) return req.session.currentUser
+        if (req.session?.currentUser) return req.session?.currentUser
         // return req.session ? req.session?.currentUser : null
     },
 
