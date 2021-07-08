@@ -48,8 +48,10 @@ function editMyPlace(e) {
 
     api.getOneRegister(id)
         .then(res => {
+            console.log(res)
 
             res = res.data
+
 
             let buttons = `<img src="${res.image}" alt="">
                             <p>${res.name}</p>
@@ -205,6 +207,9 @@ function confirmOrDeleteApplication(e) {
 
         api.updatePendingApplicant(id)
             .then(res => {
+
+                console.log(res)
+
                 clearPage('divRight')
                 let form = `<h4>Custom email to the Applicant </h4>
                                 <h5>or default email acceptation if blank</h4> 
@@ -248,6 +253,19 @@ function confirmOrDeleteApplication(e) {
 
 function sendEmail(e) {
     if (e) e.preventDefault()
+
+    const subject = document.querySelector('#subject').value
+    const answer = document.querySelector('#answer').value
+
+    const id = e.currentTarget.dataset.id
+
+    const obj = { subject, answer, id }
+
+    api.tryPost(obj)
+        .then(res => '????????????????????')
+        .catch(err => console.log(err))
+
+    closeModal()
 }
 
 

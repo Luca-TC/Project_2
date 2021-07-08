@@ -47,6 +47,8 @@ module.exports = {
         }
         if (type === 'customMessage') {
 
+            console.log(objectNeeded.elm)
+
             let subject = `Place accepted in B&BIDDAS, & you become promoted to host`
             let content = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste voluptate nostrum consectetur amet, autem cumque repellat asperiores aperiam aliquid repudiandae ea omnis est quod. Explicabo magnam aliquam maxime fugit ipsam! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae a quos fugit vitae repudiandae voluptates reiciendis mollitia aperiam odio consectetur recusandae beatae, quia asperiores eius esse. Hic incidunt minima tempora?`
 
@@ -54,7 +56,7 @@ module.exports = {
             if (objectNeeded.answer !== '') content = objectNeeded.answer
 
 
-            console.log(objectNeeded.elm)
+            // console.log(objectNeeded.elm)
             return {
                 from: 'My project B&BIDAS',
                 to: objectNeeded.elm.host_id.username,

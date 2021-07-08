@@ -82,7 +82,7 @@ router.get('/details/:place_id', (req, res) => {
 /*POST application */
 router.post('/application', rejectUser('PENDING'), (req, res) => {
 
-    const application = { place_id, host_id, user_applicant, start_date, final_date, direction, cover_letter } = req.body
+    const application = { place_id, host_id, user_applicant_id, start_date, final_date, direction, cover_letter } = req.body
 
     Applicant.create(application)
         .then(() => res.redirect('/profile'))
@@ -100,6 +100,8 @@ router.post('/postEmail', rejectUser('USER', 'PENDING'), (req, res) => {
     Place.findById(id)
         .populate('host_id')
         .then(elm => {
+
+            console.log(elm)
 
             const objectEmail = { elm, answer, subject }
             const email = emails('customMessage', objectEmail)
