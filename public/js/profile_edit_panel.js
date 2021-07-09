@@ -5,10 +5,10 @@ const leftPan = document.querySelector('.leftPan')
 const rightPan = document.querySelector('.rightPan')
 
 window.onload = function () {
-    document.querySelector('.myProfileEdit').addEventListener('click', e => editMyPRofile(e))
+    document.querySelector('.myProfileEdit').addEventListener('click', e => editMyProfile(e))
 }
 
-function editMyPRofile(e) {
+function editMyProfile(e) {
 
     if (e) e.preventDefault()
 
@@ -45,21 +45,21 @@ function editMyPRofile(e) {
             </div>
             <div class='form-group'>
                 <label for='road'>Address</label>
-                <input type='text' class='form-control' name='road' id='road'  value="${res.address.road}"/>
+                <input type='text' class='form-control' name='road' id='road'  value="${res.address?.road}"/>
             </div>
             <div class='form-group'>
                 <label for='number'>Number</label>
-                <input type='number' class='form-control' name='number' min='0' id='number' value="${res.address.number}" />
+                <input type='number' class='form-control' name='number' min='0' id='number' value="${res.address?.number}" />
                 <small id='description-help' class='form-text text-muted'>Your addressnumber</small>
             </div>
             <div class='form-group'>
                 <label for='city'>City</label>
-                <input type='text' class='form-control' name='city' id='city' value="${res.address.city}" />
+                <input type='text' class='form-control' name='city' id='city' value="${res.address?.city}" />
                 <small id='description-help' class='form-text text-muted'>Your city</small>
             </div>
             <div class='form-group'>
                 <label for='state'>State</label>
-                <input type='text' class='form-control' name='state' id='state'  value="${res.address.state}"/>
+                <input type='text' class='form-control' name='state' id='state'  value="${res.address?.state}"/>
             </div>
            
 

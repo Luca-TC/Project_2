@@ -26,7 +26,7 @@ setInterval(() => {
 
     // }, 3100);
 
-}, 90000);
+}, 30000);
 
 function queryForImages(res, query) {
     const randomNum = Math.trunc(Math.random() * 60 - 1)

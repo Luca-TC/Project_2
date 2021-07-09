@@ -21,13 +21,15 @@
                 </nav>
             </div>
 
-            <div class=' bg-transparent border-light position-absolute avatar'>
+            <div class=' bg-transparent border-light position-absolute avatar text-center '>
                 {{#with loggedUser}}
-
                     <p></p>
                     <img src='{{image}}' alt='profile img' class='shadow profile-img' />
-                        <a class='myProfileEdit text-light navLinkAvatar' data-id="{{id}}" href='/edit'>Edit Profile</a>
+                    <div class="mt-2">
+                        <a class='myProfileEdit navLinkAvatar btn-sm btn-outline-dark' data-id="{{_id}}" href='/edit'>Edit Profile</a>
                     <p class='text-center text-truncate'>{{description}}</p>
+
+                    </div>
         
                     {{!-- {{#with address}}   
                         <p>address:{{road}} </p>
@@ -124,9 +126,9 @@
                             <h5 class='card-title text-center'>{{name}}</h5>
 
                             <img src="{{place_id.image}}" alt="">
-                                                {{!-- {{#with place}} --}}
+
                             <a class='btn btn-outline-dark btn-sm border-light mb-3' href='/places/details/{{place_id._id}}'>Details</a>
-                                                {{!-- {{/with}} --}}
+                            <a class='btn btn-outline-dark btn-sm border-light mb-3' href='/places/details/{{place_id._id}}'>Details</a>
 
                         </div>
 
@@ -136,8 +138,6 @@
             {{/if}}
         {{/if}}
 
-           
-        
 
     </div>
 

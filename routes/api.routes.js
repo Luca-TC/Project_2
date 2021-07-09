@@ -51,7 +51,7 @@ router.get('/myplace/edit/:id', rejectUser('ADMIN', 'USER', 'PENDING'), (req, re
 router.get('/profile/MyPRofile/:id', (req, res) => {
 
     const { id } = req.params
-    
+
     User.findById(id)
         .then(user => res.json(user))
         .catch(err => console.log(err))
@@ -69,7 +69,7 @@ router.put('/updateHostPlace/:id', rejectUser('HOST', 'USER', 'PENDING'), (req, 
         .populate('host_id')
         .then(place => {
 
-            if (place.host_id.role !== 'ADMIN') {
+            if (place.host_id?.role !== 'ADMIN') {
 
                 User.findByIdAndUpdate(place.host_id._id, { role: 'HOST' }, { new: true })
                     .then(response => console.log(response))
