@@ -303,7 +303,7 @@ function sendEdits(e) {
 
     const id = e.currentTarget.dataset.id
 
-
+    const [placeName, name, description, working_hours, rooms, road, number, city, state ] = allInputsValue
     const obj = { id, placeName, name, description, working_hours, rooms, road, number, city, state }
 
     api.updateMyPlace(obj)

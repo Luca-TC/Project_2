@@ -25,7 +25,7 @@ class ApiHandler {
 
     updateMyPlace = data => this.app.put(`/places/updateMyPlace`, data)
 
-    updateMyProfile = data => this.app.put('/profile/editMyPRofile', data)
+    updateMyProfile = data => this.app.put(`/profile/editMyPRofile`, data)
 
     returnPlaceToPending = id => this.app.put(`/places/returnPending/${id}`)
 

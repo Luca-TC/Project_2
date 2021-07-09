@@ -67,6 +67,28 @@ router.post('/register', fileUploader.single('image'), (req, res) => {
         .then(() => res.redirect('/login'))
         .catch(err => console.log(err))
 })
+/**PUT edit my profile */
+router.put('/profile/editMyPRofile', (req, res) => {
+
+    const { id, name, username, pwd, description } = req.body
+
+  
+
+    const address = { road, number, city, state } = req.body
+
+
+    const bcryptSalt = 10
+    const salt = bcrypt.genSaltSync(bcryptSalt)
+    let hashPass = bcrypt.hashSync(pwd, salt)
+
+
+    User.findByIdAndUpdate(id, { name, username, password: hashPass, description, address }, { new: true })
+        .then(user => res.json(user))
+        .catch(err => console.log(err))
+})
+
+
+
 
 //
 

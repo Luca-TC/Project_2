@@ -14,7 +14,7 @@ function editMyPRofile(e) {
 
     const id = e.currentTarget.dataset.id
 
-  
+
 
     clearPage('divRight')
 
@@ -25,7 +25,7 @@ function editMyPRofile(e) {
 
             let form = `<img src="${res.image}" alt="">
                             <p>${res.name}</p>
-                         <form>
+                         <form enctype='multipart/form-data'>
 
             <div class='form-group'>
                 <label for='place_name'>Your Name:</label>
@@ -33,27 +33,19 @@ function editMyPRofile(e) {
             </div>
             <div class='form-group'>
                 <label for='name_description'>insert your Email:</label>
-                <input type='email' class='form-control' name='username' id='userName' value="${res.userName}" />
+                <input type='email' class='form-control' name='username' id='username' value="${res.username}" />
             </div>
             <div class='form-group'>
                 <label for='task_description'>Change your password:</label>
-                <input type='password' class='form-control' name='pwd' id='password' value="${res.password}" />
-                <small id='description-help' class='form-text text-muted'>Description of the task to do</small>
-            </div>
-            <div class='custom-file'>
-                <label for='task_time'>Insert your photo</label>
-                <input type='file' class='custom-file-input' name='image' id='image'  value="${res.image}" required/>
-                <small id='description-help' class='form-text text-muted'>Insert your photo</small>
+                <input type='password' class='form-control' name='pwd' id='pwd' value="insert your password..." />
             </div>
             <div class='form-group'>
                 <label for='description'>Tell us your story:</label>
                 <input type='text' class='form-control' name='description' id='description'  value="${res.description}"/>
-                <small id='description-help' class='form-text text-muted'>Tell us your story</small>
             </div>
             <div class='form-group'>
                 <label for='road'>Address</label>
                 <input type='text' class='form-control' name='road' id='road'  value="${res.address.road}"/>
-                <small id='description-help' class='form-text text-muted'>Your Address</small>
             </div>
             <div class='form-group'>
                 <label for='number'>Number</label>
@@ -68,11 +60,10 @@ function editMyPRofile(e) {
             <div class='form-group'>
                 <label for='state'>State</label>
                 <input type='text' class='form-control' name='state' id='state'  value="${res.address.state}"/>
-                <small id='description-help' class='form-text text-muted'>Your state</small>
             </div>
            
 
-            <button id="button" data-accept="${true}" type='submit' data-id="${res._id}" class='btn btn-primary'>Submit</button>
+            <button id="button" data-accept="${true}" type='submit' data-id="${res.id}" class='btn btn-primary'>Submit</button>
         </form>
                        `
 
@@ -84,11 +75,6 @@ function editMyPRofile(e) {
             document.querySelectorAll('#button').forEach(btn => btn.addEventListener('click', e => {
                 if (e.currentTarget.dataset.accept === 'true') {
                     sendEdits(e)
-                    return res
-                }
-                else {
-                    console.log(e.currentTarget.dataset)
-                    deleteMyPlace(e)
                     return res
                 }
             }))
@@ -113,15 +99,17 @@ function sendEdits(e) {
     form.forEach(elm => {
         allInputsValue.push(elm.value)
     })
-
     const id = e.currentTarget.dataset.id
 
+    
+    const [name, username, pwd, description, road, number, city, state] = allInputsValue
+    const obj = { id, name, username, pwd, description, road, number, city, state }
 
-    const obj = { name, userName, password, image, description, road, number, city, state }
+    console.log(obj)
 
     api.updateMyProfile(obj)
-    // .then(() => printPlacesNames())
-    // .catch(err => console.log(err))
+        .then(obj => console.log(obj))
+        .catch(err => console.log(err))
 
     clearPage('ok')
 
