@@ -130,8 +130,7 @@ router.get('/profile', (req, res) => {
         const pending = role(req, 'PENDING')
         const loggedUser = currentUser(req)
 
-        console.log(host)
-        console.log(userOrAdmin)
+        console.log(loggedUser)
 
         const promisePlace = Place.find({ host_id: loggedUser._id })
         const promiseApplicants = (Applicant.find({ user_applicant_id: loggedUser._id }).populate('place_id')
