@@ -37,7 +37,7 @@ function editMyPRofile(e) {
             </div>
             <div class='form-group'>
                 <label for='task_description'>Change your password:</label>
-                <input type='password' class='form-control' name='pwd' id='pwd' value="insert your password..." />
+                <input type='password' class='form-control' name='pwd' id='pwd' value="" />
             </div>
             <div class='form-group'>
                 <label for='description'>Tell us your story:</label>
@@ -63,7 +63,7 @@ function editMyPRofile(e) {
             </div>
            
 
-            <button id="button" data-accept="${true}" type='submit' data-id="${res.id}" class='btn btn-primary'>Submit</button>
+            <button id="button" data-accept="${true}" type='submit' data-id="${res._id}" class='btn btn-primary'>Submit</button>
         </form>
                        `
 
@@ -101,7 +101,6 @@ function sendEdits(e) {
     })
     const id = e.currentTarget.dataset.id
 
-    
     const [name, username, pwd, description, road, number, city, state] = allInputsValue
     const obj = { id, name, username, pwd, description, road, number, city, state }
 
@@ -114,7 +113,14 @@ function sendEdits(e) {
     clearPage('ok')
 
     closeModal()
+    reloadProfile()
 }
+
+function reloadProfile() {
+    window.location.reload()
+    return false
+}
+
 
 function clearPage(div) {
     div === 'divLeft' ? (leftPan.textContent = '') : (rightPan.textContent = ''.textContent = '')

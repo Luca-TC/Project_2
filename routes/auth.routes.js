@@ -72,7 +72,7 @@ router.put('/profile/editMyPRofile', (req, res) => {
 
     const { id, name, username, pwd, description } = req.body
 
-  
+
 
     const address = { road, number, city, state } = req.body
 
@@ -85,6 +85,8 @@ router.put('/profile/editMyPRofile', (req, res) => {
     User.findByIdAndUpdate(id, { name, username, password: hashPass, description, address }, { new: true })
         .then(user => res.json(user))
         .catch(err => console.log(err))
+
+    req.session.currentUser = user
 })
 
 
@@ -141,8 +143,8 @@ router.get('/profile', (req, res) => {
 
                 const [place, applicant] = myPlacesAndMyApps
 
-               // res.send({ applicant, admin, host, pending, loggedUser, userOrAdmin })
-                 res.render('user/my-profile', { place, applicant, admin, host, pending, loggedUser, userOrAdmin })
+                // res.send({ applicant, admin, host, pending, loggedUser, userOrAdmin })
+                res.render('user/my-profile', { place, applicant, admin, host, pending, loggedUser, userOrAdmin })
             })
             .catch(err => console.log(err))
 
