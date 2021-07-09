@@ -101,10 +101,10 @@ function sendEdits(e) {
     })
     const id = e.currentTarget.dataset.id
 
-<<<<<<< HEAD
-=======
+    // <<<<<<< HEAD
+    // =======
 
->>>>>>> 1635a82d49d2b71fa12528f9da4839e9b44d3fac
+    // >>>>>>> 1635a82d49d2b71fa12528f9da4839e9b44d3fac
     const [name, username, pwd, description, road, number, city, state] = allInputsValue
     const obj = { id, name, username, pwd, description, road, number, city, state }
 
