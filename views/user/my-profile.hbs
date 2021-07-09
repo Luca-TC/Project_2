@@ -24,7 +24,8 @@
             <div class=' bg-transparent border-light position-absolute avatar'>
                 {{#with loggedUser}}
 
-                    <p><img src='{{image}}' alt='profile img' class='shadow profile-img' /></p>
+                    <p></p>
+                    <a href="javascript: void(0)"><img src='{{image}}' alt='profile img' class='shadow profile-img' /></a>
                     
                     <p class='text-center text-truncate'>{{description}}</p>
         
@@ -44,14 +45,14 @@
 
 <div class='container'>
 
-    <h1>Welcome to {{loggedUser.name}}`s Profile</h1>
+    <h1 class="mt-5">Welcome to {{loggedUser.name}}`s Profile</h1>
 
     <div class='row'>
        
        
 
-        {{#if host}}
-        <div class='col-5'>
+    {{#if host}}
+        <div class='col-5 1'>
     
             {{#each place}}
 
@@ -78,46 +79,10 @@
             {{/each}}
 
         </div>
-
-        {{/if}}   
-
-        {{!-- <div class="col-1"></div> --}}
-        
-        {{#if userOrAdmin}}
-
-        <div class='col-5'>
-
-                {{#each place}}
-        
-                    <div class='card shadow bg-transparent border-light mb-3'>
-                        
-                    {{#if contract_status}}
-                            <input class='form-control p-3' type='checkbox' checked disabled />
-                    {{/if}}
-                        
-                        <img class='card-img-top' src='{{image}}' alt='img.jpg' />
-
-                        <h5 class='card-title text-center'>{{name}}</h5>
-
-                        <p class='text-center'>{{task_info.description}}</p>
-                        
-                        <p class='text-center'>{{address.city}}</p>
-                        
-                        <p class='text-center'>{{rooms}}</p>
-
-                        <a class='btn btn-outline-dark btn-sm border-light mb-3' href='/places/details/{{id}}'>Details</a>
-
-                    </div>
-
-                {{/each}}
-            </div>
-            
-        {{/if}}
-
-
-        {{#unless pending}}
-            {{#if applicantLength}}
-        <div class="col-md-5">
+   
+       
+        {{#if applicantLength}}
+            <div class="col-md-5 ">
                 {{#each applicant}}  
         
                     <div class='card shadow bg-transparent border-light mb-3'>
@@ -131,17 +96,45 @@
                         <h5 class='card-title text-center'>{{name}}</h5>
 
                         <img src="{{place_id.image}}" alt="">
-                                            {{!-- {{#with place}} --}}
+
                         <a class='btn btn-outline-dark btn-sm border-light mb-3' href='/places/details/{{place_id._id}}'>Details</a>
-                                            {{!-- {{/with}} --}}
 
                     </div>
 
                 {{/each}}
-        </div>
+            </div>
+        {{/if}}
+            
+    {{/if}} 
+
+         {{#if userOrAdmin}}
+
+            {{#if applicantLength}}
+                <div class="col-md-8 ml-auto mr-auto mt-5">
+                    {{#each applicant}}  
+        
+                        <div class='card shadow bg-transparent border-light mb-3'>
+                            
+                        {{#if contract_status}}
+                                <input class='form-control p-3' type='checkbox' checked disabled />
+                        {{/if}}
+                            <h5 class='card-title text-center'>Place name: {{place_id.name}}</h5>
+                            
+                            <h5 class='card-title text-center'>City: {{place_id.address.city}}</h5>
+                            <h5 class='card-title text-center'>{{name}}</h5>
+
+                            <img src="{{place_id.image}}" alt="">
+                                                {{!-- {{#with place}} --}}
+                            <a class='btn btn-outline-dark btn-sm border-light mb-3' href='/places/details/{{place_id._id}}'>Details</a>
+                                                {{!-- {{/with}} --}}
+
+                        </div>
+
+                    {{/each}}
+                </div>
 
             {{/if}}
-        {{/unless}}
+        {{/if}}
 
            
         
