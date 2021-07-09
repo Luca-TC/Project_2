@@ -275,3 +275,29 @@ h3 {
     width: 50px;
     height: 50px !important;
 }
+
+
+/* .profileNav{
+    background-position: left bottom;
+    transition: all.8s;
+    top: 25;
+    right: 10;
+    width: 0px;
+    height: 0px;
+    transition: all .7s;
+    position:absolute;
+   z-index: -1;
+   border-radius: 10px;
+   opacity: 1;
+} */
+
+/* .profileNav-load{
+    opacity: 1;
+    width: 200px;
+    height: 300px;
+    padding: 30px 15px;
+}
+
+.navLinkAvatar{
+    z-index: 999;
+}  */

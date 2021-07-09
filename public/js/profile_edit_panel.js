@@ -101,7 +101,7 @@ function sendEdits(e) {
     })
     const id = e.currentTarget.dataset.id
 
-    
+
     const [name, username, pwd, description, road, number, city, state] = allInputsValue
     const obj = { id, name, username, pwd, description, road, number, city, state }
 
@@ -123,3 +123,19 @@ function clearPage(div) {
 function makeRigthPanBigger() {
     document.querySelector('.rightPan').classList.add('col-md-5')
 }
+
+// document.querySelector('.profile-img').addEventListener('click', (e) => {
+//     e.stopPropagation()
+//     const profileNav = document.querySelector('.profileNav')
+
+//     profileNav.classList.add('profileNav-load')
+
+// })
+
+
+// document.querySelector('.profileNav').addEventListener('mouseout', () => {
+//     const profileNav = document.querySelector('.profileNav')
+
+//     console.log('out')
+//     profileNav.classList.remove('profileNav-load')
+// })

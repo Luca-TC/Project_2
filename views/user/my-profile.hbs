@@ -25,18 +25,18 @@
                 {{#with loggedUser}}
 
                     <p></p>
-                    <a href="javascript: void(0)"><img src='{{image}}' alt='profile img' class='shadow profile-img' /></a>
-                    
+                    <img src='{{image}}' alt='profile img' class='shadow profile-img' />
+                        <a class='myProfileEdit text-light navLinkAvatar' data-id="{{id}}" href='/edit'>Edit Profile</a>
                     <p class='text-center text-truncate'>{{description}}</p>
         
-                    {{#with address}}   
+                    {{!-- {{#with address}}   
                         <p>address:{{road}} </p>
                         <p>num:{{number}} </p>
                         <p class='blockquote disabled'>{{city}} ({{state}})</p>
-                    {{/with}}
+                    {{/with}} --}}
         
                 {{/with}}
-                 <a class='myProfileEdit bg-dark ' data-id="{{loggedUser._id}}" href='#'>Edit Profile</a>
+                 
             </div>
            
 <div class='col-md-2'></div>
